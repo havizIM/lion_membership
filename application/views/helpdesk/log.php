@@ -15,7 +15,7 @@
       <thead>
         <tr>
           <th>Tanggal</th>
-          <th>NIP</th>
+          <th>ID</th>
           <th>Nama User</th>
           <th>Keterangan</th>
           <th>Kategori</th>

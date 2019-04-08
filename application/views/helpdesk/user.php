@@ -14,7 +14,7 @@
     <table class="table" id="t_user">
       <thead>
         <tr>
-          <th>NIP</th>
+          <th>ID</th>
           <th>Name</th>
           <th>Password</th>
           <th>Level</th>
@@ -44,7 +44,7 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <label for="">NIP</label>
+                  <label for="">ID</label>
                   <input type="text" name="nip" id="add_nip" class="form-control">
                 </div>
                 <div class="form-group">

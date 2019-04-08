@@ -86,7 +86,7 @@ Author: SAEROX
                     							    <input type="text" name="nip" id="nip">
                     							    <span class="highlight"></span>
                     							    <span class="bar"></span>
-                    							    <label>NIP</label>
+                    							    <label>ID</label>
                                     </div>
                                     <div class="group material-input">
                     							    <input type="password" name="password" id="password">

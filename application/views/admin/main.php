@@ -29,8 +29,8 @@ Author: SAEROX
         <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon-16x16.png">
         <!-- Stylesheet -->
-        <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css"> -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/elisyam-1.5.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>assets/css/animate/animate.min.css">
 
@@ -102,7 +102,7 @@ Author: SAEROX
                                         </div>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a>
                                             <div class="message-icon">
                                                 <i class="la la-user"></i>
                                             </div>
@@ -113,7 +113,7 @@ Author: SAEROX
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a>
                                             <div class="message-icon">
                                                 <i class="la la-user-plus"></i>
                                             </div>
@@ -124,7 +124,7 @@ Author: SAEROX
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a>
                                             <div class="message-icon">
                                                 <i class="la la-calendar-check-o"></i>
                                             </div>
@@ -232,7 +232,6 @@ Author: SAEROX
         </div>
         <!-- Begin Vendor Js -->
         <script src="<?= base_url() ?>assets/vendors/js/base/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="<?= base_url() ?>assets/vendors/js/base/core.min.js"></script>
         <!-- End Vendor Js -->
         <!-- Begin Page Vendor Js -->
