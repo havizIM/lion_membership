@@ -65,7 +65,7 @@ Author: SAEROX
                                     <img src="<?= base_url() ?>assets/img/logo-lion-2.png" alt="logo">
                                 </a>
                             </div>
-                            <h1>Lion Passport Card</h1>
+                            <h1>Lion Passport System</h1>
                             <span class="description">
                                 Sistem Informasi Pengelolaan Poin Membership
                             </span>
