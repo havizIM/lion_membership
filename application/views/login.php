@@ -136,7 +136,17 @@ Author: SAEROX
               var password = $('#password').val();
 
               if(nip === '' || password === ''){
-                alert('Form harus diisi dengan lengkap');
+                new Noty({
+                  type:"error",
+                  layout:"topRight",
+                  text: 'ID and Password is required',
+                  progressBar:true,
+                  timeout:2500,
+                  animation:{
+                    open:"animated bounceInRight",
+                    close:"animated bounceOutRight"
+                  }
+                }).show();
               } else {
 
                 $.ajax({
