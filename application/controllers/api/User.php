@@ -100,8 +100,10 @@ class User extends CI_Controller {
 
               $log = array(
                 'user'        => $otorisasi->nip,
-                'keterangan'  => 'Menambahkan data user baru',
-                'kategori'    => 'Add'
+                'id_ref'      => $nip,
+                'refrensi'    => 'User',
+                'kategori'    => 'Add',
+                'keterangan'  => 'Menambahkan data user baru'
               );
 
               $add = $this->UserModel->add($data, $log);
@@ -169,8 +171,10 @@ class User extends CI_Controller {
 
                 $log = array(
                   'user'        => $otorisasi->nip,
-                  'keterangan'  => 'Mengedit data user',
-                  'kategori'    => 'Edit'
+                  'id_ref'      => $nip,
+                  'refrensi'    => 'User',
+                  'kategori'    => 'Edit',
+                  'keterangan'  => 'Mengedit data user'
                 );
 
                 $edit = $this->UserModel->edit($nip, $data, $log);
@@ -228,8 +232,10 @@ class User extends CI_Controller {
 
               $log = array(
                 'user'        => $otorisasi->nip,
-                'keterangan'  => 'Menghapus data user',
-                'kategori'    => 'Delete'
+                'id_ref'      => $nip,
+                'refrensi'    => 'User',
+                'kategori'    => 'Delete',
+                'keterangan'  => 'Menghapus data user'
               );
 
               $delete = $this->UserModel->delete($nip, $log);

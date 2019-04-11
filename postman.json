@@ -16,12 +16,12 @@
 					"formdata": [
 						{
 							"key": "nip",
-							"value": "7201160101",
+							"value": "helpdesk",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "gzkla",
+							"value": "h3lpd35k",
 							"type": "text"
 						}
 					]
@@ -76,12 +76,12 @@
 					"formdata": [
 						{
 							"key": "password_lama",
-							"value": "helpdesk",
+							"value": "h3lpd35k",
 							"type": "text"
 						},
 						{
 							"key": "password_baru",
-							"value": "h3lpd35k",
+							"value": "helpdesk",
 							"type": "text"
 						}
 					]
@@ -137,17 +137,17 @@
 					"formdata": [
 						{
 							"key": "nip",
-							"value": "7201160101",
+							"value": "7201160107",
 							"type": "text"
 						},
 						{
 							"key": "nama_user",
-							"value": "Kalyssa Innara Putri",
+							"value": "Devan Dirgantara Putra",
 							"type": "text"
 						},
 						{
 							"key": "level",
-							"value": "Customer Service",
+							"value": "Admin",
 							"description": "Admin / Customer Service / Manager",
 							"type": "text"
 						}
@@ -215,14 +215,14 @@
 						},
 						{
 							"key": "status",
-							"value": "Aktif",
+							"value": "Nonaktif",
 							"description": "Aktif / Nonaktif",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lion_membership/api/user/edit/875a8f2f42c570f?nip=7201160106",
+					"raw": "localhost/lion_membership/api/user/edit/875a8f2f42c570f?nip=7201160107",
 					"host": [
 						"localhost"
 					],
@@ -236,7 +236,7 @@
 					"query": [
 						{
 							"key": "nip",
-							"value": "7201160106"
+							"value": "7201160107"
 						}
 					]
 				}
@@ -250,7 +250,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost/lion_membership/api/user/delete/875a8f2f42c570f?nip=7201160101",
+					"raw": "localhost/lion_membership/api/user/delete/875a8f2f42c570f?nip=7201160107",
 					"host": [
 						"localhost"
 					],
@@ -264,7 +264,7 @@
 					"query": [
 						{
 							"key": "nip",
-							"value": "7201160101"
+							"value": "7201160107"
 						}
 					]
 				}
