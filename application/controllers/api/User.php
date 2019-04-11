@@ -1,5 +1,7 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
 
 class User extends CI_Controller {
 
@@ -96,11 +98,29 @@ class User extends CI_Controller {
                 'token'     => sha1($nip)
               );
 
-              $add = $this->UserModel->add($data);
+              $log = array(
+                'user'        => $otorisasi->nip,
+                'keterangan'  => 'Menambahkan data user baru',
+                'kategori'    => 'Add'
+              );
+
+              $add = $this->UserModel->add($data, $log);
 
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data user'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  '9e635b2377fe901b86c3',
+                  '5a3cbd48fcd0cc669b54',
+                  '744014',
+                  $options
+                );
+
+                $pusher->trigger('lion_membership', 'user', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data user'));
               }
             }
@@ -147,11 +167,29 @@ class User extends CI_Controller {
                   'status'    => $status
                 );
 
-                $edit = $this->UserModel->edit($nip, $data);
+                $log = array(
+                  'user'        => $otorisasi->nip,
+                  'keterangan'  => 'Mengedit data user',
+                  'kategori'    => 'Edit'
+                );
+
+                $edit = $this->UserModel->edit($nip, $data, $log);
 
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit user'));
                 } else {
+                  $options = array(
+                    'cluster' => 'ap1',
+                    'useTLS' => true
+                  );
+                  $pusher = new Pusher\Pusher(
+                    '9e635b2377fe901b86c3',
+                    '5a3cbd48fcd0cc669b54',
+                    '744014',
+                    $options
+                  );
+
+                  $pusher->trigger('lion_membership', 'user', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit user'));
                 }
               }
@@ -188,11 +226,29 @@ class User extends CI_Controller {
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'NIP tidak ditemukan'));
             } else {
 
-              $delete = $this->UserModel->delete($nip);
+              $log = array(
+                'user'        => $otorisasi->nip,
+                'keterangan'  => 'Menghapus data user',
+                'kategori'    => 'Delete'
+              );
+
+              $delete = $this->UserModel->delete($nip, $log);
 
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus user'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  '9e635b2377fe901b86c3',
+                  '5a3cbd48fcd0cc669b54',
+                  '744014',
+                  $options
+                );
+
+                $pusher->trigger('lion_membership', 'user', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus user'));
               }
             }
