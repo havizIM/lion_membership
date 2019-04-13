@@ -3,34 +3,48 @@
       <div class="d-flex align-items-center">
           <h2 class="page-header-title">Data User</h2>
           <div>
-
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#/dashboard"><i class="ti ti-home"></i> Dashboard</a></li>
+                <li class="breadcrumb-item active">User</li>
+            </ul>
           </div>
       </div>
     </div>
 </div>
 
-<div class="row">
-  <div class="table-responsive">
-    <table class="table" id="t_user">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Password</th>
-          <th>Level</th>
-          <th>Register Date</th>
-          <th>Status</th>
-          <th style="text-align: center; background-color: #5bc0de; color: #fff; cursor: pointer" id="add_user">
-            <i class="la la-plus"></i>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
+<div class="row flex-row">
+  <div class="col-md-12">
+    <div class="widget has-shadow">
+        <div class="widget-header bordered no-actions d-flex align-items-center">
+            <h4>Data User</h4>
+        </div>
+        <div class="widget-body">
+          <div class="table-responsive">
+            <table class="table" id="t_user">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Password</th>
+                  <th>Level</th>
+                  <th>Register Date</th>
+                  <th>Status</th>
+                  <th style="text-align: center; background-color: #5bc0de; color: #fff; cursor: pointer" id="add_user">
+                    <i class="la la-plus"></i>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
 
-      </tbody>
-    </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
   </div>
+</div>
 
+<div class="row">
   <div id="modal_add" class="modal fade">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
