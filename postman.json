@@ -128,6 +128,75 @@
 			"response": []
 		},
 		{
+			"name": "Show User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/user/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"user",
+						"show",
+						"875a8f2f42c570f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Poin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/poin/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"poin",
+						"show",
+						"875a8f2f42c570f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Rute",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/rute/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"rute",
+						"show",
+						"875a8f2f42c570f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add User",
 			"request": {
 				"method": "POST",
@@ -170,25 +239,82 @@
 			"response": []
 		},
 		{
-			"name": "Show User",
+			"name": "Add Rute",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": ""
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_rute",
+							"value": "CGK",
+							"type": "text"
+						},
+						{
+							"key": "nama_rute",
+							"value": "Jakarta",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
-					"raw": "localhost/lion_membership/api/user/show/875a8f2f42c570f",
+					"raw": "localhost/lion_membership/api/rute/add/7dc3ac11a0c4db2",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"lion_membership",
 						"api",
-						"user",
-						"show",
-						"875a8f2f42c570f"
+						"rute",
+						"add",
+						"7dc3ac11a0c4db2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Poin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "departure",
+							"value": "PDG",
+							"type": "text"
+						},
+						{
+							"key": "arrival",
+							"value": "CGK",
+							"type": "text"
+						},
+						{
+							"key": "claim_poin",
+							"value": "437",
+							"type": "text"
+						},
+						{
+							"key": "reedem_poin",
+							"value": "437000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/poin/add/7dc3ac11a0c4db2",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"poin",
+						"add",
+						"7dc3ac11a0c4db2"
 					]
 				}
 			},
@@ -244,6 +370,95 @@
 			"response": []
 		},
 		{
+			"name": "Edit Rute",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nama_rute",
+							"value": "Padang",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/rute/edit/7dc3ac11a0c4db2?id_rute=PDG",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"rute",
+						"edit",
+						"7dc3ac11a0c4db2"
+					],
+					"query": [
+						{
+							"key": "id_rute",
+							"value": "PDG"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Poin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "departure",
+							"value": "CGK",
+							"type": "text"
+						},
+						{
+							"key": "arrival",
+							"value": "PDG",
+							"type": "text"
+						},
+						{
+							"key": "claim_poin",
+							"value": "200",
+							"type": "text"
+						},
+						{
+							"key": "reedem_poin",
+							"value": "200000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/poin/edit/7dc3ac11a0c4db2?id_poin=POIN0002",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"poin",
+						"edit",
+						"7dc3ac11a0c4db2"
+					],
+					"query": [
+						{
+							"key": "id_poin",
+							"value": "POIN0002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete User",
 			"request": {
 				"method": "GET",
@@ -266,6 +481,106 @@
 							"key": "nip",
 							"value": "7201160107"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Rute",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/rute/delete/7dc3ac11a0c4db2?id_rute=CGK",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"rute",
+						"delete",
+						"7dc3ac11a0c4db2"
+					],
+					"query": [
+						{
+							"key": "id_rute",
+							"value": "CGK"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Poin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/poin/delete/7dc3ac11a0c4db2?id_poin=POIN0003",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"poin",
+						"delete",
+						"7dc3ac11a0c4db2"
+					],
+					"query": [
+						{
+							"key": "id_poin",
+							"value": "POIN0003"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Statistic Log",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/log/statistic/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"log",
+						"statistic",
+						"875a8f2f42c570f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Statistic User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/user/statistic/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"user",
+						"statistic",
+						"875a8f2f42c570f"
 					]
 				}
 			},
