@@ -171,6 +171,7 @@ Author: SAEROX
                                     <li><a href="#/user">Data User</a></li>
                                 </ul>
                             </li>
+                            <li><a href="#/rute"><i class="ti ti-map-alt"></i><span>Rute</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->
@@ -245,7 +246,6 @@ Author: SAEROX
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-
         <script type="text/javascript">
           function load_content(link) {
             $.get(`<?= base_url().'admin/'?>${link}`,function(response){

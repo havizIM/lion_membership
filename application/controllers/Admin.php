@@ -27,4 +27,9 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/dashboard');
 	}
+
+	public function rute()
+	{
+		$this->load->view('admin/rute');
+	}
 }
