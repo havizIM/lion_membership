@@ -37,6 +37,10 @@ Author: SAEROX
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="<?= base_url() ?>assets/css/select2/select2-bootstrap.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" /> -->
+
         <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/css/datatables/datatables.min.css"> -->
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -165,13 +169,8 @@ Author: SAEROX
                         <!-- Begin Main Navigation -->
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
-                            <li><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>User</span></a>
-                                <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
-                                    <li><a href="#/log">Log User</a></li>
-                                    <li><a href="#/user">Data User</a></li>
-                                </ul>
-                            </li>
                             <li><a href="#/rute"><i class="ti ti-map-alt"></i><span>Rute</span></a></li>
+                            <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->
@@ -245,6 +244,7 @@ Author: SAEROX
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script type="text/javascript">
           function load_content(link) {

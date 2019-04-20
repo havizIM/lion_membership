@@ -19,10 +19,7 @@
 		box-shadow: 0px 7px 20px 1px rgba(52, 40, 104, 0.37);
 		transform: 
 	}
-	.btn-shadow-2  {
-		
-	}
-
+	
 	.widget-header-2 {
 		padding: .85rem 1.4rem;
 	}
@@ -72,7 +69,7 @@
 </div>
  <!-- Begin Widget Header -->
 <div class="widget-header bordered d-flex align-items-center">
-    <h2>Show Rute</h2>
+    <h2>Data Rute</h2>
     <div class="widget-options">
         <div class="dropdown">
             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
@@ -186,7 +183,7 @@
 		                    	</div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
-                                <button type="submit" id="submit_password" class="btn btn-gradient-03 waves-effect waves-light" id="submit_edit">Save Change</button>
+                                <button type="submit" class="btn btn-gradient-03 waves-effect waves-light" id="submit_edit">Save Change</button>
                             </div>
                       	</form>
                     </div>
@@ -200,7 +197,7 @@
 
 	$(document).ready(function(){
 
-	var id_rute = '<?= base_url('api/rute/show/'); ?>'+auth.token
+	var link_get = '<?= base_url('api/rute/show/'); ?>'+auth.token
 		// alert(id_rute)
     var t_rute = $('#t_rute').DataTable({
       columnDefs: [{
@@ -210,7 +207,7 @@
       autoWidth: false,
       responsive: true,
       processing: true,
-      ajax: '<?= base_url('api/rute/show/'); ?>'+auth.token,
+      ajax: link_get,
       columns: [
         {"data": 'id_rute'},
         {"data": 'nama_rute'},
@@ -272,8 +269,6 @@
 
 /*EDIT RUTE*/
 	$(document).on('click', '#btn_edit', function(){
-		$('#modal_edit').modal('show');
-
 		// var id_jadwal = location.hash.substr(14);
 		var id_rute = $(this).attr('data-id');
 		var link_get = `<?= base_url('api/rute/show/') ?>${auth.token}?id_rute=${id_rute}`
@@ -289,7 +284,7 @@
             $('#edit_nama_rute').val(v.nama_rute);
           });
 
-          $('#modal_edit').modal('hide');
+          $('#modal_edit').modal('show');
         },
         error: function(){
           makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
@@ -343,8 +338,8 @@
       var link_get = `<?= base_url('api/rute/delete/') ?>${auth.token}?id_rute=${id_rute}`;
   
               Swal.fire({
-                title: 'Are you sure to logout?',
-                text: "You need to login again!",
+                title: 'Are you sure to Delete?',
+                text: "Data will delete permanently!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

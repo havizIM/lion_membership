@@ -32,4 +32,19 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/rute');
 	}
+
+	public function point()
+	{
+		$this->load->view('admin/point');
+	}
+
+	public function add_point()
+	{
+		$this->load->view('admin/add_point');
+	}
+
+	public function edit_point($id)
+	{
+		$this->load->view('admin/edit_point');
+	}
 }
