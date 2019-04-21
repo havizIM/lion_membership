@@ -88,6 +88,24 @@
 
          $('#edit_departure').html(departure).selectpicker('refresh');
          $('#edit_arrival').html(arrival).selectpicker('refresh');
+
+         $.ajax({
+             url: link_get,
+             type: 'GET',
+             dataType: 'JSON',
+             success: function(response){
+               $.each (response.data, function(k, v){
+                   $('#edit_departure').selectpicker('val', v.departure);
+                   $('#edit_arrival').selectpicker('val', v.arrival);
+                   $('#edit_claim_poin').val(v.claim_poin);
+                   $('#edit_reedem_poin').val(v.reedem_poin);
+               });
+             },
+
+             error: function(){
+               makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+             },
+           });
        },
 
        error: function(){
@@ -96,24 +114,6 @@
      });
 
 //FORM EDIT
-
-      $.ajax({
-          url: link_get,
-          type: 'GET',
-          dataType: 'JSON',
-          success: function(response){
-            $.each (response.data, function(k, v){
-                $('#edit_departure').selectpicker('val', v.departure);
-                $('#edit_arrival').selectpicker('val', v.arrival);
-                $('#edit_claim_poin').val(v.claim_poin);
-                $('#edit_reedem_poin').val(v.reedem_poin);
-            });
-          },
-
-          error: function(){
-            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
-          },
-        });
 
         $('#form_edit').on('submit', function(e){
           e.preventDefault();
@@ -133,7 +133,7 @@
                 data: $(this).serialize(),
 
                 beforeSend: function(){
-                  $('#submit_edit').addClass('disabled').attr('disabled', 'disabled').text('Save')
+                  $('#submit_edit').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
                 },
 
                 success: function(response){

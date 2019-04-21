@@ -17,9 +17,9 @@
 	}
 	.btn-shadow-2 {
 		box-shadow: 0px 7px 20px 1px rgba(52, 40, 104, 0.37);
-		transform: 
+		transform:
 	}
-	
+
 	.widget-header-2 {
 		padding: .85rem 1.4rem;
 	}
@@ -45,11 +45,11 @@
 		background: transparent;
    		color: #fff;
 	}
-	
+
 	.widget-options .dropdown-menu .dropdown-item {
 		padding:0.3rem 1.8rem !important;
 	}
-	
+
 	.widget-options .dropdown-menu {
 	  padding: 0.4rem 0rem !important;
 	}
@@ -76,7 +76,7 @@
                 <i class="la la-ellipsis-h"></i>
             </button>
             <div class="dropdown-menu">
-                <button type="button" class="dropdown-item edit" id="btn_add"> 
+                <button type="button" class="dropdown-item edit" id="btn_add">
                     <i class="ion-plus-round"></i>Add Rute
                 </button>
             </div>
@@ -106,8 +106,8 @@
   </div>
 </div>
 
-                              
-                                   
+
+
 
 <!-- MODAL ADD-->
 <!-- Begin Centered Modal -->
@@ -141,7 +141,7 @@
 		                    	</div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
-                                <button type="submit" id="submit_password" class="btn btn-gradient-03 waves-effect waves-light" id="submit_add">Save</button>
+                                <button type="submit" class="btn btn-gradient-03 waves-effect waves-light" id="submit_add">Save</button>
                             </div>
                       	</form>
                     </div>
@@ -193,7 +193,7 @@
         <!-- End Centered Modal -->
 <!-- MODAL EDIT END-->
 <script>
-	
+
 
 	$(document).ready(function(){
 
@@ -241,11 +241,11 @@
    					type: 'POST',
    					dataType: 'JSON',
    					data: $(this).serialize(),
-   			
+
    					beforeSend: function(){
    						$('#submit_add').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
    					},
-   			
+
    					success: function(response){
    						if (response.status === 200) {
    							t_rute.ajax.reload();
@@ -257,7 +257,7 @@
    						$('#submit_add').removeClass('disabled').html('Save');
    						$('#modal_add').modal('hide');
    					},
-   			
+
    					error: function(){
    							makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
    					},
@@ -307,11 +307,11 @@
 					type: 'POST',
 					dataType: 'JSON',
 					data: $(this).serialize(),
-			
+
 					beforeSend: function(){
 						$('#submit_edit').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>')
 					},
-			
+
 					success: function(response){
 						if (response.status === 200) {
    							t_rute.ajax.reload();
@@ -323,7 +323,7 @@
    						$('#submit_edit').removeClass('disabled').html('Edit');
    						$('#modal_edit').modal('hide');
 					},
-			
+
 					error: function(){
 						makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
 					},
@@ -336,7 +336,7 @@
    $(document).on('click', '#btn_delete', function(){
       var id_rute = $(this).attr('data-id');
       var link_get = `<?= base_url('api/rute/delete/') ?>${auth.token}?id_rute=${id_rute}`;
-  
+
               Swal.fire({
                 title: 'Are you sure to Delete?',
                 text: "Data will delete permanently!",
@@ -357,9 +357,9 @@
               					makeNotif('success', response.message, 'bottomRight');
               				 } else {
               				 	makeNotif('error', response.message, 'bottomRight');
-              				 }	
+              				 }
               				},
-              		
+
               				error: function(){
               					makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
               				},
