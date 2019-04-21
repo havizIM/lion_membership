@@ -30,18 +30,17 @@ Author: SAEROX
         <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon-16x16.png">
         <!-- Stylesheet -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css">
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/elisyam-1.5.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>assets/css/animate/animate.min.css">
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="<?= base_url() ?>assets/css/select2/select2-bootstrap.css">
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" /> -->
+        <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/js/select2/css/select2.min.css">
+        <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/js/select2/css/select2-bootstrap.css"> -->
+        <link rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap-select/bootstrap-select.min.css">
 
-        <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/css/datatables/datatables.min.css"> -->
+        <link rel="stylesheet" href="<?= base_url() ?>assets/css/datatables/datatables.min.css">
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -244,7 +243,9 @@ Author: SAEROX
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+        <!-- <script src="<?= base_url() ?>assets/vendors/js/select2/js/select2.full.min.js"></script> -->
+        <script src="<?= base_url() ?>assets/vendors/js/bootstrap-select/bootstrap-select.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script type="text/javascript">
           function load_content(link) {

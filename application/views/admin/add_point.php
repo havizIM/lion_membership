@@ -1,6 +1,3 @@
-<style>
-  /*.select2-container .select2-selection--single {height: 50px !important;}*/
-</style>
 
 <div class="row">
     <div class="page-header">
@@ -18,27 +15,25 @@
 <div class="widget-header bordered d-flex align-items-center">
     <h2>Add Point</h2>
     <div class="widget-options">
-        
+
     </div>
 </div>
 <div class="row row-flex">
   <div class="col-md-12">
     <div class="widget has-shadow">
         <div class="widget-body">
-         <form class=" " id="form_add">
+         <form class="form_horizontal" id="form_add">
             <div class="form-group row mb-5">
                 <label class="col-lg-3 form-control-label">Departure</label>
                 <div class="col-lg-9 select mb-3">
-                    <select id="departure" name="departure" class=" form-control">
-                       
-                    </select>
+                  <select id="departure" name="departure" class="form-control" data-live-search="true"></select>
                 </div>
             </div>
             <div class="form-group row mb-5">
                 <label class="col-lg-3 form-control-label">Arrival</label>
                 <div class="col-lg-9 select mb-3">
-                    <select id="arrival" name="arrival" class="custom-select form-control">
-                       
+                    <select id="arrival" name="arrival" class="form-control" data-live-search="true">
+
                     </select>
                 </div>
             </div>
@@ -67,66 +62,34 @@
      </div>
   </div>
 </div>
+
 <script>
   $(document).ready(function(){
-     // With Select2
-        // Inisiasi Select 2 and Ajax
-        $('#departure').select2({
-           placeholder: '---Pilih User---',
-        ajax: {
-          url: `<?=base_url().'api/rute/show/' ?>${auth.token}`,
-          dataType: 'JSON',
-          data: function(params){
-            return {
-              nama_rute: params.term
-            };
-          },
-          processResults: function(response) {
-            var results = [];
 
-            $.each(response.data, function(k, v){
-              results.push({
-                id: v.id_rute,
-                text: v.nama_rute
-              });
-            });
+    $('#departure').selectpicker();
+    $('#arrival').selectpicker();
 
-            return {
-              results: results
-            };
-          },
-          cache: true
-        }
-        });
+    $.ajax({
+        url: `<?= base_url().'api/rute/show/' ?>${auth.token}`,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(response){
+          var departure = '<option value="">-- Pilih Departure --</option>';
+          var arrival = '<option value="">-- Pilih Arrival --</option>';
 
-        // Inisiasi Select 2 and Ajax
-        $('#arrival').select2({
-           placeholder: '---Pilih User---',
-        ajax: {
-          url: `<?=base_url().'api/rute/show/' ?>${auth.token}`,
-          dataType: 'JSON',
-          data: function(params){
-            return {
-              nama_rute: params.term
-            };
-          },
-          processResults: function(response) {
-            var results = [];
+          $.each (response.data, function(k, v){
+            departure += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
+            arrival += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
+          });
 
-            $.each(response.data, function(k, v){
-              results.push({
-                id: v.id_rute,
-                text: v.nama_rute
-              });
-            });
+          $('#departure').html(departure).selectpicker('refresh');
+          $('#arrival').html(arrival).selectpicker('refresh');
+        },
 
-            return {
-              results: results
-            };
-          },
-          cache: true
-        }
-        });
+        error: function(){
+          makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+        },
+      });
 
 //FORM ADD
         $('#form_add').on('submit', function(e){
@@ -147,11 +110,11 @@
                 type: 'POST',
                 dataType: 'JSON',
                 data: $(this).serialize(),
-            
+
                 beforeSend: function(){
                   $('#submit_add').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
                 },
-            
+
                 success: function(response){
                   if (response.status === 200) {
                     makeNotif('success', response.message, 'bottomRight');
@@ -160,9 +123,9 @@
                     makeNotif('error', response.message, 'bottomRight')
                     $('#submit_add').removeClass('disabled').html('Save');
                   }
-                  
+
                 },
-            
+
                 error: function(){
                     makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
                 },
@@ -174,5 +137,5 @@
 
 
   });
- 
+
 </script>
