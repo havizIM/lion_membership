@@ -57,6 +57,20 @@ Author: SAEROX
             }
           }
         </script>
+
+        <style>
+            .default-sidebar>.side-navbar a .la-home {
+                color: #1a9cfd;
+            }
+
+            .default-sidebar>.side-navbar a .ti-map-alt {
+                color: #5cb85c;
+            }
+
+            .default-sidebar>.side-navbar a .la-gift {
+                color: #e7956c;
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Begin Preloader -->
