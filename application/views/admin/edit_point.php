@@ -14,7 +14,7 @@
 <div class="widget-header bordered d-flex align-items-center">
     <h2>Add Point</h2>
     <div class="widget-options">
-        
+
     </div>
 </div>
 <div class="row row-flex">
@@ -26,7 +26,7 @@
                 <label class="col-lg-3 form-control-label">Departure</label>
                 <div class="col-lg-9 select mb-3">
                     <select id="edit_departure" name="departure" class=" form-control">
-                       
+
                     </select>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <label class="col-lg-3 form-control-label">Arrival</label>
                 <div class="col-lg-9 select mb-3">
                     <select id="edit_arrival" name="arrival" class="custom-select form-control">
-                       
+
                     </select>
                 </div>
             </div>
@@ -65,89 +65,55 @@
 </div>
 <script>
  $(document).ready(function(){
-   // With Select2
-        // Inisiasi Select 2 and Ajax
-        $('#edit_departure').select2({
-           placeholder: '---Pilih User---',
-        ajax: {
-          url: `<?=base_url().'api/rute/show/' ?>${auth.token}`,
-          dataType: 'JSON',
-          data: function(params){
-            return {
-              nama_rute: params.term
-            };
-          },
-          processResults: function(response) {
-            var results = [];
 
-            $.each(response.data, function(k, v){
-              results.push({
-                id: v.id_rute,
-                text: v.nama_rute
-              });
-            });
+   var id_poin = location.hash.substr(13);
+   var link_get =  `<?=base_url().'api/poin/show/' ?>${auth.token}?id_poin=${id_poin}`;
+   var link_post =  `<?=base_url().'api/poin/edit/' ?>${auth.token}?id_poin=${id_poin}`;
 
-            return {
-              results: results
-            };
-          },
-          cache: true
-        }
-        });
+   $('#edit_departure').selectpicker();
+   $('#edit_arrival').selectpicker();
 
-        // Inisiasi Select 2 and Ajax
-        $('#edit_arrival').select2({
-           placeholder: '---Pilih User---',
-        ajax: {
-          url: `<?=base_url().'api/rute/show/' ?>${auth.token}`,
-          dataType: 'JSON',
-          data: function(params){
-            return {
-              nama_rute: params.term
-            };
-          },
-          processResults: function(response) {
-            var results = [];
+   $.ajax({
+       url: `<?= base_url().'api/rute/show/' ?>${auth.token}`,
+       type: 'GET',
+       dataType: 'JSON',
+       success: function(response){
+         var departure = '<option value="">-- Pilih Departure --</option>';
+         var arrival = '<option value="">-- Pilih Arrival --</option>';
 
-            $.each(response.data, function(k, v){
-              results.push({
-                id: v.id_rute,
-                text: v.nama_rute
-              });
-            });
+         $.each (response.data, function(k, v){
+           departure += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
+           arrival += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
+         });
 
-            return {
-              results: results
-            };
-          },
-          cache: true
-        }
-        });
+         $('#edit_departure').html(departure).selectpicker('refresh');
+         $('#edit_arrival').html(arrival).selectpicker('refresh');
+
+         $.ajax({
+             url: link_get,
+             type: 'GET',
+             dataType: 'JSON',
+             success: function(response){
+               $.each (response.data, function(k, v){
+                   $('#edit_departure').selectpicker('val', v.departure);
+                   $('#edit_arrival').selectpicker('val', v.arrival);
+                   $('#edit_claim_poin').val(v.claim_poin);
+                   $('#edit_reedem_poin').val(v.reedem_poin);
+               });
+             },
+
+             error: function(){
+               makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+             },
+           });
+       },
+
+       error: function(){
+         makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+       },
+     });
 
 //FORM EDIT
- 
-      var id_poin = location.hash.substr(13);
-
-      var link_get =  `<?=base_url().'api/poin/show/' ?>${auth.token}?id_poin=${id_poin}`;
-      var link_post =  `<?=base_url().'api/poin/edit/' ?>${auth.token}?id_poin=${id_poin}`;
-
-      $.ajax({
-          url: link_get,
-          type: 'GET',
-          dataType: 'JSON',
-          success: function(response){
-            $.each (response.data, function(k, v){
-                $('#edit_departure').val(v.departure);
-                $('#edit_arrival').val(v.arrival);
-                $('#edit_claim_poin').val(v.claim_poin);
-                $('#edit_reedem_poin').val(v.reedem_poin);
-            });
-          },
-      
-          error: function(){
-            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
-          },
-        });
 
         $('#form_edit').on('submit', function(e){
           e.preventDefault();
@@ -165,11 +131,11 @@
                 type: 'POST',
                 dataType: 'JSON',
                 data: $(this).serialize(),
-            
+
                 beforeSend: function(){
-                  $('#submit_edit').addClass('disabled').attr('disabled', 'disabled').text('Save')
+                  $('#submit_edit').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
                 },
-            
+
                 success: function(response){
                   if (response.status === 200) {
                       makeNotif('success', response.message, 'bottomRight');
@@ -179,17 +145,17 @@
                       $('#submit_edit').removeClass('disabled').removeAttr('disabled').text('Save');
                     }
                 },
-            
+
                 error: function(){
                   makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
                  $('#submit_edit').removeClass('disabled').removeAttr('disabled').text('Save');
                 },
               });
          }
-         
+
       });
 
-   
+
 
 
 //FORM EDIT END
