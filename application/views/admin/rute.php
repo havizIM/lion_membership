@@ -249,17 +249,18 @@
    					success: function(response){
    						if (response.status === 200) {
    							t_rute.ajax.reload();
-   							makeNotif('success', response.message, 'bottomRight');
-   							$('#form_add')[0].reset();
-   						} else {
-   							makeNotif('error', response.message, 'bottomRight')
-   						}
-   						$('#submit_add').removeClass('disabled').html('Save');
-   						$('#modal_add').modal('hide');
+                makeNotif('success', response.message, 'bottomRight');
+                $('#form_add')[0].reset();
+   						 $('#modal_add').modal('hide');
+              } else {
+                makeNotif('error', response.message, 'bottomRight')
+              }
+              $('#submit_add').removeClass('disabled').html('Save');
    					},
 
    					error: function(){
    							makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+                $('#submit_add').removeClass('disabled').html('Save')
    					},
    				});
    		}
@@ -317,15 +318,16 @@
    							t_rute.ajax.reload();
    							makeNotif('success', response.message, 'bottomRight');
    							$('#form_edit')[0].reset();
-   						} else {
-   							makeNotif('error', response.message, 'bottomRight')
-   						}
-   						$('#submit_edit').removeClass('disabled').html('Edit');
-   						$('#modal_edit').modal('hide');
+   						 $('#modal_edit').modal('hide');
+              } else {
+                makeNotif('error', response.message, 'bottomRight')
+              }
+              $('#submit_edit').removeClass('disabled').html('Edit');
 					},
 
 					error: function(){
 						makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+            $('#submit_edit').removeClass('disabled').html('Edit');
 					},
 				});
 		}

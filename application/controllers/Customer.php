@@ -22,4 +22,9 @@ class Customer extends CI_Controller {
 	{
 		$this->load->view('customer/main');
 	}
+
+	public function point()
+	{
+		$this->load->view('customer/point');
+	}
 }

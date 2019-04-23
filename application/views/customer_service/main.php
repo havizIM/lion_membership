@@ -165,12 +165,7 @@ Author: SAEROX
                         <!-- Begin Main Navigation -->
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
-                            <li><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>User</span></a>
-                                <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
-                                    <li><a href="#/log">Log User</a></li>
-                                    <li><a href="#/user">Data User</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->

@@ -191,7 +191,7 @@
           dataType: 'JSON',
           data: $(this).serialize(),
           beforeSend: function(){
-            $('#submit_add').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+            $('#submit_add').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
           },
           success: function(response){
             if(response.status === 200){
@@ -206,6 +206,7 @@
           },
           error: function(){
             makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+            $('#submit_add').removeClass('disabled').html('Save');
           }
         })
       }
@@ -230,7 +231,7 @@
           dataType: 'JSON',
           data: $(this).serialize(),
           beforeSend: function(){
-            $('#submit_edit').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+            $('#submit_edit').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
           },
           success: function(response){
             if(response.status === 200){
@@ -245,6 +246,7 @@
           },
           error: function(){
             makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+            $('#submit_edit').removeClass('disabled').html('Save Changes');
           }
         })
       }
