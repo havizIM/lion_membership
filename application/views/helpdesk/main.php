@@ -246,7 +246,8 @@ Author: SAEROX
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="<?= base_url() ?>assets/vendors/js/chart/chart.min.js"></script>
-
+        
+        <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
         <script type="text/javascript">
           function load_content(link) {
             $.get(`<?= base_url().'helpdesk/'?>${link}`,function(response){

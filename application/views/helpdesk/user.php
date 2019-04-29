@@ -313,5 +313,17 @@
     });
     <!-- End Edit User -->
 
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4e09d24d839d5e63c48b', {
+      cluster: 'ap1',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('lion');
+    channel.bind('user', function(data) {
+      t_user.ajax.reload();
+    });
+
   });
 </script>
