@@ -27,4 +27,9 @@ class Customer_service extends CI_Controller {
 	{
 		$this->load->view('customer_service/dashboard');
 	}
+
+	public function point()
+	{
+		$this->load->view('customer_service/point');
+	}
 }

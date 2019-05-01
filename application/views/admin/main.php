@@ -56,6 +56,20 @@ Author: SAEROX
             }
           }
         </script>
+
+        <style>
+            .default-sidebar>.side-navbar a .la-home {
+                color: #1a9cfd;
+            }
+
+            .default-sidebar>.side-navbar a .ti-map-alt {
+                color: #5cb85c;
+            }
+
+            .default-sidebar>.side-navbar a .la-gift {
+                color: #e7956c;
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Begin Preloader -->
@@ -247,6 +261,8 @@ Author: SAEROX
         <!-- <script src="<?= base_url() ?>assets/vendors/js/select2/js/select2.full.min.js"></script> -->
         <script src="<?= base_url() ?>assets/vendors/js/bootstrap-select/bootstrap-select.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+        <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
         <script type="text/javascript">
           function load_content(link) {
             $.get(`<?= base_url().'admin/'?>${link}`,function(response){

@@ -22,4 +22,6 @@ class Customer extends CI_Controller {
 	{
 		$this->load->view('customer/main');
 	}
+
+	
 }

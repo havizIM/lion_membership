@@ -128,6 +128,7 @@
 
                 error: function(){
                     makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+                    $('#submit_add').removeClass('disabled').html('Save');
                 },
               });
           }

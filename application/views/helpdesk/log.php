@@ -64,5 +64,18 @@
       ],
       order: [[0, 'asc']]
     });
+
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4e09d24d839d5e63c48b', {
+      cluster: 'ap1',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('lion');
+    channel.bind('log', function(data) {
+      t_log.ajax.reload();
+    });
+
   });
 </script>

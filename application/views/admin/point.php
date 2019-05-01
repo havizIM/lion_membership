@@ -185,5 +185,18 @@
 		$(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(350);
 	});
    //WIDGET OPTION HOVER END
+
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4e09d24d839d5e63c48b', {
+      cluster: 'ap1',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('lion');
+    channel.bind('point', function(data) {
+      t_point.ajax.reload();
+    });
+
 	});
 </script>

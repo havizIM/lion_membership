@@ -172,8 +172,8 @@ Author: SAEROX
                           close:"animated bounceOutRight"
                         }
                       }).show();
-                    }
                     $('#submit_login').removeClass('disabled').html('Log In');
+                    }
                   },
                   error: function(){
                     new Noty({
@@ -187,6 +187,7 @@ Author: SAEROX
                         close:"animated bounceOutRight"
                       }
                     }).show();
+                    $('#submit_login').removeClass('disabled').html('Log In');
                   }
                 })
               }
