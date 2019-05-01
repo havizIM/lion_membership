@@ -15,7 +15,7 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "nip",
+							"key": "id_karyawan",
 							"value": "helpdesk",
 							"type": "text"
 						},
@@ -37,7 +37,8 @@
 						"auth",
 						"login_user"
 					]
-				}
+				},
+				"description": "Link : \n- localhost/lion_membership/api/auth/login_user\n\n\nMethod :\n- POST\n\n\nData : \n- id_karyawan\n- password\n\n\nHak Akses :\n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
 			},
 			"response": []
 		},
@@ -62,7 +63,8 @@
 						"logout_user",
 						"875a8f2f42c570f"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/auth/logout_user/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -98,7 +100,8 @@
 						"password_user",
 						"875a8f2f42c570f"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/auth/password_user/--token--\n\nMethod :\n- POST\n\nData :\n- password_lama\n- password_baru\n\nHak Akses : \n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -123,7 +126,8 @@
 						"show",
 						"875a8f2f42c570f"
 					]
-				}
+				},
+				"description": "Link: \n- localhost/lion_membership/api/log/show/--token--\n\nMethod : \n- GET\n\nHak Akses :\n- Helpdesk\n\nNote :\n- Token bisa didapatkan dari localStorage\n\nPusher :\n- channel : lion_membership\n- event : log"
 			},
 			"response": []
 		},
@@ -148,29 +152,8 @@
 						"show",
 						"875a8f2f42c570f"
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Show Poin",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "localhost/lion_membership/api/poin/show/875a8f2f42c570f",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lion_membership",
-						"api",
-						"poin",
-						"show",
-						"875a8f2f42c570f"
-					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/user/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_karyawan\n- nama_user\n\nHak Akses : \n- Helpdesk\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : user"
 			},
 			"response": []
 		},
@@ -192,7 +175,31 @@
 						"show",
 						"875a8f2f42c570f"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/rute/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_rute\n- nama_rute\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : rute"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Poin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/lion_membership/api/poin/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"poin",
+						"show",
+						"875a8f2f42c570f"
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/poin/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_poin\n- departure\n- arrival\n\nHak Akses : \n- Customer Service\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : poin"
 			},
 			"response": []
 		},
@@ -205,18 +212,18 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "nip",
-							"value": "7201160107",
+							"key": "id_karyawan",
+							"value": "7201160100",
 							"type": "text"
 						},
 						{
 							"key": "nama_user",
-							"value": "Devan Dirgantara Putra",
+							"value": "Ratu Atika",
 							"type": "text"
 						},
 						{
 							"key": "level",
-							"value": "Admin",
+							"value": "Customer Service",
 							"description": "Admin / Customer Service / Manager",
 							"type": "text"
 						}
@@ -234,7 +241,8 @@
 						"add",
 						"875a8f2f42c570f"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/user/add/--token--\n\nMethod :\n- POST\n\nData : \n- id_karyawan\n- nama_user\n- level (Admin / Customer Service / Manager)\n\nHak Akses : \n- Helpdesk\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -248,12 +256,12 @@
 					"formdata": [
 						{
 							"key": "id_rute",
-							"value": "CGK",
+							"value": "ABG",
 							"type": "text"
 						},
 						{
 							"key": "nama_rute",
-							"value": "Jakarta",
+							"value": "Anak Baru Gede",
 							"type": "text"
 						}
 					]
@@ -270,7 +278,8 @@
 						"add",
 						"7dc3ac11a0c4db2"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/rute/add/--token--\n\nMethod :\n- POST\n\nData : \n- id_rute\n- nama_rute\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -285,21 +294,23 @@
 						{
 							"key": "departure",
 							"value": "PDG",
+							"description": "Relasi ke Rute",
 							"type": "text"
 						},
 						{
 							"key": "arrival",
-							"value": "CGK",
+							"value": "ABG",
+							"description": "Relasi ke Rute",
 							"type": "text"
 						},
 						{
 							"key": "claim_poin",
-							"value": "437",
+							"value": "427",
 							"type": "text"
 						},
 						{
 							"key": "reedem_poin",
-							"value": "437000",
+							"value": "51200",
 							"type": "text"
 						}
 					]
@@ -316,7 +327,8 @@
 						"add",
 						"7dc3ac11a0c4db2"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/poin/add/--token--\n\nMethod :\n- POST\n\nData : \n- departure (relasi ke rute)\n- arrival (relasi ke rute)\n- claim_poin\n- reedem_poin\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -335,7 +347,7 @@
 						},
 						{
 							"key": "level",
-							"value": "Manager",
+							"value": "Customer Service",
 							"description": "Admin / Customer Service / Manager",
 							"type": "text"
 						},
@@ -348,7 +360,7 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lion_membership/api/user/edit/875a8f2f42c570f?nip=7201160107",
+					"raw": "localhost/lion_membership/api/user/edit/875a8f2f42c570f?id_karyawan=7201160100",
 					"host": [
 						"localhost"
 					],
@@ -361,11 +373,12 @@
 					],
 					"query": [
 						{
-							"key": "nip",
-							"value": "7201160107"
+							"key": "id_karyawan",
+							"value": "7201160100"
 						}
 					]
-				}
+				},
+				"description": "Link:\n- localhost/lion_membership/api/user/edit/--token--\n\nMethod :\n- POST\n\nParams :\n- id_karyawan\n\nData : \n- nama_user\n- level (Admin / Customer Service / Manager)\n- status (Aktif / Nonaktif)\n\nHak Akses :\n- Helpdesk\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib\n- Lihat dokumentasi di postman"
 			},
 			"response": []
 		},
@@ -379,13 +392,13 @@
 					"formdata": [
 						{
 							"key": "nama_rute",
-							"value": "Padang",
+							"value": "Ambon Gede",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost/lion_membership/api/rute/edit/7dc3ac11a0c4db2?id_rute=PDG",
+					"raw": "localhost/lion_membership/api/rute/edit/7dc3ac11a0c4db2?id_rute=ABG",
 					"host": [
 						"localhost"
 					],
@@ -399,10 +412,11 @@
 					"query": [
 						{
 							"key": "id_rute",
-							"value": "PDG"
+							"value": "ABG"
 						}
 					]
-				}
+				},
+				"description": "Link:\n- localhost/lion_membership/api/rute/edit/--token--\n\nMethod :\n- POST\n\nParams :\n- id_rute\n\nData : \n- nama_rute\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib\n- Lihat dokumentasi di postman"
 			},
 			"response": []
 		},
@@ -416,12 +430,12 @@
 					"formdata": [
 						{
 							"key": "departure",
-							"value": "CGK",
+							"value": "PDG",
 							"type": "text"
 						},
 						{
 							"key": "arrival",
-							"value": "PDG",
+							"value": "CGK",
 							"type": "text"
 						},
 						{
@@ -437,7 +451,7 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/lion_membership/api/poin/edit/7dc3ac11a0c4db2?id_poin=POIN0002",
+					"raw": "localhost/lion_membership/api/poin/edit/7dc3ac11a0c4db2?id_poin=POIN0004",
 					"host": [
 						"localhost"
 					],
@@ -451,10 +465,11 @@
 					"query": [
 						{
 							"key": "id_poin",
-							"value": "POIN0002"
+							"value": "POIN0004"
 						}
 					]
-				}
+				},
+				"description": "Link:\n- localhost/lion_membership/api/poin/edit/--token--\n\nMethod :\n- POST\n\nParams :\n- id_poin\n\nData : \n- departure (relasi ke rute)\n- arrival (relasi ke rute)\n- claim_poin\n- redeem_poin\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib\n- Lihat dokumentasi di postman"
 			},
 			"response": []
 		},
@@ -465,7 +480,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost/lion_membership/api/user/delete/875a8f2f42c570f?nip=7201160107",
+					"raw": "localhost/lion_membership/api/user/delete/875a8f2f42c570f?id_karyawan=7201160100",
 					"host": [
 						"localhost"
 					],
@@ -478,11 +493,12 @@
 					],
 					"query": [
 						{
-							"key": "nip",
-							"value": "7201160107"
+							"key": "id_karyawan",
+							"value": "7201160100"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/user/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_karyawan\n\nHak Akses :\n- Helpdesk\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -493,7 +509,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost/lion_membership/api/rute/delete/7dc3ac11a0c4db2?id_rute=CGK",
+					"raw": "localhost/lion_membership/api/rute/delete/7dc3ac11a0c4db2?id_rute=ABG",
 					"host": [
 						"localhost"
 					],
@@ -507,10 +523,11 @@
 					"query": [
 						{
 							"key": "id_rute",
-							"value": "CGK"
+							"value": "ABG"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/rute/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_rute\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -521,7 +538,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost/lion_membership/api/poin/delete/7dc3ac11a0c4db2?id_poin=POIN0003",
+					"raw": "localhost/lion_membership/api/poin/delete/7dc3ac11a0c4db2?id_poin=POIN0004",
 					"host": [
 						"localhost"
 					],
@@ -535,10 +552,11 @@
 					"query": [
 						{
 							"key": "id_poin",
-							"value": "POIN0003"
+							"value": "POIN0004"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/lion_membership/api/poin/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_poin\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},

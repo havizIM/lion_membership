@@ -32,16 +32,16 @@ class User extends CI_Controller {
           if($otorisasi->level != 'Helpdesk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
-            $nip      		= $this->input->get('nip');
+            $id_karyawan  = $this->input->get('id_karyawan');
       			$nama_user	  = $this->input->get('nama_user');
 
-            $show  = $this->UserModel->show($nip, $nama_user);
+            $show  = $this->UserModel->show($id_karyawan, $nama_user);
             $user  = array();
 
             foreach($show->result() as $key){
               $json = array();
 
-              $json['nip']            = $key->nip;
+              $json['id_karyawan']    = $key->id_karyawan;
               $json['nama_user']      = $key->nama_user;
               $json['password']       = $key->password;
               $json['level']          = $key->level;
@@ -80,27 +80,27 @@ class User extends CI_Controller {
           if($otorisasi->level != 'Helpdesk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
-            $nip        = $this->input->post('nip');
-            $nama_user  = $this->input->post('nama_user');
-            $level      = $this->input->post('level');
+            $id_karyawan  = $this->input->post('id_karyawan');
+            $nama_user    = $this->input->post('nama_user');
+            $level        = $this->input->post('level');
 
-            if($nip == null || $nama_user == null || $level == null){
+            if($id_karyawan == null || $nama_user == null || $level == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
             } else {
 
               $data = array(
-                'nip'       => $nip,
-                'nama_user' => $nama_user,
-                'password'  => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5),
-                'level'     => $level,
-                'foto'      => 'user.jpg',
-                'status'    => 'Aktif',
-                'token'     => sha1($nip)
+                'id_karyawan' => $id_karyawan,
+                'nama_user'   => $nama_user,
+                'password'    => substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5),
+                'level'       => $level,
+                'foto'        => 'user.jpg',
+                'status'      => 'Aktif',
+                'token'       => sha1($id_karyawan)
               );
 
               $log = array(
-                'user'        => $otorisasi->nip,
-                'id_ref'      => $nip,
+                'user'        => $otorisasi->id_karyawan,
+                'id_ref'      => $id_karyawan,
                 'refrensi'    => 'User',
                 'kategori'    => 'Add',
                 'keterangan'  => 'Menambahkan data user baru'
@@ -132,7 +132,7 @@ class User extends CI_Controller {
     }
   }
 
-  public function edit($token = null){
+  function edit($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'POST') {
@@ -152,32 +152,32 @@ class User extends CI_Controller {
           if($otorisasi->level != 'Helpdesk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
-            $nip        = $this->input->get('nip');
-            $nama_user  = $this->input->post('nama_user');
-            $level      = $this->input->post('level');
-            $status     = $this->input->post('status');
+            $id_karyawan      = $this->input->get('id_karyawan');
+            $nama_user        = $this->input->post('nama_user');
+            $level            = $this->input->post('level');
+            $status           = $this->input->post('status');
 
-            if($nip == null){
-              json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Tidak ada NIP yang dipilih'));
+            if($id_karyawan == null){
+              json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Tidak ada id_karyawan yang dipilih'));
             } else {
               if($nama_user == null || $level == null || $status == null){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
               } else {
                 $data = array(
                   'nama_user' => $nama_user,
-                  'level'  => $level,
+                  'level'     => $level,
                   'status'    => $status
                 );
 
                 $log = array(
-                  'user'        => $otorisasi->nip,
-                  'id_ref'      => $nip,
+                  'user'        => $otorisasi->id_karyawan,
+                  'id_ref'      => $id_karyawan,
                   'refrensi'    => 'User',
                   'kategori'    => 'Edit',
                   'keterangan'  => 'Mengedit data user'
                 );
 
-                $edit = $this->UserModel->edit($nip, $data, $log);
+                $edit = $this->UserModel->edit($id_karyawan, $data, $log);
 
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit user'));
@@ -204,7 +204,7 @@ class User extends CI_Controller {
     }
   }
 
-  public function delete($token = null){
+  function delete($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'GET') {
@@ -224,21 +224,21 @@ class User extends CI_Controller {
           if($otorisasi->level != 'Helpdesk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
-            $nip = $this->input->get('nip');
+            $id_karyawan = $this->input->get('id_karyawan');
 
-            if($nip == null){
-              json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'NIP tidak ditemukan'));
+            if($id_karyawan == null){
+              json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'id_karyawan tidak ditemukan'));
             } else {
 
               $log = array(
-                'user'        => $otorisasi->nip,
-                'id_ref'      => $nip,
+                'user'        => $otorisasi->id_karyawan,
+                'id_ref'      => $id_karyawan,
                 'refrensi'    => 'User',
                 'kategori'    => 'Delete',
                 'keterangan'  => 'Menghapus data user'
               );
 
-              $delete = $this->UserModel->delete($nip, $log);
+              $delete = $this->UserModel->delete($id_karyawan, $log);
 
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus user'));

@@ -11,7 +11,7 @@ class LogModel extends CI_Model {
 
     function show()
     {
-      return $this->db->select('*')->from('log a')->join('user b', 'b.nip = a.user', 'left')->get();
+      return $this->db->select('*')->from('log a')->join('user b', 'b.id_karyawan = a.user', 'left')->get();
     }
 
     function statistic($tahun)

@@ -20,16 +20,16 @@ class Auth extends CI_Controller {
       json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
     } else {
 
-      $nip      = $this->input->post('nip');
-      $password = $this->input->post('password');
+      $id_karyawan  = $this->input->post('id_karyawan');
+      $password     = $this->input->post('password');
 
-      if($nip == null || $password == null) {
-        json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'NIP dan Password belum lengkap' ));
+      if($id_karyawan == null || $password == null) {
+        json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'ID dan Password belum lengkap' ));
       } else {
-        $user   = $this->AuthModel->loginUser($nip);
+        $user   = $this->AuthModel->loginUser($id_karyawan);
 
         if($user->num_rows() == 0){
-          json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'NIP tidak ditemukan' ));
+          json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'ID tidak ditemukan' ));
         } else {
           foreach($user->result() as $key){
             $db_password    = $key->password;
@@ -41,7 +41,7 @@ class Auth extends CI_Controller {
             }
 
             $session = array(
-              'nip'            => $key->nip,
+              'id_karyawan'    => $key->id_karyawan,
               'nama_user'      => $key->nama_user,
               'tgl_registrasi' => $key->tgl_registrasi,
               'foto'           => $key->foto,
@@ -50,7 +50,7 @@ class Auth extends CI_Controller {
             );
 
             $log = array(
-              'user'        => $key->nip,
+              'user'        => $key->id_karyawan,
               'id_ref'      => '-',
               'refrensi'    => 'Auth',
               'kategori'    => 'Login',
@@ -109,7 +109,7 @@ class Auth extends CI_Controller {
           $otorisasi = $auth->row();
 
           $log = array(
-            'user'        => $otorisasi->nip,
+            'user'        => $otorisasi->id_karyawan,
             'id_ref'      => '-',
             'refrensi'    => 'Auth',
             'kategori'    => 'Logout',
@@ -173,14 +173,14 @@ class Auth extends CI_Controller {
               );
 
               $log = array(
-                'user'        => $otorisasi->nip,
+                'user'        => $otorisasi->id_karyawan,
                 'id_ref'      => '-',
                 'refrensi'    => 'Auth',
                 'kategori'    => 'Ganti Password',
                 'keterangan'  => 'Mengganti password lama menjadi password baru'
               );
 
-              $pass = $this->AuthModel->gantiPass($otorisasi->nip, $data, $log);
+              $pass = $this->AuthModel->gantiPass($otorisasi->id_karyawan, $data, $log);
 
               if(!$pass){
                 json_output(500, array('status' => 500, 'description' => 'Gagal', 'message' => 'Gagal mengganti password'));

@@ -31,14 +31,14 @@ class Log extends CI_Controller {
             foreach($show->result() as $key){
               $json = array();
 
-              $json['id_log']     = $key->id_log;
-              $json['nip']        = $key->nip;
-              $json['nama_user']  = $key->nama_user;
-              $json['id_ref']     = $key->id_ref;
-              $json['refrensi']   = $key->refrensi;
-              $json['keterangan'] = $key->keterangan;
-              $json['kategori']   = $key->kategori;
-              $json['tgl_log']    = $key->tgl_log;
+              $json['id_log']       = $key->id_log;
+              $json['id_karyawan']  = $key->id_karyawan;
+              $json['nama_user']    = $key->nama_user;
+              $json['id_ref']       = $key->id_ref;
+              $json['refrensi']     = $key->refrensi;
+              $json['keterangan']   = $key->keterangan;
+              $json['kategori']     = $key->kategori;
+              $json['tgl_log']      = $key->tgl_log;
 
               $log[] = $json;
             }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 29, 2019 at 07:50 PM
+-- Generation Time: Apr 11, 2019 at 10:03 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -25,12 +25,76 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `claim`
+--
+
+CREATE TABLE `claim` (
+  `id_claim` varchar(11) NOT NULL,
+  `kode_booking` varchar(6) NOT NULL,
+  `no_member` varchar(11) NOT NULL,
+  `tgl_claim` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `lampiran` text NOT NULL,
+  `status_claim` enum('Proses','Valid','Tidak Valid','') NOT NULL,
+  `keterangan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `claim_detail`
+--
+
+CREATE TABLE `claim_detail` (
+  `id_claim_detail` int(11) NOT NULL,
+  `id_claim` varchar(11) NOT NULL,
+  `id_poin` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `no_aplikasi` varchar(11) NOT NULL,
+  `gender` enum('Mr','Mrs','Ms','') NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `alamat` varchar(200) NOT NULL,
+  `kota` varchar(30) NOT NULL,
+  `kode_pos` varchar(10) NOT NULL,
+  `no_handphone` varchar(15) NOT NULL,
+  `kebangsaan` enum('WNI','WNA','','') NOT NULL,
+  `no_identitas` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `nama_perusahaan` varchar(50) NOT NULL,
+  `alamat_perusahaan` varchar(200) NOT NULL,
+  `kota_perusahaan` varchar(30) NOT NULL,
+  `kode_pos_perusahaan` varchar(10) NOT NULL,
+  `jabatan` varchar(30) NOT NULL,
+  `no_tlp` varchar(15) NOT NULL,
+  `no_fax` varchar(15) NOT NULL,
+  `email_perusahaan` varchar(50) NOT NULL,
+  `bidang_usaha` varchar(30) NOT NULL,
+  `alamat_surat` enum('Rumah','Kantor','','') NOT NULL,
+  `tgl_pengajuan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('Proses','Terima','Tolak','') NOT NULL,
+  `lampiran_1` text NOT NULL,
+  `lampiran_2` text NOT NULL,
+  `lampiran_3` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `log`
 --
 
 CREATE TABLE `log` (
   `id_log` bigint(20) NOT NULL,
   `user` varchar(20) NOT NULL,
+  `id_ref` varchar(15) NOT NULL,
+  `refrensi` varchar(30) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   `kategori` varchar(20) NOT NULL,
   `tgl_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -40,16 +104,99 @@ CREATE TABLE `log` (
 -- Dumping data for table `log`
 --
 
-INSERT INTO `log` (`id_log`, `user`, `keterangan`, `kategori`, `tgl_log`) VALUES
-(1, 'helpdesk', 'User login', 'Login', '2019-03-28 20:59:12'),
-(2, 'helpdesk', 'User logout', 'Logout', '2019-03-28 21:09:11'),
-(3, 'helpdesk', 'User login', 'Login', '2019-03-28 21:10:03'),
-(4, 'helpdesk', 'Mengganti password lama menjadi password baru', 'Ganti Password', '2019-03-28 21:11:45'),
-(5, 'helpdesk', 'User login', 'Login', '2019-03-28 21:12:14'),
-(6, 'helpdesk', 'Mengganti password lama menjadi password baru', 'Ganti Password', '2019-03-28 21:12:43'),
-(7, '7201160106', 'User login', 'Login', '2019-03-29 08:04:25'),
-(9, '7201160106', 'User login', 'Login', '2019-03-29 08:06:34'),
-(11, 'helpdesk', 'User logout', 'Logout', '2019-03-29 08:39:18');
+INSERT INTO `log` (`id_log`, `user`, `id_ref`, `refrensi`, `keterangan`, `kategori`, `tgl_log`) VALUES
+(74, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-04-11 19:49:38'),
+(75, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-04-11 19:50:24'),
+(76, 'helpdesk', '-', 'Auth', 'Mengganti password lama menjadi password baru', 'Ganti Password', '2019-04-11 19:51:01'),
+(77, 'helpdesk', '7201160107', 'User', 'Menambahkan data user baru', 'Add', '2019-04-11 20:00:31'),
+(78, 'helpdesk', '7201160107', 'User', 'Mengedit data user', 'Edit', '2019-04-11 20:01:20'),
+(79, 'helpdesk', '7201160107', 'User', 'Menghapus data user', 'Delete', '2019-04-11 20:01:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_poin`
+--
+
+CREATE TABLE `log_poin` (
+  `id_user_poin` varchar(11) NOT NULL,
+  `kd_booking` varchar(6) NOT NULL,
+  `id_poin` varchar(8) NOT NULL,
+  `no_member` varchar(11) NOT NULL,
+  `type` enum('claim','reedem','','') NOT NULL,
+  `tgl_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_poin`
+--
+
+CREATE TABLE `master_poin` (
+  `id_poin` varchar(8) NOT NULL,
+  `departure` varchar(3) NOT NULL,
+  `arrival` varchar(3) NOT NULL,
+  `claim_poin` int(11) NOT NULL,
+  `reedem_poin` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_rute`
+--
+
+CREATE TABLE `master_rute` (
+  `id_rute` varchar(3) NOT NULL,
+  `nama_rute` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member`
+--
+
+CREATE TABLE `member` (
+  `no_member` varchar(11) NOT NULL,
+  `no_aplikasi` varchar(11) NOT NULL,
+  `password` varchar(15) NOT NULL,
+  `berlaku_dari` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `berlaku_sampai` datetime NOT NULL,
+  `token` varchar(20) NOT NULL,
+  `status_member` enum('Aktif','Nonaktif','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reedem`
+--
+
+CREATE TABLE `reedem` (
+  `id_reedem` varchar(11) NOT NULL,
+  `no_member` varchar(11) NOT NULL,
+  `tgl_reedem` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status_reedem` enum('Batal','Proses','Approve','') NOT NULL,
+  `keterangan` varchar(100) NOT NULL,
+  `alamat_kirim` enum('Rumah','Kantor','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reedem_detail`
+--
+
+CREATE TABLE `reedem_detail` (
+  `id_reedem_detail` int(11) NOT NULL,
+  `id_reedem` varchar(11) NOT NULL,
+  `id_poin` varchar(8) NOT NULL,
+  `no_flight` varchar(10) NOT NULL,
+  `gender_pessenger` enum('Mr','Mrs','Ms','') NOT NULL,
+  `nama_pessenger` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -73,12 +220,36 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nip`, `nama_user`, `password`, `level`, `tgl_registrasi`, `foto`, `status`, `token`) VALUES
-('7201160106', 'Kalyssa Innara Putri', 'o5j4h', 'Manager', '2019-03-29 08:02:57', 'user.jpg', 'Aktif', 'df8f450cc77361b'),
-('helpdesk', 'Helpdesk', 'h3lpd35k', 'Helpdesk', '2019-03-28 19:05:02', 'user.jpg', 'Aktif', '875a8f2f42c570f');
+('06142', 'Coba yaa cuk', 'd0a92', 'Customer Service', '2019-04-08 04:17:15', 'user.jpg', 'Aktif', 'eab498f404354c1'),
+('06244', 'Nabilla Yulizar', '3t6c0', 'Admin', '2019-04-08 08:25:59', 'user.jpg', 'Aktif', '7dc3ac11a0c4db2'),
+('7201160106', 'Kalyssa Innara Putri', 'manager', 'Manager', '2019-03-29 08:02:57', 'user.jpg', 'Aktif', 'df8f450cc77361b'),
+('helpdesk', 'Helpdesk', 'helpdesk', 'Helpdesk', '2019-03-28 19:05:02', 'user.jpg', 'Aktif', '875a8f2f42c570f'),
+('Tst', 'ttty', 'hxmbe', 'Customer Service', '2019-04-09 08:01:32', 'user.jpg', 'Aktif', 'e4c75d02dac94e7');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `claim`
+--
+ALTER TABLE `claim`
+  ADD PRIMARY KEY (`id_claim`),
+  ADD KEY `no_member` (`no_member`);
+
+--
+-- Indexes for table `claim_detail`
+--
+ALTER TABLE `claim_detail`
+  ADD PRIMARY KEY (`id_claim_detail`),
+  ADD KEY `id_claim` (`id_claim`),
+  ADD KEY `id_poin` (`id_poin`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`no_aplikasi`);
 
 --
 -- Indexes for table `log`
@@ -86,6 +257,51 @@ INSERT INTO `user` (`nip`, `nama_user`, `password`, `level`, `tgl_registrasi`, `
 ALTER TABLE `log`
   ADD PRIMARY KEY (`id_log`),
   ADD KEY `user` (`user`);
+
+--
+-- Indexes for table `log_poin`
+--
+ALTER TABLE `log_poin`
+  ADD PRIMARY KEY (`id_user_poin`),
+  ADD UNIQUE KEY `kd_booking` (`kd_booking`),
+  ADD KEY `id_poin` (`id_poin`),
+  ADD KEY `id_customer` (`no_member`);
+
+--
+-- Indexes for table `master_poin`
+--
+ALTER TABLE `master_poin`
+  ADD PRIMARY KEY (`id_poin`),
+  ADD KEY `departure` (`departure`),
+  ADD KEY `arrival` (`arrival`);
+
+--
+-- Indexes for table `master_rute`
+--
+ALTER TABLE `master_rute`
+  ADD PRIMARY KEY (`id_rute`);
+
+--
+-- Indexes for table `member`
+--
+ALTER TABLE `member`
+  ADD PRIMARY KEY (`no_member`),
+  ADD KEY `no_aplikasi` (`no_aplikasi`);
+
+--
+-- Indexes for table `reedem`
+--
+ALTER TABLE `reedem`
+  ADD PRIMARY KEY (`id_reedem`),
+  ADD KEY `no_member` (`no_member`);
+
+--
+-- Indexes for table `reedem_detail`
+--
+ALTER TABLE `reedem_detail`
+  ADD PRIMARY KEY (`id_reedem_detail`),
+  ADD KEY `id_reedem` (`id_reedem`),
+  ADD KEY `id_poin` (`id_poin`);
 
 --
 -- Indexes for table `user`
@@ -98,20 +314,78 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `claim_detail`
+--
+ALTER TABLE `claim_detail`
+  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `reedem_detail`
+--
+ALTER TABLE `reedem_detail`
+  MODIFY `id_reedem_detail` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `claim`
+--
+ALTER TABLE `claim`
+  ADD CONSTRAINT `claim_ibfk_1` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `claim_detail`
+--
+ALTER TABLE `claim_detail`
+  ADD CONSTRAINT `claim_detail_ibfk_1` FOREIGN KEY (`id_claim`) REFERENCES `claim` (`id_claim`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `claim_detail_ibfk_2` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`);
+
+--
 -- Constraints for table `log`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `log_poin`
+--
+ALTER TABLE `log_poin`
+  ADD CONSTRAINT `log_poin_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `log_poin_ibfk_2` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `master_poin`
+--
+ALTER TABLE `master_poin`
+  ADD CONSTRAINT `master_poin_ibfk_1` FOREIGN KEY (`departure`) REFERENCES `master_rute` (`id_rute`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `master_poin_ibfk_2` FOREIGN KEY (`arrival`) REFERENCES `master_rute` (`id_rute`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `member`
+--
+ALTER TABLE `member`
+  ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`no_aplikasi`) REFERENCES `customer` (`no_aplikasi`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `reedem`
+--
+ALTER TABLE `reedem`
+  ADD CONSTRAINT `reedem_ibfk_1` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `reedem_detail`
+--
+ALTER TABLE `reedem_detail`
+  ADD CONSTRAINT `reedem_detail_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `reedem_detail_ibfk_2` FOREIGN KEY (`id_reedem`) REFERENCES `reedem` (`id_reedem`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

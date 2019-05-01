@@ -84,7 +84,7 @@ class Rute extends CI_Controller {
               );
 
               $log = array(
-                'user'        => $otorisasi->nip,
+                'user'        => $otorisasi->id_karyawan,
                 'id_ref'      => $id_rute,
                 'refrensi'    => 'Rute',
                 'kategori'    => 'Add',
@@ -141,7 +141,7 @@ class Rute extends CI_Controller {
             $nama_rute  = $this->input->post('nama_rute');
 
             if($id_rute == null){
-              json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Tidak ada NIP yang dipilih'));
+              json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Tidak ada ID Rute yang dipilih'));
             } else {
               if($nama_rute == null){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
@@ -151,7 +151,7 @@ class Rute extends CI_Controller {
                 );
 
                 $log = array(
-                  'user'        => $otorisasi->nip,
+                  'user'        => $otorisasi->id_karyawan,
                   'id_ref'      => $id_rute,
                   'refrensi'    => 'Rute',
                   'kategori'    => 'Edit',
@@ -185,7 +185,7 @@ class Rute extends CI_Controller {
     }
   }
 
-  public function delete($token = null){
+   function delete($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'GET') {
@@ -212,7 +212,7 @@ class Rute extends CI_Controller {
             } else {
 
               $log = array(
-                'user'        => $otorisasi->nip,
+                'user'        => $otorisasi->id_karyawan,
                 'id_ref'      => $id_rute,
                 'refrensi'    => 'Rute',
                 'kategori'    => 'Delete',

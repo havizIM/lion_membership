@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class UserModel extends CI_Model {
 
-    function show($nip = null, $nama_user = null)
+    function show($id_karyawan = null, $nama_user = null)
     {
       $this->db->select('*')->from('user');
 
-      if($nip != null){
-        $this->db->where('nip', $nip);
+      if($id_karyawan != null){
+        $this->db->where('id_karyawan', $id_karyawan);
       }
 
       if($nama_user != null){
@@ -40,7 +40,7 @@ class UserModel extends CI_Model {
     function edit($param, $data, $log)
     {
       $this->db->trans_start();
-      $this->db->where('nip', $param)->update('user', $data);
+      $this->db->where('id_karyawan', $param)->update('user', $data);
       $this->db->insert('log', $log);
       $this->db->trans_complete();
 
@@ -56,7 +56,7 @@ class UserModel extends CI_Model {
     function delete($param, $log)
     {
       $this->db->trans_start();
-      $this->db->where('nip', $param)->delete('user');
+      $this->db->where('id_karyawan', $param)->delete('user');
       $this->db->insert('log', $log);
       $this->db->trans_complete();
 
@@ -71,7 +71,7 @@ class UserModel extends CI_Model {
 
     function statistic()
     {
-      $this->db->select("level, COUNT('nip') as jml_user");
+      $this->db->select("level, COUNT('id_karyawan') as jml_user");
 
       $this->db->from("user");
       $this->db->where('level !=', 'Helpdesk');

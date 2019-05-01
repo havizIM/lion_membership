@@ -95,7 +95,7 @@ class Poin extends CI_Controller {
               );
 
               $log = array(
-                'user'        => $otorisasi->nip,
+                'user'        => $otorisasi->id_karyawan,
                 'id_ref'      => $id_poin,
                 'refrensi'    => 'Poin',
                 'kategori'    => 'Add',
@@ -128,7 +128,7 @@ class Poin extends CI_Controller {
     }
   }
 
-  public function edit($token = null){
+  function edit($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'POST') {
@@ -168,7 +168,7 @@ class Poin extends CI_Controller {
                 );
 
                 $log = array(
-                  'user'        => $otorisasi->nip,
+                  'user'        => $otorisasi->id_karyawan,
                   'id_ref'      => $id_poin,
                   'refrensi'    => 'Poin',
                   'kategori'    => 'Edit',
@@ -202,7 +202,7 @@ class Poin extends CI_Controller {
     }
   }
 
-  public function delete($token = null){
+  function delete($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'GET') {
@@ -229,7 +229,7 @@ class Poin extends CI_Controller {
             } else {
 
               $log = array(
-                'user'        => $otorisasi->nip,
+                'user'        => $otorisasi->id_karyawan,
                 'id_ref'      => $id_poin,
                 'refrensi'    => 'Poin',
                 'kategori'    => 'Delete',
