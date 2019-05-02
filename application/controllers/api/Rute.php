@@ -8,6 +8,17 @@ class Rute extends CI_Controller {
   function __construct(){
     parent::__construct();
 
+    $this->options = array(
+      'cluster' => 'ap1',
+      'useTLS' => true
+    );
+    $this->pusher = new Pusher\Pusher(
+      '9e635b2377fe901b86c3',
+      '5a3cbd48fcd0cc669b54',
+      '744014',
+      $this->options
+    );
+
 		$this->load->model('RuteModel');
   }
 
@@ -96,18 +107,7 @@ class Rute extends CI_Controller {
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data rute'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  '9e635b2377fe901b86c3',
-                  '5a3cbd48fcd0cc669b54',
-                  '744014',
-                  $options
-                );
-
-                $pusher->trigger('lion_membership', 'rute', $log);
+                $this->pusher->trigger('lion_membership', 'rute', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data rute'));
               }
             }
@@ -163,18 +163,7 @@ class Rute extends CI_Controller {
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit rute'));
                 } else {
-                  $options = array(
-                    'cluster' => 'ap1',
-                    'useTLS' => true
-                  );
-                  $pusher = new Pusher\Pusher(
-                    '9e635b2377fe901b86c3',
-                    '5a3cbd48fcd0cc669b54',
-                    '744014',
-                    $options
-                  );
-
-                  $pusher->trigger('lion_membership', 'rute', $log);
+                  $this->pusher->trigger('lion_membership', 'rute', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit rute'));
                 }
               }
@@ -224,18 +213,7 @@ class Rute extends CI_Controller {
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus rute'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  '9e635b2377fe901b86c3',
-                  '5a3cbd48fcd0cc669b54',
-                  '744014',
-                  $options
-                );
-
-                $pusher->trigger('lion_membership', 'rute', $log);
+                $this->pusher->trigger('lion_membership', 'rute', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus rute'));
               }
             }

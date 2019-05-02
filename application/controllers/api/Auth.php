@@ -9,6 +9,17 @@ class Auth extends CI_Controller {
   {
     parent::__construct();
 
+    $this->options = array(
+      'cluster' => 'ap1',
+      'useTLS' => true
+    );
+    $this->pusher = new Pusher\Pusher(
+      '9e635b2377fe901b86c3',
+      '5a3cbd48fcd0cc669b54',
+      '744014',
+      $this->options
+    );
+
 		$this->load->model('AuthModel');
   }
 
@@ -68,18 +79,7 @@ class Auth extends CI_Controller {
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal melakukan login' ));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  '9e635b2377fe901b86c3',
-                  '5a3cbd48fcd0cc669b54',
-                  '744014',
-                  $options
-                );
-
-                $pusher->trigger('lion_membership', 'log', $log);
+                $this->pusher->trigger('lion_membership', 'log', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil melakukan login', 'data' => $session ));
               }
             }
@@ -121,18 +121,7 @@ class Auth extends CI_Controller {
           if(!$add){
             json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal Logout'));
           } else {
-            $options = array(
-              'cluster' => 'ap1',
-              'useTLS' => true
-            );
-            $pusher = new Pusher\Pusher(
-              '9e635b2377fe901b86c3',
-              '5a3cbd48fcd0cc669b54',
-              '744014',
-              $options
-            );
-
-            $pusher->trigger('lion_membership', 'log', $log);
+            $this->pusher->trigger('lion_membership', 'log', $log);
             json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil logout'));
           }
         }
@@ -185,18 +174,7 @@ class Auth extends CI_Controller {
               if(!$pass){
                 json_output(500, array('status' => 500, 'description' => 'Gagal', 'message' => 'Gagal mengganti password'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  '9e635b2377fe901b86c3',
-                  '5a3cbd48fcd0cc669b54',
-                  '744014',
-                  $options
-                );
-
-                $pusher->trigger('lion_membership', 'log', $log);
+                $this->pusher->trigger('lion_membership', 'log', $log);
                 json_output(200, array('status' => 200, 'description' => 'Gagal', 'message' => 'Berhasil mengganti password'));
               }
             }
