@@ -11,7 +11,7 @@ class AuthModel extends CI_Model {
 
     function cekAuth($token)
     {
-      return $this->db->select('id_karyawan, level, password')->from('user')->where('token', $token)->get();
+      return $this->db->select('*')->from('user')->where('token', $token)->get();
     }
 
     function gantiPass($param, $data, $log)
@@ -28,6 +28,21 @@ class AuthModel extends CI_Model {
         $this->db->trans_commit();
         return true;
       }
+    }
+
+    function cekAuthCustomer($param)
+    {
+      return $this->db->select('*')->from('customer')->where($param)->get();
+    }
+
+    function registerCustomer($data)
+    {
+      return $this->db->insert('customer', $data);
+    }
+
+    function updateCustomer($param, $data)
+    {
+      return $this->db->where($param)->update('customer', $data);
     }
 }
 
