@@ -146,8 +146,8 @@ class Aplikasi extends CI_Controller {
                     'mailtype'  => 'html',
                     'protocol'  => 'smtp',
                     'smtp_host' => 'ssl://smtp.gmail.com',
-                    'smtp_user' => 'adm.lionmember@gmail.com',
-                    'smtp_pass' => 'lionair123',
+                    'smtp_user' => 'viz.ndinq@gmail.com',
+                    'smtp_pass' => 'haviz06142',
                     'smtp_port' => 465,
                     'crlf'      => "\r\n",
                     'newline'   => "\r\n"
@@ -256,8 +256,8 @@ class Aplikasi extends CI_Controller {
                     'mailtype'  => 'html',
                     'protocol'  => 'smtp',
                     'smtp_host' => 'ssl://smtp.gmail.com',
-                    'smtp_user' => 'adm.lionmember@gmail.com',
-                    'smtp_pass' => 'lionair123',
+                    'smtp_user' => 'viz.ndinq@gmail.com',
+                    'smtp_pass' => 'haviz06142',
                     'smtp_port' => 465,
                     'crlf'      => "\r\n",
                     'newline'   => "\r\n"

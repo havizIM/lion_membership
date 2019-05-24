@@ -74,42 +74,6 @@
 			"response": []
 		},
 		{
-			"name": "Login Customer",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "id_karyawan",
-							"value": "helpdesk",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "h3lpd35k",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost/lion_membership/api/auth/login_user",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"lion_membership",
-						"api",
-						"auth",
-						"login_user"
-					]
-				},
-				"description": "Link : \n- localhost/lion_membership/api/auth/login_user\n\n\nMethod :\n- POST\n\n\nData : \n- id_karyawan\n- password\n\n\nHak Akses :\n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
-			},
-			"response": []
-		},
-		{
 			"name": "Registrasi Customer",
 			"request": {
 				"method": "POST",
@@ -407,6 +371,58 @@
 					]
 				},
 				"description": "Link :\n- localhost/lion_membership/api/poin/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_poin\n- departure\n- arrival\n\nHak Akses : \n- Customer Service\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : poin"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Aplikasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/aplikasi/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"aplikasi",
+						"show",
+						"875a8f2f42c570f"
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/aplikasi/show/--token--\n\nMethod :\n- GET\n\nParams : \n- no_aplikasi\n- nama\n\nHak Akses : \n- Customer Service\n- Admin\n- Manager\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : aplikasi"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Member",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/member/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"member",
+						"show",
+						"875a8f2f42c570f"
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/member/show/--token--\n\nMethod :\n- GET\n\nParams : \n- no_aplikasi\n- no_member\n\nHak Akses : \n- Customer Service\n- Admin\n- Manager\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : member"
 			},
 			"response": []
 		},
@@ -773,6 +789,70 @@
 					]
 				},
 				"description": "Link :\n- localhost/lion_membership/api/poin/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_poin\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
+			},
+			"response": []
+		},
+		{
+			"name": "Terima Aplikasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/aplikasi/terima_aplikasi/7dc3ac11a0c4db2?no_aplikasi=00000000001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"aplikasi",
+						"terima_aplikasi",
+						"7dc3ac11a0c4db2"
+					],
+					"query": [
+						{
+							"key": "no_aplikasi",
+							"value": "00000000001"
+						}
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/aplikasi/terima_aplikasi/--token--\n\nMethod :\n- GET\n\nParams :\n- no_aplikasi\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
+			},
+			"response": []
+		},
+		{
+			"name": "Tolak Aplikasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/aplikasi/tolak_aplikasi/7dc3ac11a0c4db2?no_aplikasi=00000000001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"aplikasi",
+						"tolak_aplikasi",
+						"7dc3ac11a0c4db2"
+					],
+					"query": [
+						{
+							"key": "no_aplikasi",
+							"value": "00000000001"
+						}
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/aplikasi/terima_aplikasi/--token--\n\nMethod :\n- GET\n\nParams :\n- no_aplikasi\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},

@@ -19,7 +19,6 @@ class Member extends CI_Controller {
       $this->options
     );
 
-		$this->load->model('AplikasiModel');
     $this->load->model('MemberModel');
   }
 
@@ -40,20 +39,23 @@ class Member extends CI_Controller {
         } else {
 
           $otorisasi    = $auth->row();
-          $no_aplikasi  = $this->input->get('no_aplikasi');
-          $nama	        = $this->input->get('nama');
+          $where        = array();
+          $like         = array();
 
-          $show         = $this->AplikasiModel->show($no_aplikasi, $nama);
+          $this->input->get('no_aplikasi') != null ? $where['no_aplikasi'] = $this->input->get('no_aplikasi') : null;
+          $this->input->get('no_member') != null ? $where['no_member'] = $this->input->get('no_member') : null;
+
+          $show         = $this->MemberModel->show($where, $like);
           $member       = array();
 
           foreach($show->result() as $key){
             $json = array();
 
             $json['no_member']          = $key->no_member;
-            $json['no_aplikasi']               = $key->no_aplikasi;
-            $json['berlaku_dari']                 = $key->berlaku_dari;
-            $json['berlaku_sampai']               = $key->berlaku_sampai;
-            $json['status_member']                 = $key->status_member;
+            $json['no_aplikasi']        = $key->no_aplikasi;
+            $json['berlaku_dari']       = $key->berlaku_dari;
+            $json['berlaku_sampai']     = $key->berlaku_sampai;
+            $json['status_member']      = $key->status_member;
 
             $json['no_aplikasi']          = $key->no_aplikasi;
             $json['gender']               = $key->gender;
