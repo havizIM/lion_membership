@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3f33e61e-b228-43b6-8c1f-7979190ea01c",
+		"_postman_id": "1ea3ee2e-4491-4dfb-8061-9596b4601af6",
 		"name": "LION",
 		"description": "Sistem Informasi Service Online",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -39,6 +39,207 @@
 					]
 				},
 				"description": "Link : \n- localhost/lion_membership/api/auth/login_user\n\n\nMethod :\n- POST\n\n\nData : \n- id_karyawan\n- password\n\n\nHak Akses :\n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Kirim Kode Verifikasi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "si.ubk16@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/send_verify",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"send_verify"
+					]
+				},
+				"description": "Link : \n- localhost/lion_membership/api/auth/send_verify\n\n\nMethod :\n- POST\n\n\nData : \n- email\n\n\nHak Akses :\n- Customer\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Login Customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id_karyawan",
+							"value": "helpdesk",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "h3lpd35k",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/login_user",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"login_user"
+					]
+				},
+				"description": "Link : \n- localhost/lion_membership/api/auth/login_user\n\n\nMethod :\n- POST\n\n\nData : \n- id_karyawan\n- password\n\n\nHak Akses :\n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Registrasi Customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "gender",
+							"value": "Mr",
+							"description": "Mr / Mrs / Ms",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "Haviz Indra Maulana",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "Jl. Jakarta",
+							"type": "text"
+						},
+						{
+							"key": "kota",
+							"value": "Jakarta Barat",
+							"type": "text"
+						},
+						{
+							"key": "kode_pos",
+							"value": "11210",
+							"type": "text"
+						},
+						{
+							"key": "no_handphone",
+							"value": "081355754092",
+							"type": "text"
+						},
+						{
+							"key": "kebangsaan",
+							"value": "WNI",
+							"description": "WNI / WNA",
+							"type": "text"
+						},
+						{
+							"key": "no_identitas",
+							"value": "1839517957291364365",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "si.ubk16@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "nama_perusahaan",
+							"value": "PT. CodeManiac",
+							"type": "text"
+						},
+						{
+							"key": "alamat_perusahaan",
+							"value": "Jakarta",
+							"type": "text"
+						},
+						{
+							"key": "kota_perusahaan",
+							"value": "Jakarta Barat",
+							"type": "text"
+						},
+						{
+							"key": "kode_pos_perusahaan",
+							"value": "11210",
+							"type": "text"
+						},
+						{
+							"key": "jabatan",
+							"value": "CEO",
+							"type": "text"
+						},
+						{
+							"key": "no_tlp",
+							"value": "081355754092",
+							"type": "text"
+						},
+						{
+							"key": "no_fax",
+							"value": "02199876542",
+							"type": "text"
+						},
+						{
+							"key": "email_perusahaan",
+							"value": "si.ubk16@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "bidang_usaha",
+							"value": "Startup",
+							"type": "text"
+						},
+						{
+							"key": "alamat_surat",
+							"value": "Rumah",
+							"description": "Rumah / Kantor",
+							"type": "text"
+						},
+						{
+							"key": "kode_verifikasi",
+							"value": "270048",
+							"type": "text"
+						},
+						{
+							"key": "lampiran_daftar",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/register_customer",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"register_customer"
+					]
+				},
+				"description": "Link : \n- localhost/lion_membership/api/auth/register_customer\n\n\nMethod :\n- POST\n\n\nData : \n- gender (Mr / Mrs / Ms)\n- nama\n- alamat\n- kota\n- kode_pos\n- no_handphone\n- kebangsaaan (WNI / WNA)\n- no_identitas\n- email\n- nama_perusahaan\n- alamat_perusahaan\n- kota_perusahaan\n- kode_pos_perusahaan\n- jabatan\n- no_tlp\n- no_fax\n- email_perusahaan\n- bidang_usaha\n- alamat_surat (Kantor / Rumah)\n- kode_verifikasi\n- lampiran_daftar (.jpg / .png / .pdf)\n\n\nHak Akses :\n- Customer\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya"
 			},
 			"response": []
 		},
@@ -162,7 +363,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/rute/show/875a8f2f42c570f",
 					"host": [
@@ -185,7 +389,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/poin/show/875a8f2f42c570f",
 					"host": [
@@ -478,7 +685,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/user/delete/875a8f2f42c570f?id_karyawan=7201160100",
 					"host": [
@@ -507,7 +717,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/rute/delete/7dc3ac11a0c4db2?id_rute=ABG",
 					"host": [
@@ -536,7 +749,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/poin/delete/7dc3ac11a0c4db2?id_poin=POIN0004",
 					"host": [
@@ -565,7 +781,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/log/statistic/875a8f2f42c570f",
 					"host": [
@@ -587,7 +806,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost/lion_membership/api/user/statistic/875a8f2f42c570f",
 					"host": [

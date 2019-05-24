@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 01, 2019 at 08:02 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 5.6.35
+-- Host: 127.0.0.1
+-- Generation Time: 24 Mei 2019 pada 16.10
+-- Versi Server: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `claim`
+-- Struktur dari tabel `claim`
 --
 
 CREATE TABLE `claim` (
@@ -41,7 +39,7 @@ CREATE TABLE `claim` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `claim_detail`
+-- Struktur dari tabel `claim_detail`
 --
 
 CREATE TABLE `claim_detail` (
@@ -53,7 +51,7 @@ CREATE TABLE `claim_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Struktur dari tabel `customer`
 --
 
 CREATE TABLE `customer` (
@@ -79,15 +77,20 @@ CREATE TABLE `customer` (
   `alamat_surat` enum('Rumah','Kantor','','') NOT NULL,
   `tgl_pengajuan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` enum('Proses','Terima','Tolak','') NOT NULL,
-  `lampiran_1` text NOT NULL,
-  `lampiran_2` text NOT NULL,
-  `lampiran_3` text NOT NULL
+  `lampiran_daftar` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `customer`
+--
+
+INSERT INTO `customer` (`no_aplikasi`, `gender`, `nama`, `alamat`, `kota`, `kode_pos`, `no_handphone`, `kebangsaan`, `no_identitas`, `email`, `nama_perusahaan`, `alamat_perusahaan`, `kota_perusahaan`, `kode_pos_perusahaan`, `jabatan`, `no_tlp`, `no_fax`, `email_perusahaan`, `bidang_usaha`, `alamat_surat`, `tgl_pengajuan`, `status`, `lampiran_daftar`) VALUES
+('00000000001', 'Mr', 'Haviz Indra Maulana', 'Jl. Jakarta', 'Jakarta Barat', '11210', '081355754092', 'WNI', '1839517957291364365', 'si.ubk16@gmail.com', 'PT. CodeManiac', 'Jakarta', 'Jakarta Barat', '11210', 'CEO', '081355754092', '02199876542', 'si.ubk16@gmail.com', 'Startup', 'Rumah', '2019-05-24 13:53:49', 'Proses', '00000000001.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `log`
+-- Struktur dari tabel `log`
 --
 
 CREATE TABLE `log` (
@@ -101,7 +104,7 @@ CREATE TABLE `log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `log`
+-- Dumping data untuk tabel `log`
 --
 
 INSERT INTO `log` (`id_log`, `user`, `id_ref`, `refrensi`, `keterangan`, `kategori`, `tgl_log`) VALUES
@@ -179,7 +182,7 @@ INSERT INTO `log` (`id_log`, `user`, `id_ref`, `refrensi`, `keterangan`, `katego
 -- --------------------------------------------------------
 
 --
--- Table structure for table `log_poin`
+-- Struktur dari tabel `log_poin`
 --
 
 CREATE TABLE `log_poin` (
@@ -194,7 +197,7 @@ CREATE TABLE `log_poin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_poin`
+-- Struktur dari tabel `master_poin`
 --
 
 CREATE TABLE `master_poin` (
@@ -206,7 +209,7 @@ CREATE TABLE `master_poin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `master_poin`
+-- Dumping data untuk tabel `master_poin`
 --
 
 INSERT INTO `master_poin` (`id_poin`, `departure`, `arrival`, `claim_poin`, `reedem_poin`) VALUES
@@ -217,7 +220,7 @@ INSERT INTO `master_poin` (`id_poin`, `departure`, `arrival`, `claim_poin`, `ree
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_rute`
+-- Struktur dari tabel `master_rute`
 --
 
 CREATE TABLE `master_rute` (
@@ -226,7 +229,7 @@ CREATE TABLE `master_rute` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `master_rute`
+-- Dumping data untuk tabel `master_rute`
 --
 
 INSERT INTO `master_rute` (`id_rute`, `nama_rute`) VALUES
@@ -241,7 +244,7 @@ INSERT INTO `master_rute` (`id_rute`, `nama_rute`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member`
+-- Struktur dari tabel `member`
 --
 
 CREATE TABLE `member` (
@@ -257,7 +260,7 @@ CREATE TABLE `member` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reedem`
+-- Struktur dari tabel `reedem`
 --
 
 CREATE TABLE `reedem` (
@@ -272,7 +275,7 @@ CREATE TABLE `reedem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reedem_detail`
+-- Struktur dari tabel `reedem_detail`
 --
 
 CREATE TABLE `reedem_detail` (
@@ -287,7 +290,7 @@ CREATE TABLE `reedem_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -302,7 +305,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_karyawan`, `nama_user`, `password`, `level`, `tgl_registrasi`, `foto`, `status`, `token`) VALUES
@@ -406,75 +409,71 @@ ALTER TABLE `user`
 --
 ALTER TABLE `claim_detail`
   MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
   MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
-
 --
 -- AUTO_INCREMENT for table `reedem_detail`
 --
 ALTER TABLE `reedem_detail`
   MODIFY `id_reedem_detail` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
 
 --
--- Constraints for dumped tables
---
-
---
--- Constraints for table `claim`
+-- Ketidakleluasaan untuk tabel `claim`
 --
 ALTER TABLE `claim`
   ADD CONSTRAINT `claim_ibfk_1` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `claim_detail`
+-- Ketidakleluasaan untuk tabel `claim_detail`
 --
 ALTER TABLE `claim_detail`
   ADD CONSTRAINT `claim_detail_ibfk_1` FOREIGN KEY (`id_claim`) REFERENCES `claim` (`id_claim`) ON UPDATE CASCADE,
   ADD CONSTRAINT `claim_detail_ibfk_2` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`);
 
 --
--- Constraints for table `log`
+-- Ketidakleluasaan untuk tabel `log`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id_karyawan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `log_poin`
+-- Ketidakleluasaan untuk tabel `log_poin`
 --
 ALTER TABLE `log_poin`
   ADD CONSTRAINT `log_poin_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
   ADD CONSTRAINT `log_poin_ibfk_2` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `master_poin`
+-- Ketidakleluasaan untuk tabel `master_poin`
 --
 ALTER TABLE `master_poin`
   ADD CONSTRAINT `master_poin_ibfk_1` FOREIGN KEY (`departure`) REFERENCES `master_rute` (`id_rute`) ON UPDATE CASCADE,
   ADD CONSTRAINT `master_poin_ibfk_2` FOREIGN KEY (`arrival`) REFERENCES `master_rute` (`id_rute`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `member`
+-- Ketidakleluasaan untuk tabel `member`
 --
 ALTER TABLE `member`
   ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`no_aplikasi`) REFERENCES `customer` (`no_aplikasi`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `reedem`
+-- Ketidakleluasaan untuk tabel `reedem`
 --
 ALTER TABLE `reedem`
   ADD CONSTRAINT `reedem_ibfk_1` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `reedem_detail`
+-- Ketidakleluasaan untuk tabel `reedem_detail`
 --
 ALTER TABLE `reedem_detail`
   ADD CONSTRAINT `reedem_detail_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
   ADD CONSTRAINT `reedem_detail_ibfk_2` FOREIGN KEY (`id_reedem`) REFERENCES `reedem` (`id_reedem`) ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

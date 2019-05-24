@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require 'vendor/autoload.php';
 
-class Aplikasi extends CI_Controller {
+class Member extends CI_Controller {
 
   function __construct(){
     parent::__construct();
