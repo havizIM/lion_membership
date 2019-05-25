@@ -24,10 +24,10 @@ Author: SAEROX
             }
           });
         </script>
-        <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/img/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon-16x16.png">
+         <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon/favicon-16x16.png">
         <!-- Stylesheet -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css">
         <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -53,6 +53,15 @@ Author: SAEROX
             }
           }
         </script>
+
+        <style>
+             .default-sidebar>.side-navbar a .la-gift {
+                color: #e7956c;
+            } 
+            .default-sidebar>.side-navbar a .la-home {
+                color: #1a9cfd;
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Begin Preloader -->

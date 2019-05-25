@@ -27,4 +27,9 @@ class Manager extends CI_Controller {
 	{
 		$this->load->view('manager/dashboard');
 	}
+
+	public function point()
+	{
+		$this->load->view('manager/point');
+	}
 }

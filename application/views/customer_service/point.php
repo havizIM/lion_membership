@@ -69,18 +69,6 @@
  <!-- Begin Widget Header -->
 <div class="widget-header bordered d-flex align-items-center">
     <h2>Data Point</h2>
-    <div class="widget-options">
-        <div class="dropdown">
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                <i class="la la-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu">
-                <a href="#/add_point" class="dropdown-item edit" id="btn_add"> 
-                    <i class="ion-plus-round"></i>Add Point
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="row row-flex">
   <div class="col-md-12">
@@ -97,7 +85,6 @@
                   <th>Arrival Name</th>
                   <th>Clain Point</th>
                   <th>Reedem Point</th>
-                  <th class="text-center" style="width: 15%;">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,53 +116,9 @@
 	        {"data": 'arrival_name'},
 	        {"data": 'claim_poin'},
 	        {"data": 'reedem_poin'},
-	        {"data": null, 'render': function(data, type, row){
-	            return `<a href="#/edit_point/${row.id_poin}" class="btn btn-info btn-shadow-2 mb-2 m-pencil" id="btn_edit"><i class="ti ti-pencil-alt"></i><span class="pencil">Edit</span></a><button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_delete" data-id="${row.id_poin}" style="width: 100px;"><span class="closed">Delete</span><i class="ti ti-close"></i></button>`
-	          }
-	        },
 	      ],
 	      order: [[0, 'asc']]
 	    });
-
-
-	    //DELETE OPTION
-	    $(document).on('click', '#btn_delete', function(){
-      var id_poin = $(this).attr('data-id');
-      var link_get = `<?= base_url('api/poin/delete/') ?>${auth.token}?id_poin=${id_poin}`;
-  
-              Swal.fire({
-                title: 'Are you sure to Delete?',
-                text: "Data will delete permanently!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-              	if (result.value) {
-              		$.ajax({
-              				url: link_get,
-              				type: 'GET',
-              				dataType: 'JSON',
-              				success: function(response){
-              				 if (response.status === 200) {
-              				 	t_point.ajax.reload()
-              					makeNotif('success', response.message, 'bottomRight');
-              				 } else {
-              				 	makeNotif('error', response.message, 'bottomRight');
-              				 }	
-              				},
-              		
-              				error: function(){
-              					makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-              				},
-              			});
-              		}
-              });
-          });
-
-	    //DELETE OPTION
-
 
 	    //WIDGET OPTION HOVER
        $('.widget-options > .dropdown, .actions > .dropdown, .quick-actions > .dropdown').hover(function () {

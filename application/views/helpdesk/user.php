@@ -4,20 +4,30 @@
           <h2 class="page-header-title">Data User</h2>
           <div>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#/dashboard"><i class="ti ti-home"></i> Dashboard</a></li>
-                <li class="breadcrumb-item active">User</li>
+                <li class="breadcrumb-item active"><a href="#/dashboard"><i class="la la-home"></i></a> - <a href="#/dashboard">Dashboard</a> - User </li>
             </ul>
           </div>
       </div>
+    </div>
+</div>
+<!-- Begin Widget Header -->
+<div class="widget-header bordered d-flex align-items-center">
+    <h2>Data Rute</h2>
+    <div class="widget-options">
+        <div class="dropdown">
+            <div class="my-fancy-container">
+              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle" id="add_user">
+              <span class='la la-plus-circle fz'></span>
+              <span class="my-text">Add</span>
+              </button>
+          </div>
+        </div>
     </div>
 </div>
 
 <div class="row flex-row">
   <div class="col-md-12">
     <div class="widget has-shadow">
-        <div class="widget-header bordered no-actions d-flex align-items-center">
-            <h4>Data User</h4>
-        </div>
         <div class="widget-body">
           <div class="table-responsive">
             <table class="table" id="t_user">
@@ -29,9 +39,7 @@
                   <th>Level</th>
                   <th>Register Date</th>
                   <th>Status</th>
-                  <th style="text-align: center; background-color: #5bc0de; color: #fff; cursor: pointer" id="add_user">
-                    <i class="la la-plus"></i>
-                  </th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -59,7 +67,7 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label for="">ID</label>
-                  <input type="text" name="nip" id="add_nip" class="form-control">
+                  <input type="text" name="id_karyawan" id="id_karyawan" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="">Name</label>
@@ -119,7 +127,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                  <input type="hidden" name="nip" id="edit_nip">
+                  <input type="hidden" name="id_karyawan" id="edit_karyawan">
                   <button type="button" class="btn btn-shadow" data-dismiss="modal">Close</button>
                   <button type="submit" id="submit_edit" class="btn btn-primary">Save Changes</button>
               </div>
@@ -128,202 +136,12 @@
       </div>
   </div>
 </div>
-
 <script type="text/javascript">
-  $(document).ready(function(){
+  var BASE_URL = '<?= base_url() ?>';
+</script>
+<script src="<?=base_url('public/helpdesk/user.js') ?>">
 
-    <!-- Load Data to table -->
-    var t_user = $('#t_user').DataTable({
-      columnDefs: [{
-        targets: [0, 2, 3, 4, 5],
-        searchable: false
-      },{
-        targets: [6],
-        orderable: false
-      }],
-      autoWidth: false,
-      language: {
-        search: 'Search Name: _INPUT_',
-      },
-      responsive: true,
-      processing: true,
-      ajax: '<?= base_url('api/user/show/'); ?>'+auth.token,
-      columns: [
-        {"data": 'nip'},
-        {"data": 'nama_user'},
-        {"data": 'password'},
-        {"data": 'level'},
-        {"data": null, 'render': function(data, type, row){
-            return moment(row.tgl_registrasi, 'YYYY-MM-DD hh:mm:ss').format('LLL')
-          }
-        },
-        {"data": 'status'},
-        {"data": null, 'render': function(data, type, row){
-            return `<div class="btn-group" role="group"><button type="button" class="btn btn-success" id="edit_user" data-id="${row.nip}"><i class="la la-edit"></i></button> <button type="button" class="btn btn-danger" id="delete_user" data-id="${row.nip}"><i class="la la-close"></i></button></div>`
-          }
-        },
-      ],
-      order: [[4, 'desc']]
-    });
-    <!-- End Load Data to table -->
+</script>
+<script type="text/javascript">
 
-    <!-- Show Form Add -->
-    $('#add_user').on('click', function(){
-      $('#modal_add').modal('show');
-      $('#form_add')[0].reset();
-    });
-    <!-- End Show Form Add -->
-
-    <!-- Submit Add -->
-    $('#form_add').on('submit', function(e){
-      e.preventDefault();
-
-      var nip = $('#add_nip').val();
-      var nama_user = $('#add_nama_user').val();
-      var level = $('#add_level').val();
-
-      if(nip === '' || nama_user === '' || level === ''){
-        makeNotif('error', 'Please enter the value', 'bottomRight');
-      } else {
-        $.ajax({
-          url: `<?= base_url('api/user/add/') ?>`+auth.token,
-          type: 'POST',
-          dataType: 'JSON',
-          data: $(this).serialize(),
-          beforeSend: function(){
-            $('#submit_add').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
-          },
-          success: function(response){
-            if(response.status === 200){
-              t_user.ajax.reload();
-              makeNotif('success', response.message, 'bottomRight');
-              $('#modal_add').modal('hide');
-            } else {
-              makeNotif('error', response.message, 'bottomRight');
-            }
-
-            $('#submit_add').removeClass('disabled').html('Save');
-          },
-          error: function(){
-            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-            $('#submit_add').removeClass('disabled').html('Save');
-          }
-        })
-      }
-    });
-    <!-- End Submit Add -->
-
-    <!-- Submit Edit -->
-    $('#form_edit').on('submit', function(e){
-      e.preventDefault();
-
-      var nip       = $('#edit_nip').val();
-      var nama_user = $('#edit_nama_user').val();
-      var level     = $('#edit_level').val();
-      var status    = $('#edit_status').val();
-
-      if(nip === '' || nama_user === '' || level === '' || status === ''){
-        makeNotif('error', 'Please enter the value', 'bottomRight');
-      } else {
-        $.ajax({
-          url: `<?= base_url('api/user/edit/') ?>${auth.token}?nip=${nip}`,
-          type: 'POST',
-          dataType: 'JSON',
-          data: $(this).serialize(),
-          beforeSend: function(){
-            $('#submit_edit').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
-          },
-          success: function(response){
-            if(response.status === 200){
-              t_user.ajax.reload();
-              makeNotif('success', response.message, 'bottomRight');
-              $('#modal_edit').modal('hide');
-            } else {
-              makeNotif('error', response.message, 'bottomRight');
-            }
-
-            $('#submit_edit').removeClass('disabled').html('Save Changes');
-          },
-          error: function(){
-            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-            $('#submit_edit').removeClass('disabled').html('Save Changes');
-          }
-        })
-      }
-    });
-    <!-- End Submit Edit -->
-
-    <!-- Delete User -->
-    $(document).on('click', '#delete_user', function(){
-      var nip = $(this).attr('data-id');
-
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.value) {
-          $.ajax({
-            url: `<?= base_url('api/user/delete/') ?>${auth.token}?nip=${nip}`,
-            type: 'GET',
-            dataType: 'JSON',
-            success: function(response){
-              if(response.status === 200){
-                t_user.ajax.reload();
-                makeNotif('success', response.message, 'bottomRight');
-              } else {
-                makeNotif('error', response.message, 'bottomRight');
-              }
-            },
-            error: function(){
-              makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-            }
-          })
-        }
-      })
-    });
-    <!-- End Delete User -->
-
-    <!-- Edit User -->
-    $(document).on('click', '#edit_user', function(){
-      var nip = $(this).attr('data-id');
-
-      $.ajax({
-        url: `<?= base_url('api/user/show/') ?>${auth.token}?nip=${nip}`,
-        type: 'GET',
-        dataType: 'JSON',
-        success: function(response){
-          $.each(response.data, function(k,v){
-            $('#edit_nip').val(v.nip);
-            $('#edit_nama_user').val(v.nama_user);
-            $('#edit_status').val(v.status);
-            $('#edit_level').val(v.level);
-          });
-
-          $('#modal_edit').modal('show');
-        },
-        error: function(){
-          makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-        }
-      })
-    });
-    <!-- End Edit User -->
-
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('4e09d24d839d5e63c48b', {
-      cluster: 'ap1',
-      forceTLS: true
-    });
-
-    var channel = pusher.subscribe('lion');
-    channel.bind('user', function(data) {
-      t_user.ajax.reload();
-    });
-
-  });
 </script>
