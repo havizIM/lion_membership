@@ -24,10 +24,10 @@ Author: SAEROX
             }
           });
         </script>
-        <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/img/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon-16x16.png">
+         <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon/favicon-16x16.png">
         <!-- Stylesheet -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css">
         <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -53,6 +53,14 @@ Author: SAEROX
             }
           }
         </script>
+        <style>
+             .default-sidebar>.side-navbar a .la-gift {
+                color: #e7956c;
+            } 
+            .default-sidebar>.side-navbar a .la-home {
+                color: #1a9cfd;
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Begin Preloader -->
@@ -165,12 +173,7 @@ Author: SAEROX
                         <!-- Begin Main Navigation -->
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
-                            <li><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>User</span></a>
-                                <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
-                                    <li><a href="#/log">Log User</a></li>
-                                    <li><a href="#/user">Data User</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->
@@ -216,7 +219,7 @@ Author: SAEROX
                                 </div>
                                 <div class="form-group" style="float: right">
                                   <input type="checkbox" id="show_pass">
-                                  <label for="remeber">Show Password</label>
+                                  <label>Show Password</label>
                                 </div>
                                 <button type="submit" id="btn_password" name="button" class="btn btn-info btn-block">Save Changes</button>
                               </form>
@@ -239,7 +242,6 @@ Author: SAEROX
         <script src="<?= base_url() ?>assets/vendors/js/app/app.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/noty/noty.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/moment/moment.js"></script>
-        <!-- <script src="<?= base_url() ?>assets/vendors/js/datatables/datatables.min.js"></script> -->
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>

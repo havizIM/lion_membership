@@ -24,10 +24,10 @@ Author: SAEROX
             }
           });
         </script>
-        <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/img/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon-16x16.png">
+         <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url() ?>assets/img/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/img/favicon/favicon-16x16.png">
         <!-- Stylesheet -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css">
         <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -36,6 +36,7 @@ Author: SAEROX
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap-select/bootstrap-select.min.css">
 
         <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/css/datatables/datatables.min.css"> -->
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -53,6 +54,92 @@ Author: SAEROX
             }
           }
         </script>
+        <style media="screen">
+        .m-pencil i{
+        position: relative;
+        right: 5px;
+        bottom: 2px;
+      }
+      .m-closed i{
+          position: relative;
+          left: 5px;
+          bottom: 0px;
+          font-size: 0.97rem;
+          font-weight: 900;
+      }
+      .m-closed .closed {
+        position: relative;
+        right: 5px;
+      }
+      .btn-shadow-2 {
+        box-shadow: 0px 7px 20px 1px rgba(52, 40, 104, 0.37);
+        transform:
+      }
+
+      .widget-header-2 {
+        padding: .85rem 1.4rem;
+      }
+
+      .widget-options .dropdown-menu button {
+        color: #2c304d;
+        font-weight: 500;
+      }
+      .widget-options .dropdown-menu button i {
+        font-size: 1.6rem;
+          vertical-align: middle;
+          color: #aea9c3;
+          margin-right: .7rem;
+          transition: all 0.4s ease;
+      }
+      .widget-options .dropdown-menu .dropdown-item.edit:hover, .widget-options .dropdown-menu .dropdown-item.edit:focus {
+        background: #17a2b8;
+      }
+      .widget-options .dropdown-menu .dropdown-item.delete:hover, .widget-options .dropdown-menu .dropdown-item.delete:focus {
+        background: #d0577b;
+      }
+      .widget-options .dropdown-menu a:hover, .widget-options .dropdown-menu a:hover i {
+        background: transparent;
+          color: #fff !important;
+      }
+
+      .widget-options .dropdown-menu .dropdown-item {
+        padding:0.3rem 1.8rem !important;
+      }
+
+      .widget-options .dropdown-menu {
+        padding: 0.4rem 0rem !important;
+      }
+
+      #add_user .fz {
+        font-weight: bold;
+        font-size: 29px;
+        color: #757575;
+      }
+      .my-fancy-container {
+       text-align: center;
+       margin-right: 15px;
+      }
+
+    .my-text {
+      display: block;
+      font-size: 13px;
+      margin-top: -2px;
+    }
+
+    .my-icon {
+        vertical-align: middle;
+        font-size: 40px;
+    }
+
+    .arrow-down {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid black;
+        margin: 0 auto;
+    }
+        </style>
     </head>
     <body id="page-top">
         <!-- Begin Preloader -->
@@ -165,13 +252,14 @@ Author: SAEROX
                         <!-- Begin Main Navigation -->
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
-                            <li><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>User</span></a>
-                                <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
-                                    <li><a href="#/log">Log User</a></li>
-                                    <li><a href="#/user">Data User</a></li>
+                            <li><a href="#dropdown-db" aria-expanded="false" data-toggle="collapse"><i class="la la-users"></i><span>User</span></a>
+                                <ul id="dropdown-db" class="collapse list-unstyled pt-0">
+                                    <li><a href="#/log">log</a></li>
+                                    <li><a href="#/user">User</a></li>
                                 </ul>
                             </li>
                         </ul>
+
                     </nav>
                     <!-- End Side Navbar -->
                 </div>
@@ -246,140 +334,14 @@ Author: SAEROX
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="<?= base_url() ?>assets/vendors/js/chart/chart.min.js"></script>
-        
+        <script src="<?= base_url() ?>assets/vendors/js/bootstrap-select/bootstrap-select.min.js"></script>
+
         <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+
         <script type="text/javascript">
-          function load_content(link) {
-            $.get(`<?= base_url().'helpdesk/'?>${link}`,function(response){
-
-              $('#content').html(response);
-            });
-          };
-
-          function makeNotif(type, message, position){
-            new Noty({
-              type: type,
-              layout: position,
-              text: message,
-              progressBar:true,
-              timeout:2500,
-              animation:{
-                open:"animated bounceInRight",
-                close:"animated bounceOutRight"
-              }
-            }).show();
-          }
-
-          $(document).ready(function(){
-            var session = localStorage.getItem('lion_membership');
-            var auth = JSON.parse(session);
-            var link;
-
-            <!-- Display Session -->
-              $('#session_name').text(auth.nama_user);
-              $('#session_nip').text(auth.nip);
-              $('#session_level').text(auth.level);
-              $('#session_tgl').text(auth.tgl_registrasi);
-            <!-- End Display Session -->
-
-            <!-- Load Halaman -->
-            if (location.hash) {
-              link = location.hash.substr(2);
-              load_content(link);
-            }else {
-              location.hash ='#/dashboard';
-            }
-
-            $(window).on('hashchange',function(){
-              link = location.hash.substr(2);
-              load_content(link);
-            });
-            <!-- End Load Halaman -->
-
-            <!-- Show Password -->
-            $('#show_pass').click(function(){
-              if($(this).is(':checked')){
-                $('#password_lama').attr('type','text');
-                $('#password_baru').attr('type','text');
-                $('#retype_baru').attr('type','text');
-              }else{
-                $('#password_lama').attr('type','password');
-                $('#password_baru').attr('type','password');
-                $('#retype_baru').attr('type','password');
-              };
-            });
-            <!-- End Show Password -->
-
-            <!-- Logout Action -->
-            $('#logout').on('click', function(){
-              Swal.fire({
-                title: 'Are you sure to logout?',
-                text: "You need to login again!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-                if (result.value) {
-                  $.ajax({
-                    url: `<?= base_url() ?>api/auth/logout_user/${auth.token}`,
-                    type: 'GET',
-                    dataType: 'JSON',
-                    success: function(response){
-                      if(response.status === 200){
-                        localStorage.clear();
-                        window.location.replace(`<?= base_url() ?>auth`)
-                      } else {
-                        makeNotif('error', response.message, 'bottomRight');
-                      }
-                    },
-                    error: function(){
-                      makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-                    }
-                  })
-                }
-              })
-            });
-            <!-- Logout Action -->
-
-            $('#form_password').on('submit', function(e){
-              e.preventDefault();
-              var password_lama = $('#password_lama').val();
-              var password_baru = $('#password_baru').val();
-              var retype_password = $('#retype_baru').val();
-
-              if(password_lama === '' || password_baru === ''){
-                makeNotif('error', 'Silahkan isi form dengan lengkap', 'bottomRight')
-              } else if(password_baru !== retype_password){
-                makeNotif('error', 'Password baru dan retype password harus sama', 'bottomRight')
-              } else {
-                $.ajax({
-                  url: `<?= base_url('api/auth/password_user/') ?>${auth.token}`,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  data: $(this).serialize(),
-                  beforeSend: function(){
-                    $('#btn_password').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
-                  },
-                  success: function(response){
-                    if(response.status === 200){
-                      makeNotif('success', response.message, 'bottomRight');
-                      $('#form_password')[0].reset();
-                    } else {
-                      makeNotif('error', response.message, 'bottomRight')
-                    }
-                    $('#btn_password').removeClass('disabled').html('Save Changes');
-                  },
-                  error: function(){
-                    makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
-                  }
-                })
-              }
-
-            })
-          });
+          var BASE_URL = '<?= base_url() ?>'
         </script>
+        <script src='<?= base_url('public/helpdesk/main.js') ?>'> </script>
         <!-- End Page Vendor Js -->
     </body>
 </html>

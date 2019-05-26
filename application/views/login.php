@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
 Item Name: Elisyam - Web App & Admin Dashboard Template
@@ -10,7 +11,7 @@ Author: SAEROX
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>LPS - Login</title>
+        <title>Elisyam - Login</title>
         <meta name="description" content="Elisyam is a Web App and Admin Dashboard Template built with Bootstrap 4">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Google Fonts -->
@@ -30,22 +31,13 @@ Author: SAEROX
         <!-- Stylesheet -->
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/bootstrap.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/css/base/elisyam-1.5.min.css">
-        <link rel="stylesheet" href="<?= base_url() ?>assets/css/animate/animate.min.css">
         <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-        <script type="text/javascript">
-          var session = localStorage.getItem('lion_membership');
-          var auth = JSON.parse(session);
-
-          if(session){
-            window.location.replace(`<?= base_url() ?>${auth.level}/`)
-          }
-        </script>
     </head>
     <body class="bg-white">
         <!-- Begin Preloader -->
-        <div id="preloader">
+         <div id="preloader">
             <div class="canvas">
                 <img src="<?= base_url() ?>assets/img/logo-lion-2.png" alt="logo" class="loader-logo">
                 <div class="spinner"></div>
@@ -56,15 +48,10 @@ Author: SAEROX
         <div class="container-fluid no-padding h-100">
             <div class="row flex-row h-100 bg-white">
                 <!-- Begin Left Content -->
-                <div class="col-xl-3 col-lg-5 col-md-5 col-sm-12 col-12 no-padding">
-                    <div class="elisyam-bg background-03">
-                        <div class="elisyam-overlay overlay-08"></div>
-                        <div class="authentication-col-content-2 mx-auto text-center">
-                            <div class="logo-centered">
-                                <a href="db-default.html">
-                                    <img src="<?= base_url() ?>assets/img/logo-lion-2.png" alt="logo">
-                                </a>
-                            </div>
+                <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
+                    <div class="elisyam-bg" style="background-image:url('<?= base_url() ?>assets/img/background/bg01copy.jpg')">
+                        <div class="elisyam-overlay" style="background: linear-gradient(135deg,rgba(46,52,81,.4) 0%,rgba(79, 69, 121, 0.55) 100%);"></div>
+                        <div class="authentication-col-content mx-auto">
                             <h1>Lion Passport System</h1>
                             <span class="description">
                                 Sistem Informasi Pengelolaan Poin Membership
@@ -74,137 +61,60 @@ Author: SAEROX
                 </div>
                 <!-- End Left Content -->
                 <!-- Begin Right Content -->
-                <div class="col-xl-9 col-lg-7 col-md-7 col-sm-12 col-12 my-auto no-padding">
+                <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
                     <!-- Begin Form -->
-                    <div class="authentication-form-2 mx-auto">
-                        <div class="tab-content" id="animate-tab-content">
-                            <!-- Begin Sign In -->
-                            <div role="tabpanel" class="tab-pane show active" id="singin" aria-labelledby="singin-tab">
-                                <h3>Login LPS Administrator</h3><br>
-                                <form id="form_login">
-                                    <div class="group material-input">
-                    							    <input type="text" name="nip" id="nip">
-                    							    <span class="highlight"></span>
-                    							    <span class="bar"></span>
-                    							    <label>ID</label>
-                                    </div>
-                                    <div class="group material-input">
-                    							    <input type="password" name="password" id="password">
-                    							    <span class="highlight"></span>
-                    							    <span class="bar"></span>
-                    							    <label>Password</label>
-                                    </div>
-
-                                  <div class="row">
-                                      <div class="col text-left">
-                                        <input type="checkbox" name="checkbox" id="show_pass">
-                                        <label for="remeber">Show Password</label>
-                                      </div>
-                                  </div>
-                                  <div class="sign-btn text-center">
-                                      <button type="submit" class="btn btn-lg btn-gradient-01" id="submit_login">
-                                          Log In
-                                      </button>
-                                  </div>
-                                </form>
-                            </div>
-                            <!-- End Sign In -->
+                    <div class="authentication-form mx-auto">
+                        <div class="logo-centered">
+                            <a>
+                                <img src="<?= base_url() ?>assets/img/logo-lion-2.png" alt="logo">
+                            </a>
                         </div>
+                        <h3 style="padding-bottom: 30px;">Login To LPS</h3>
+                        <form id="form_login">
+                            <div class="group material-input">
+							    <input type="text" id="id_karyawan" name="id_karyawan">
+							    <span class="highlight"></span>
+							    <span class="bar"></span>
+							    <label>ID Karyawan</label>
+                            </div>
+                            <div class="group material-input">
+							    <input type="password" id="password" name="password">
+							    <span class="highlight"></span>
+							    <span class="bar"></span>
+							    <label>Password</label>
+                            </div>
+                             <div class="row">
+                                <div class="col text-left">
+                                <input type="checkbox" name="checkbox" id="show_pass">
+                                <label for="remeber">Show Password</label>
+                                </div>
+                            </div>
+                            <div class="sign-btn text-center">
+                                <button type="submit" class="btn btn-lg btn-gradient-01" id="submit_login">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- End Form -->
+                    <!-- End Form -->                        
                 </div>
                 <!-- End Right Content -->
             </div>
             <!-- End Row -->
         </div>
-        <!-- End Container -->
+        <!-- End Container -->    
         <!-- Begin Vendor Js -->
+        <script>
+        var BASE_URL = '<?= base_url() ?>'
+        </script>
         <script src="<?= base_url() ?>assets/vendors/js/base/jquery.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/base/core.min.js"></script>
         <!-- End Vendor Js -->
         <!-- Begin Page Vendor Js -->
         <script src="<?= base_url() ?>assets/vendors/js/app/app.min.js"></script>
+        
         <script src="<?= base_url() ?>assets/vendors/js/noty/noty.min.js"></script>
-
-        <script type="text/javascript">
-          $(document).ready(function(){
-
-            $('#form_login').on('submit', function(e){
-              e.preventDefault();
-
-              var nip      = $('#nip').val();
-              var password = $('#password').val();
-
-              if(nip === '' || password === ''){
-                new Noty({
-                  type:"error",
-                  layout:"topRight",
-                  text: 'ID and Password is required',
-                  progressBar:true,
-                  timeout:2500,
-                  animation:{
-                    open:"animated bounceInRight",
-                    close:"animated bounceOutRight"
-                  }
-                }).show();
-              } else {
-
-                $.ajax({
-                  url: `<?= base_url() ?>api/auth/login_user`,
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  beforeSend: function(){
-                    $('#submit_login').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
-                  },
-                  success: function(response){
-                    if(response.status === 200){
-                      localStorage.setItem('lion_membership', JSON.stringify(response.data));
-                      window.location.replace(`<?= base_url() ?>${response.data.level}/`)
-                    } else {
-                      new Noty({
-                        type:"error",
-                        layout:"topRight",
-                        text: response.message,
-                        progressBar:true,
-                        timeout:2500,
-                        animation:{
-                          open:"animated bounceInRight",
-                          close:"animated bounceOutRight"
-                        }
-                      }).show();
-                    $('#submit_login').removeClass('disabled').html('Log In');
-                    }
-                  },
-                  error: function(){
-                    new Noty({
-                      type:"info",
-                      layout:"topRight",
-                      text:"Hey this is an informations notification.",
-                      progressBar:true,
-                      timeout:2500,
-                      animation:{
-                        open:"animated bounceInRight",
-                        close:"animated bounceOutRight"
-                      }
-                    }).show();
-                    $('#submit_login').removeClass('disabled').html('Log In');
-                  }
-                })
-              }
-            });
-
-            $('#show_pass').click(function(){
-              if($(this).is(':checked')){
-                $('#password').attr('type','text');
-              }else{
-                $('#password').attr('type','password');
-              };
-            });
-
-          });
-        </script>
+        <script src="<?= base_url() ?>public/auth_admin.js"></script>
         <!-- End Page Vendor Js -->
-
-
     </body>
 </html>
