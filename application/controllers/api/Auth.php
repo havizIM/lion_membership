@@ -197,7 +197,7 @@ class Auth extends CI_Controller {
         json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Field email pribadi harus diisi terlebih dahulu' ));
       } else {
         $param     = array('email' => $email);
-        $cek_email = $this->AuthModel->cekAuthCustomer($param)->num_rows();
+        $cek_email = $this->AuthModel->cekCustomer($param)->num_rows();
 
         if($cek_email == 1){
           json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Email sudah digunakan.'));
@@ -365,6 +365,189 @@ class Auth extends CI_Controller {
       }
     } else {
       return null;
+    }
+  }
+
+  function login_member(){
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if($method != 'POST') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
+    } else {
+
+      $no_member    = $this->input->post('no_member');
+      $password     = $this->input->post('password');
+
+      if($no_member == null || $password == null) {
+        json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'No Member dan Password belum lengkap' ));
+      } else {
+        $param    = array('no_member' => $no_member);
+        $member = $this->AuthModel->cekAuthMember($param);
+
+        if($member->num_rows() == 0){
+          json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Email tidak ditemukan' ));
+        } else {
+          foreach($member->result() as $key){
+            $db_password    = $key->password;
+            $status         = $key->status_member;
+
+            $session = array(
+              'no_member'       => $key->no_member,
+              'nama'            => $key->nama,
+              'email'           => $key->email,
+              'berlaku_dari'    => $key->berlaku_dari,
+              'berlaku_sampai'  => $key->berlaku_sampai,
+              'token'           => $key->token
+            );
+          }
+
+          if(hash_equals($password, $db_password)){
+            if($status != 'Aktif'){
+              json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Member sudah tidak aktif' ));
+            } else {
+              json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil melakukan login', 'data' => $session ));
+            }
+          } else {
+            json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Password salah' ));
+          }
+        }
+      }
+    }
+  }
+
+  function lupa_password(){
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if($method != 'POST') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
+    } else {
+      $email 				= $this->input->post('email');
+			$new_password = substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5);
+
+      if($email == null){
+        json_output(400, array('status' => 400, 'description' => 'Failed', 'message' => 'Email tidak boleh kosong' ));
+      } else {
+        $param    = array('email' => $email);
+        $member = $this->AuthModel->cekAuthMember($param);
+
+        if($member->num_rows() != 1){
+  				json_output(400, array('status' => 400, 'description' => 'Failed', 'message' => 'Email tidak ditemukan' ));
+  			} else {
+
+          $this->load->library('email');
+          $otorisasi = $member->row();
+
+          $where    = array('no_member' => $otorisasi->no_member);
+
+          $data_email = array(
+            'nama'        => $otorisasi->nama,
+            'password'    => $new_password
+          );
+
+          $template = $this->load->view('email/lupa_password', $data_email, true);
+
+          $config = array(
+            'charset'   => 'utf-8',
+            'wordwrap'  => TRUE,
+            'mailtype'  => 'html',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_user' => 'viz.ndinq@gmail.com',
+            'smtp_pass' => 'haviz06142',
+            'smtp_port' => 465,
+            'crlf'      => "\r\n",
+            'newline'   => "\r\n"
+          );
+
+          $this->email->initialize($config);
+          $this->email->from('adm.lionmember@gmail.com', 'Admin LPS');
+          $this->email->to($email);
+          $this->email->subject('Lupa password akun LPS');
+          $this->email->message($template);
+
+          $send = $this->email->send();
+          
+          if (!$send) {
+            json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Tidak dapat mengirim email'));
+          } else {
+            $data = array(
+              'password' => $new_password
+            );
+
+            $update = $this->AuthModel->updateMember($where, $data);
+
+            if(!$update){
+							json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal melakukan reset password' ));
+						} else {
+							json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil melakukan reset password. Silahkan cek email anda untuk mendapatkan password baru'));
+						}
+          }
+        }
+      }
+    }
+  }
+
+  function password_member($token = null)
+  {
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if($method != 'POST') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
+    } else {
+      if($token == null){
+        json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Request tidak terotorisasi'));
+      } else {
+        $param  = array('token' => $token);
+        $auth   = $this->AuthModel->cekAuthMember($param);
+
+        if($auth->num_rows() != 1){
+          json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Token tidak dikenali'));
+        } else {
+          $otorisasi = $auth->row();
+
+          $db_password  = $otorisasi->password;
+          $old_password = $this->input->post('password_lama');
+          $new_password = $this->input->post('password_baru');
+
+          if($old_password == null || $new_password == null){
+            json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
+          } else {
+            if($old_password != $db_password){
+              json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Password lama salah'));
+            } else {
+
+              $data = array(
+                'password' => $new_password
+              );
+
+              $update = $this->AuthModel->updateMember($param, $data);
+
+              if(!$update){
+                json_output(500, array('status' => 500, 'description' => 'Gagal', 'message' => 'Gagal mengganti password'));
+              } else {
+                json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengganti password'));
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function logout_member($token = null){
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if($method != 'GET') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
+    } else {
+      $param  = array('token' => $token);
+      $auth   = $this->AuthModel->cekAuthMember($param);
+
+      if($auth->num_rows() != 1){
+        json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Token tidak dikenali'));
+      } else {
+        json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil melakukan logout'));
+      }
     }
   }
 

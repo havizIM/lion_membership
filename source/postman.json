@@ -43,6 +43,73 @@
 			"response": []
 		},
 		{
+			"name": "Login Member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "no_member",
+							"value": "41928650307",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "p1zst",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/login_member",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"login_member"
+					]
+				},
+				"description": "Link : \n- localhost/lion_membership/api/auth/login_member\n\n\nMethod :\n- POST\n\n\nData : \n- no_member\n- password\n\n\nHak Akses :\n- Member\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Lupa Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "si.ubk16@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/lupa_password",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"lupa_password"
+					]
+				},
+				"description": "Link : \n- localhost/lion_membership/api/auth/lupa_password\n\n\nMethod :\n- POST\n\n\nData : \n- email\n\n\nHak Akses :\n- Member\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Mengirim default password ke email"
+			},
+			"response": []
+		},
+		{
 			"name": "Kirim Kode Verifikasi",
 			"request": {
 				"method": "POST",
@@ -186,8 +253,7 @@
 						},
 						{
 							"key": "lampiran_daftar",
-							"type": "file",
-							"src": ""
+							"type": "file"
 						}
 					]
 				},
@@ -212,10 +278,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/auth/logout_user/875a8f2f42c570f",
 					"host": [
@@ -230,6 +292,28 @@
 					]
 				},
 				"description": "Link :\n- localhost/lion_membership/api/auth/logout_user/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Helpdesk\n- Admin\n- Customer Service\n- Manager\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Member",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/logout_member/5efadb2e731784797652",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"logout_member",
+						"5efadb2e731784797652"
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/auth/logout_member/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Member\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -271,14 +355,47 @@
 			"response": []
 		},
 		{
+			"name": "Ganti Password Member",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password_lama",
+							"value": "h3lpd35k",
+							"type": "text"
+						},
+						{
+							"key": "password_baru",
+							"value": "helpdesk",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/lion_membership/api/auth/password_member/5efadb2e731784797652",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"auth",
+						"password_member",
+						"5efadb2e731784797652"
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/auth/password_member/--token--\n\nMethod :\n- POST\n\nData :\n- password_lama\n- password_baru\n\nHak Akses : \n- Member\n\nNote :\n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
 			"name": "Show Log",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/log/show/875a8f2f42c570f",
 					"host": [
@@ -301,10 +418,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/user/show/875a8f2f42c570f",
 					"host": [
@@ -327,10 +440,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/rute/show/875a8f2f42c570f",
 					"host": [
@@ -353,10 +462,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/poin/show/875a8f2f42c570f",
 					"host": [
@@ -379,10 +484,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/aplikasi/show/875a8f2f42c570f",
 					"host": [
@@ -405,10 +506,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/member/show/875a8f2f42c570f",
 					"host": [
@@ -701,10 +798,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/user/delete/875a8f2f42c570f?id_karyawan=7201160100",
 					"host": [
@@ -733,10 +826,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/rute/delete/7dc3ac11a0c4db2?id_rute=ABG",
 					"host": [
@@ -765,10 +854,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/poin/delete/7dc3ac11a0c4db2?id_poin=POIN0004",
 					"host": [
@@ -797,10 +882,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/aplikasi/terima_aplikasi/7dc3ac11a0c4db2?no_aplikasi=00000000001",
 					"host": [
@@ -829,10 +910,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/aplikasi/tolak_aplikasi/7dc3ac11a0c4db2?no_aplikasi=00000000001",
 					"host": [
@@ -861,10 +938,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/log/statistic/875a8f2f42c570f",
 					"host": [
@@ -886,10 +959,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "localhost/lion_membership/api/user/statistic/875a8f2f42c570f",
 					"host": [

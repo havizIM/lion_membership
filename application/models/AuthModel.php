@@ -30,7 +30,7 @@ class AuthModel extends CI_Model {
       }
     }
 
-    function cekAuthCustomer($param)
+    function cekCustomer($param)
     {
       return $this->db->select('*')->from('customer')->where($param)->get();
     }
@@ -40,9 +40,17 @@ class AuthModel extends CI_Model {
       return $this->db->insert('customer', $data);
     }
 
-    function updateCustomer($param, $data)
+    function cekAuthMember($param)
     {
-      return $this->db->where($param)->update('customer', $data);
+      return $this->db->select('*')
+                      ->from('member a')
+                      ->join('customer b', 'b.no_aplikasi = a.no_aplikasi')
+                      ->where($param)->get();
+    }
+
+    function updateMember($param, $data)
+    {
+      return $this->db->where($param)->update('member', $data);
     }
 }
 
