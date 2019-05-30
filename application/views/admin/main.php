@@ -35,6 +35,7 @@ Author: SAEROX
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"/>
 
         <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/js/select2/css/select2.min.css">
         <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/js/select2/css/select2-bootstrap.css"> -->
@@ -68,6 +69,14 @@ Author: SAEROX
 
             .default-sidebar>.side-navbar a .la-gift {
                 color: #e7956c;
+            }
+
+            .default-sidebar>.side-navbar a .la-file-text {
+                color: #8e7ed0;
+            }
+
+            .default-sidebar>.side-navbar a .la-credit-card {
+                color: #d6ac76;
             }
         </style>
     </head>
@@ -184,6 +193,8 @@ Author: SAEROX
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
                             <li><a href="#/rute"><i class="ti ti-map-alt"></i><span>Rute</span></a></li>
                             <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
+                            <li><a href="#/application"><i class="la la-file-text"></i><span>Application</span></a></li>
+                            <li><a href="#/member"><i class="la la-credit-card"></i><span>Member</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->
@@ -257,6 +268,7 @@ Author: SAEROX
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/responsive.bootstrap4.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
         <!-- <script src="<?= base_url() ?>assets/vendors/js/select2/js/select2.full.min.js"></script> -->
         <script src="<?= base_url() ?>assets/vendors/js/bootstrap-select/bootstrap-select.min.js"></script>
@@ -344,7 +356,7 @@ Author: SAEROX
                     success: function(response){
                       if(response.status === 200){
                         localStorage.clear();
-                        window.location.replace(`<?= base_url() ?>auth`)
+                        window.location.replace(`<?= base_url() ?>auth/login_admin`)
                       } else {
                         makeNotif('error', response.message, 'bottomRight');
                       }
@@ -391,6 +403,8 @@ Author: SAEROX
                   }
                 })
               }
+
+              
 
             })
           });

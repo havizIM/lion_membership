@@ -22,6 +22,49 @@ function scroll_to_class(element_class, removed_height) {
 }
 
 $(document).ready(function () {
+
+
+    $('#form_login_member').on('submit', function (e) {
+        e.preventDefault();
+
+        var no_member = $('#no_member').val();
+        var password = $('#password').val();
+
+        if (no_member === '' || password === '') {
+            makeNotif('error', 'Silahkan isi form dengan lengkap', 'bottomRight')
+        } else {
+
+            $.ajax({
+                url: `${BASE_URL}api/auth/login_member`,
+                type: 'POST',
+                data: $(this).serialize(),
+                beforeSend: function () {
+                    $('#submit_login').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                },
+                success: function (response) {
+                    if (response.status === 200) {
+                        var link = `${BASE_URL}main/`;
+                        localStorage.setItem('ext_lion_membership', JSON.stringify(response.data));
+                        window.location.replace(link)
+                    } else {
+                        makeNotif('error', response.message, 'bottomRight');
+                        $('#submit_login').removeClass('disabled').html('Log In');
+                    }
+                },
+                error: function () {
+                    makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+                    $('#submit_login').removeClass('disabled').html('Log In');
+                }
+            })
+        }
+    });
+
+
+
+
+
+
+
     $('form fieldset:first').fadeIn('slow');
 
     $('form input[type="text"], input[type="date"], input[type="file"], input[type="number"], input[type="url"], input[type="password"],  input[type="email"],  input[type="tel"], form textarea, form select')
@@ -156,14 +199,6 @@ $(document).ready(function () {
         }
     });
 
-    // if(){
-
-    // }else if(){
-
-    // }else{
-
-    // }
-
     //LOGIN EKSTERNAL
     $('#form_login_customer').on('submit', function (e) {
         e.preventDefault();
@@ -253,6 +288,9 @@ $(document).ready(function () {
         $('#form_forgot_pass').fadeOut();
         a
     });
+
+
+
 
     // We can attach the `fileselect` event to all file inputs on the page
     $(document).on('change', ':file', function () {

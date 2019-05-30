@@ -48,4 +48,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/edit_point');
 	}
 
+	public function application()
+	{
+		$this->load->view('admin/aplikasi');
+	}
+	
+	public function member()
+	{
+		$this->load->view('admin/member');
+	}
+
 }
