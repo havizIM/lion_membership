@@ -1,6 +1,3 @@
-
-
-
 var DOM = {
     register: '#form_register',
     login: '#form_login',
@@ -262,7 +259,7 @@ var setupAuthPage = (function () {
                     url: `${BASE_URL}api/auth/register_customer`,
                     type: 'POST',
                     dataType: 'JSON',
-                    data: new FormData(this),
+                    data: new FormData(form),
                     processData: false,
                     contentType: false,
                     beforeSend: function () {
@@ -280,7 +277,6 @@ var setupAuthPage = (function () {
 
                         } else {
                             makeNotif('error', response.message, 'bottomRight')
-                            $('form fieldset:last').show();
                         }
                         $('#submit_regis').removeClass('disabled').html(`Submit`)
 
