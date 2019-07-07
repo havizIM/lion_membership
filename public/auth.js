@@ -1,319 +1,316 @@
-function makeNotif(type, message, position) {
-    new Noty({
-        type: type,
-        layout: position,
-        text: message,
-        progressBar: true,
-        timeout: 5000,
-        animation: {
-            open: "animated bounceInRight",
-            close: "animated bounceOutRight"
-        }
-    }).show();
+
+
+
+var DOM = {
+    register: '#form_register',
+    login: '#form_login',
+    pass: '#form_pass',
+    wizard: '#rootwizard',
+    submit_register: '#submit_register',
+    kode: '#kirim_kode',
+    check_pass: '#checkbox-password',
+    show_fp: '#forgot_password',
 }
 
-function scroll_to_class(element_class, removed_height) {
-    var scroll_to = $(element_class).offset().top - removed_height;
-    if ($(window).scrollTop() != scroll_to) {
-        $('html, body').stop().animate({
-            scrollTop: scroll_to
-        }, 0);
+var setupAuthPage = (function () {
+
+    var makeNotif = function (type, message, position) {
+        new Noty({
+            type: type,
+            layout: position,
+            text: message,
+            progressBar: true,
+            timeout: 5000,
+            animation: {
+                open: "animated bounceInRight",
+                close: "animated bounceOutRight"
+            }
+        }).show();
     }
-}
 
-$(document).ready(function () {
-
-
-    $('#form_login_member').on('submit', function (e) {
-        e.preventDefault();
-
-        var no_member = $('#no_member').val();
-        var password = $('#password').val();
-
-        if (no_member === '' || password === '') {
-            makeNotif('error', 'Silahkan isi form dengan lengkap', 'bottomRight')
-        } else {
-
-            $.ajax({
-                url: `${BASE_URL}api/auth/login_member`,
-                type: 'POST',
-                data: $(this).serialize(),
-                beforeSend: function () {
-                    $('#submit_login').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
-                },
-                success: function (response) {
-                    if (response.status === 200) {
-                        var link = `${BASE_URL}main/`;
-                        localStorage.setItem('ext_lion_membership', JSON.stringify(response.data));
-                        window.location.replace(link)
-                    } else {
-                        makeNotif('error', response.message, 'bottomRight');
-                        $('#submit_login').removeClass('disabled').html('Log In');
-                    }
-                },
-                error: function () {
-                    makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-                    $('#submit_login').removeClass('disabled').html('Log In');
-                }
-            })
-        }
-    });
-
-
-
-
-
-
-
-    $('form fieldset:first').fadeIn('slow');
-
-    $('form input[type="text"], input[type="date"], input[type="file"], input[type="number"], input[type="url"], input[type="password"],  input[type="email"],  input[type="tel"], form textarea, form select')
-        .on('focus', function () {
-            $(this).parent().removeClass('has-danger');
-            $(this).removeClass('form-control-danger');
-        });
-
-    $('form .btn-next').on('click', function () {
-        var parent_fieldset = $(this).parents('fieldset');
-        var next_step = true;
-        var current_active_step = $(this).parents('form').find('.form-wizard.active');
-
-        parent_fieldset.find('input[type="text"], input[type="file"],  input[type="date"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], input[type="url"], textarea, select, input[type="hidden"]').each(function () {
-            if ($(this).val() == "") {
-                $(this).parent().addClass('has-danger');
-                $(this).addClass('form-control-danger');
-                next_step = false;
-            } else {
-                $(this).parent().removeClass('has-danger');
-                $(this).removeClass('form-control-danger');
-            }
-        });
-
-        if (next_step) {
-            parent_fieldset.fadeOut(400, function () {
-                current_active_step.removeClass('active').addClass('activated').next().addClass('active');
-                $(this).next().fadeIn();
-                scroll_to_class($('form'), 20);
-            });
-        }
-
-    });
-
-    // previous step
-    $('form .btn-previous').on('click', function () {
-        var current_active_step = $(this).parents('form').find('.form-wizard.active');
-
-        $(this).parents('fieldset').fadeOut(400, function () {
-            current_active_step.removeClass('active').prev().removeClass('activated').addClass('active');
-            $(this).prev().fadeIn();
-            scroll_to_class($('form'), 20);
-        });
-    });
-
-    $('#form_register').on('submit', function (e) {
-        e.preventDefault();
-
-
-        $(this).find(
-            'input[type="text"], input[type="date"], input[type="file"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], input[type="url"], textarea, select, input[type="hidden"]'
-        ).each(function () {
-            if ($(this).val() == "") {
-                $(this).parent().addClass('has-danger');
-                $(this).addClass('form-control-danger');
-                makeNotif('warning', 'Masih ada field yang belum terisi', 'bottomRight')
-            } else {
-                $(this).parent().removeClass('has-danger');
-                $(this).removeClass('form-control-danger');
-            }
-        });
-
-        $.ajax({
-            url: `${BASE_URL}api/auth/register_customer`,
-            type: 'POST',
-            dataType: 'JSON',
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            beforeSend: function () {
-                $('#submit_regis').addClass('disabled').html(`<i class="fa fa-spinner fa-spin"></i>`)
+    var setupWizard = function () {
+        $(DOM.wizard).bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard .progressbar').css({
+                    width: $percent + '%'
+                });
             },
-            success: function (response) {
-                if (response.status === 200) {
-                    $('.switch').click()
-                    $('#form_register')[0].reset()
-                    makeNotif('success', response.message, 'bottomRight')
-                    $('form fieldset:first').show();
-                    $('form fieldset:last').hide();
-                    $('.form-wizard').removeClass('active').removeClass('activated')
-                    $('.form-wizard:first').addClass('active')
+            onNext: function (tab, navigation, index) {
+                var valid = $(DOM.register).valid();
 
+                if (!valid) {
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
+
+        });
+    }
+
+    var setupFile = function () {
+        $(document).on('change', ':file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $(':file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
                 } else {
-                    makeNotif('error', response.message, 'bottomRight')
-                    $('form fieldset:last').show();
+                    if (log) alert(log);
                 }
-                $('#submit_regis').removeClass('disabled').html(`Submit`)
 
-            },
-            error: function (err) {
-                makeNotif('error', 'Tidak dapat mengakases server', 'bottomRight')
-                $('#submit_regis').removeClass('disabled').html(`Submit`)
-                $('form fieldset:last').show();
-            }
+            });
+        });
+    }
 
-        })
-    });
+    var setupShowPass = function () {
+        $(DOM.check_pass).click(function () {
+            if ($(this).is(':checked')) {
+                $('#password').attr('type', 'text');
+            } else {
+                $('#password').attr('type', 'password');
+            };
+        });
+    }
 
+    var setupForgotPass = function () {
+        $(DOM.show_fp).on('click', function () {
+            $('#form_forgot_pass').show('slow', function () {
+                $('#email_customer').focus()
+            });
+        });
+    }
 
+    var getKode = function () {
+        $(DOM.kode).on('click', function () {
+            var email = $('#email').val();
 
-    $('#kirim_kode').on('click', function () {
-        var email = $('#email').val();
+            if (email === '') {
+                makeNotif('error', 'Email harus diisi terlebih dahulu', 'bottomRight')
+            } else {
+                $.ajax({
+                    url: `${BASE_URL}api/auth/send_verify`,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: {
+                        email: email
+                    },
+                    beforeSend: function () {
+                        $(this).addClass('disabled').html(`<i class="fa fa-spinner fa-spin"></i>`)
+                    },
+                    success: function (response) {
+                        if (response.status === 200) {
+                            makeNotif('success', response.message, 'bottomRight')
+                        } else {
+                            makeNotif('error', response.message, 'bottomRight')
+                            $(this).removeClass('disabled').html(`Kirim`)
+                        }
 
-        if (email === '') {
-            makeNotif('error', 'Email harus diisi terlebih dahulu', 'bottomRight')
-        } else {
-            $.ajax({
-                url: `${BASE_URL}api/auth/send_verify`,
-                type: 'POST',
-                dataType: 'JSON',
-                data: {
-                    email: email
-                },
-                beforeSend: function () {
-                    $(this).addClass('disabled').html(`<i class="fa fa-spinner fa-spin"></i>`)
-                },
-                success: function (response) {
-                    if (response.status === 200) {
-                        makeNotif('success', response.message, 'bottomRight')
-                    } else {
-                        makeNotif('error', response.message, 'bottomRight')
+                    },
+                    error: function (err) {
+                        makeNotif('error', 'Tidak dapat mengakases server', 'bottomRight')
                         $(this).removeClass('disabled').html(`Kirim`)
                     }
 
-                },
-                error: function (err) {
-                    makeNotif('error', 'Tidak dapat mengakases server', 'bottomRight')
-                    $(this).removeClass('disabled').html(`Kirim`)
-                }
+                })
+            }
+        });
+    }
 
-            })
-        }
-    });
+    var submitLogin = function () {
+        $(DOM.login).on('submit', function (e) {
+            e.preventDefault();
 
-    //LOGIN EKSTERNAL
-    $('#form_login_customer').on('submit', function (e) {
-        e.preventDefault();
+            var email = $('#email').val();
+            var password = $('#password').val();
 
-        var email = $('#email').val();
-        var password = $('#password').val();
+            if (email === '' || password === '') {
+                makeNotif('error', 'Email atau password harus diisi', 'bottomCenter')
+            } else {
+                $.ajax({
+                    url: `${BASE_URL}api/auth/login_member`,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: $(this).serialize(),
+                    beforeSend: function () {
+                        $('#submit_login').addClass('disabled').html('<i class="fa fa-spin fa-circle-o-notch"></i>');
+                    },
+                    success: function (response) {
+                        if (response.status === 200) {
+                            localStorage.setItem('ext_bppt', JSON.stringify(response.data));
+                            window.location.replace(`${BASE_URL}main/`)
+                        } else {
+                            makeNotif('error', response.message, 'bottomCenter');
+                            $('#submit_login').removeClass('disabled').html('Log In');
+                        }
 
-        if (email === '' || password === '') {
-            makeNotif('error', 'Email atau password harus diisi', 'bottomCenter')
-        } else {
-            $.ajax({
-                url: `${BASE_URL}api/auth/login_member`,
-                type: 'POST',
-                dataType: 'JSON',
-                data: $(this).serialize(),
-                beforeSend: function () {
-                    $('#submit_login').addClass('disabled').html('<i class="fa fa-spin fa-circle-o-notch"></i>');
-                },
-                success: function (response) {
-                    if (response.status === 200) {
-                        localStorage.setItem('ext_bppt', JSON.stringify(response.data));
-                        window.location.replace(`${BASE_URL}main/`)
-                    } else {
-                        makeNotif('error', response.message, 'bottomCenter');
+                    },
+                    error: function () {
+                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
                         $('#submit_login').removeClass('disabled').html('Log In');
                     }
-
-                },
-                error: function () {
-                    makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
-                    $('#submit_login').removeClass('disabled').html('Log In');
-                }
-            })
-        }
-    });
-
-
-
-    $('#checkbox-password').click(function () {
-        if ($(this).is(':checked')) {
-            $('#password').attr('type', 'text');
-        } else {
-            $('#password').attr('type', 'password');
-        };
-    });
-
-    $('#form_forgot_pass').on('submit', function (e) {
-        e.preventDefault();
-
-        var email = $('#email_forgot').val();
-
-        if (email === '') {
-            makeNotif('error', 'Email harus diisi', 'bottomCenter')
-        } else {
-            $.ajax({
-                url: `${BASE_URL}api/auth/lupa_password`,
-                type: 'POST',
-                dataType: 'JSON',
-                data: $(this).serialize(),
-                beforeSend: function () {
-                    $('#send_pass').addClass('disabled').html('<i class="fa fa-spin fa-circle-o-notch"></i>');;
-                },
-                success: function (response) {
-                    if (response.status === 200) {
-                        makeNotif('success', response.message, 'bottomCenter');
-                    } else {
-                        makeNotif('error', response.message, 'bottomCenter');
-                    }
-                    $('#send_pass').removeClass('disabled').html('Kirim');
-
-                },
-                error: function () {
-                    makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
-                    $('#send_pass').removeClass('disabled').html('Kirim');
-                }
-            })
-        }
-    });
-
-    $('#forgot_password').on('click', function () {
-        $('#form_forgot_pass').show('slow', function () {
-            $('#email_customer').focus()
-        });
-    });
-
-    $('#btn_cancel').on('click', function () {
-        $('#form_forgot_pass').fadeOut();
-        a
-    });
-
-
-
-
-    // We can attach the `fileselect` event to all file inputs on the page
-    $(document).on('change', ':file', function () {
-        var input = $(this),
-            numFiles = input.get(0).files ? input.get(0).files.length : 1,
-            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [numFiles, label]);
-    });
-
-    // We can watch for our custom `fileselect` event like this
-    $(document).ready(function () {
-        $(':file').on('fileselect', function (event, numFiles, label) {
-
-            var input = $(this).parents('.input-group').find(':text'),
-                log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-            if (input.length) {
-                input.val(log);
-            } else {
-                if (log) alert(log);
+                })
             }
-
         });
-    });
+    }
 
-});
+    var submitForgotPass = function () {
+        $(DOM.pass).on('submit', function (e) {
+            e.preventDefault();
+
+            var email = $('#email_forgot').val();
+
+            if (email === '') {
+                makeNotif('error', 'Email harus diisi', 'bottomCenter')
+            } else {
+                $.ajax({
+                    url: `${BASE_URL}api/auth/lupa_password`,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: $(this).serialize(),
+                    beforeSend: function () {
+                        $('#send_pass').addClass('disabled').html('<i class="fa fa-spin fa-circle-o-notch"></i>');;
+                    },
+                    success: function (response) {
+                        if (response.status === 200) {
+                            makeNotif('success', response.message, 'bottomCenter');
+                        } else {
+                            makeNotif('error', response.message, 'bottomCenter');
+                        }
+                        $('#send_pass').removeClass('disabled').html('Kirim');
+
+                    },
+                    error: function () {
+                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
+                        $('#send_pass').removeClass('disabled').html('Kirim');
+                    }
+                })
+            }
+        });
+    }
+
+    var submitRegister = function () {
+        $(DOM.register).validate({
+            rules: {
+                gender: "required",
+                nama: "required",
+                alamat: "required",
+                kota: "required",
+                kode_pos: "required",
+                no_handphone: "required",
+                kebangsaan: "required",
+                no_identitas: "required",
+                email: "required",
+                nama_perusahaan: "required",
+                alamat_perusahaan: "required",
+                kota_perusahaan: "required",
+                kode_pos_perusahaan: "required",
+                jabatan: "required",
+                no_tlp: "required",
+                no_fax: "required",
+                email_perusahaan: "required",
+                bidang_usaha: "required",
+                alamat_surat: "required",
+                kode_verifikasi: "required",
+                select_file: "required"
+            },
+            messages: {
+                gender: "This Field is required",
+                nama: "This Field is required",
+                alamat: "This Field is required",
+                kota: "This Field is required",
+                kode_pos: "This Field is required",
+                no_handphone: "This Field is required",
+                kebangsaan: "This Field is required",
+                no_identitas: "This Field is required",
+                email: "This Field is required",
+                nama_perusahaan: "This Field is required",
+                alamat_perusahaan: "This Field is required",
+                kota_perusahaan: "This Field is required",
+                kode_pos_perusahaan: "This Field is required",
+                jabatan: "This Field is required",
+                no_tlp: "This Field is required",
+                no_fax: "This Field is required",
+                email_perusahaan: "This Field is required",
+                bidang_usaha: "This Field is required",
+                alamat_surat: "This Field is required",
+                kode_verifikasi: "This Field is required",
+                select_file: "This Field is required"
+            },
+            success: function (error, element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorPlacement: function (error, element) {
+                var name = $(element).attr("id");
+
+                $(element).addClass('is-invalid');
+                $('#invalid-' + name).text(error.text());
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: `${BASE_URL}api/auth/register_customer`,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $('#submit_regis').addClass('disabled').html(`<i class="fa fa-spinner fa-spin"></i>`)
+                    },
+                    success: function (response) {
+                        if (response.status === 200) {
+                            $('.switch').click()
+                            $('#form_register')[0].reset()
+                            makeNotif('success', response.message, 'bottomRight')
+                            $('form fieldset:first').show();
+                            $('form fieldset:last').hide();
+                            $('.form-wizard').removeClass('active').removeClass('activated')
+                            $('.form-wizard:first').addClass('active')
+
+                        } else {
+                            makeNotif('error', response.message, 'bottomRight')
+                            $('form fieldset:last').show();
+                        }
+                        $('#submit_regis').removeClass('disabled').html(`Submit`)
+
+                    },
+                    error: function (err) {
+                        makeNotif('error', 'Tidak dapat mengakases server', 'bottomRight')
+                        $('#submit_regis').removeClass('disabled').html(`Submit`)
+                        $('form fieldset:last').show();
+                    }
+
+                })
+            }
+        })
+    }
+
+    return {
+        init: function () {
+            console.log('App is running');
+            setupWizard();
+            setupShowPass();
+            setupForgotPass();
+            getKode();
+            submitRegister();
+            submitForgotPass();
+            submitLogin();
+            setupFile();
+        }
+    }
+})();
+
+$(document).ready(function () {
+    setupAuthPage.init();
+})

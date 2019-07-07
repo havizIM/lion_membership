@@ -176,9 +176,6 @@ Author: SAEROX
               </form>  
             </div>
             <!-- End Sign In -->
-
-             
-            
             
             <!-- Begin Sign Up -->
             <div role="tabpanel" class="tab-pane" id="signup" aria-labelledby="signup-tab">
@@ -189,7 +186,7 @@ Author: SAEROX
                   <div class="wizards" style="padding-bottom: 20px;">
                     <div class="progressbar">
                       <div class="progress-line" data-number-of-steps="3">
-                      </div> <!-- 19.66% -->
+                      </div>
                     </div>
                     <div class="form-wizard active">
                       <div class="wizard-icon"><i class="fa fa-user"></i></div>
@@ -463,6 +460,7 @@ Author: SAEROX
   <!-- End Page Vendor Js -->
   <!-- Begin Page Snippets -->
   <script src="<?= base_url() ?>assets/js/components/tabs/animated-tabs.min.js"></script>
+  <script src="<?= base_url() ?>assets/js/components/wizard/jquery.steps.min.js"></script>
   <!-- End Page Snippets -->
   <script src="<?= base_url() ?>assets/vendors/js/noty/noty.min.js"></script>
   <script src="<?= base_url('public/auth.js') ?>"></script>

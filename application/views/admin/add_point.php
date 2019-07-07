@@ -64,35 +64,65 @@
 </div>
 
 <script>
-  $(document).ready(function(){
 
-    $('#departure').selectpicker();
-    $('#arrival').selectpicker();
+  var DOM = {
+    departure: '#departure',
+    arrival: '#arrival',
+    form: '#form_add',
+    submit: '#submit_add'
+  }
 
-    $.ajax({
+  var renderUI = (function(){
+    var renderDeparture = function(data){
+      var departure = '<option value="">-- Pilih Departure --</option>';
+
+      $.each (data, function(k, v){
+            departure += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
+      });
+
+      $(DOM.departure).html(departure).selectpicker('refresh');
+    }
+    
+    var renderArrival = function(data){
+        var arrival = '<option value="">-- Pilih Arrival --</option>';
+
+        $.each (data, function(k, v){
+            arrival += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
+        });
+
+        $(DOM.arrival).html(arrival).selectpicker('refresh');
+    }
+
+    return {
+      renderDeparture,
+      renderArrival
+    }
+  })();
+
+  var setupAddPoint = (function(UI){
+
+    var getRute = function(){
+      $.ajax({
         url: `<?= base_url().'api/rute/show/' ?>${auth.token}`,
         type: 'GET',
         dataType: 'JSON',
         success: function(response){
-          var departure = '<option value="">-- Pilih Departure --</option>';
-          var arrival = '<option value="">-- Pilih Arrival --</option>';
-
-          $.each (response.data, function(k, v){
-            departure += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
-            arrival += `<option value="${v.id_rute}">${v.nama_rute}</option>`;
-          });
-
-          $('#departure').html(departure).selectpicker('refresh');
-          $('#arrival').html(arrival).selectpicker('refresh');
+            UI.renderDeparture(response.data);
+            UI.renderArrival(response.data);
         },
-
         error: function(){
           makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
         },
       });
+    }
 
-//FORM ADD
-        $('#form_add').on('submit', function(e){
+    var selectPicker = function(){
+      $(DOM.departure).selectpicker();
+      $(DOM.arrival).selectpicker();
+    }
+
+    var submitForm = function(){
+      $(DOM.form).on('submit', function(e){
           e.preventDefault();
 
           var link_post = `<?=base_url().'api/poin/add/' ?>${auth.token}`
@@ -112,7 +142,7 @@
                 data: $(this).serialize(),
 
                 beforeSend: function(){
-                  $('#submit_add').addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
+                  $(DOM.submit).addClass('disabled').html('<i class="la la-spinner animated infinite rotateIn"></i>');
                 },
 
                 success: function(response){
@@ -121,21 +151,33 @@
                     location.hash = '#/point'
                   } else {
                     makeNotif('error', response.message, 'bottomRight')
-                    $('#submit_add').removeClass('disabled').html('Save');
+                    $(DOM.submit).removeClass('disabled').html('Save');
                   }
 
                 },
 
                 error: function(){
                     makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
-                    $('#submit_add').removeClass('disabled').html('Save');
+                    $(DOM.submit).removeClass('disabled').html('Save');
                 },
               });
           }
 
         });
-//FORM ADD END
+    }
 
+    return {
+      init: function(){
+        selectPicker();
+        getRute();
+        submitForm();
+      }
+    }
+  })(renderUI);
+
+  $(document).ready(function(){
+
+    setupAddPoint.init();
 
   });
 
