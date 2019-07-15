@@ -253,6 +253,7 @@
 						},
 						{
 							"key": "lampiran_daftar",
+							"value": null,
 							"type": "file"
 						}
 					]
@@ -515,6 +516,28 @@
 						"lion_membership",
 						"api",
 						"member",
+						"show",
+						"875a8f2f42c570f"
+					]
+				},
+				"description": "Link :\n- localhost/lion_membership/api/member/show/--token--\n\nMethod :\n- GET\n\nParams : \n- no_aplikasi\n- no_member\n\nHak Akses : \n- Customer Service\n- Admin\n- Manager\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik\n\nPusher :\n- channel : lion_membership\n- event : member"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Claim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lion_membership/api/claim/show/875a8f2f42c570f",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"claim",
 						"show",
 						"875a8f2f42c570f"
 					]
@@ -970,6 +993,60 @@
 						"user",
 						"statistic",
 						"875a8f2f42c570f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Claim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lion_membership/api/claim/valid/875a8f2f42c570f?id_claim=CL-00000001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"claim",
+						"valid",
+						"875a8f2f42c570f"
+					],
+					"query": [
+						{
+							"key": "id_claim",
+							"value": "CL-00000001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tidak Valid Claim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/lion_membership/api/claim/tidak_valid/875a8f2f42c570f?id_claim=CL-00000001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"lion_membership",
+						"api",
+						"claim",
+						"tidak_valid",
+						"875a8f2f42c570f"
+					],
+					"query": [
+						{
+							"key": "id_claim",
+							"value": "CL-00000001"
+						}
 					]
 				}
 			},
