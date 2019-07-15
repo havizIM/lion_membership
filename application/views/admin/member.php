@@ -91,10 +91,12 @@
               <thead>
                 <tr>
                   <th>No. Member</th>
-                  <th>No. Aplikasi</th>
-                  <th>Gender</th>
                   <th>Nama</th>
-                  <th>Kebangsaan</th>
+                  <th>Email</th>
+                  <th>Tanggal Berlaku</th>
+                  <th>Tanggal Expired</th>
+				  
+                  <!-- <th>Kebangsaan</th>
                   <th>No. Identitas</th>
                   <th>No. Handphone</th>
                   <th>Email</th>
@@ -116,8 +118,8 @@
                   <th>Tanggal Pengajuan</th>
                   <th>Tanggal Berlaku</th>
                   <th>Tanggal Expired</th>
-                  <th>Lampiran Daftar</th>
-                  <th class="text-center">Action</th>
+                  <th>Lampiran Daftar</th> -->
+                  <!-- <th class="text-center">Action</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -142,36 +144,41 @@
 	      processing: true,
 	      ajax: link_get,
 	      columns: [
-	        {"data": 'no_member'},
-	        {"data": 'no_aplikasi'},
-	        {"data": 'gender'},
-	        {"data": 'nama'},
-	        {"data": 'kebangsaan'},
-	        {"data": 'no_identitas'},
-	        {"data": 'no_handphone'},
+			{"data": null, 'render': function(data, type, row){
+                return `<a href="#/member/${row.no_member}">${row.no_member}</a>`;
+				}
+			},
+	        {"data": null, 'render': function(data, type, row){
+				return `${row.gender}. ${row.nama}`
+				}
+			},
 	        {"data": 'email'},
-	        {"data": 'alamat'},
-	        {"data": 'kota'},
-	        {"data": 'kode_pos'},
-	        {"data": 'nama_perusahaan'},
-	        {"data": 'no_tlp'},
-	        {"data": 'no_fax'},
-	        {"data": 'jabatan'},
-	        {"data": 'bidang_usaha'},
-	        {"data": 'email_perusahaan'},
-	        {"data": 'alamat_surat'},
-	        {"data": 'alamat_perusahaan'},
-	        {"data": 'kota_perusahaan'},
-	        {"data": 'kode_pos_perusahaan'},
-	        {"data": 'status'},
-	        {"data": 'status_member'},
-	        {"data": 'tgl_pengajuan'},
 	        {"data": 'berlaku_dari'},
 	        {"data": 'berlaku_sampai'},
-	        {"data": null, 'render': function(data, type, row){
-            return `<a class="popup" id="popup" href="<?= base_url('doc/lampiran_daftar/')?>${row.lampiran_daftar}" target="__blank"><img src="<?= base_url('doc/lampiran_daftar/') ?>${row.lampiran_daftar}" style="width: 150px; height: 100px"/></a>`
-          }
-        },
+
+	        // {"data": 'tgl_pengajuan'},
+	        // {"data": 'kebangsaan'},
+	        // {"data": 'no_identitas'},
+	        // {"data": 'no_handphone'},
+	        // {"data": 'alamat'},
+	        // {"data": 'kota'},
+	        // {"data": 'kode_pos'},
+	    //     {"data": 'nama_perusahaan'},
+	    //     {"data": 'no_tlp'},
+	    //     {"data": 'no_fax'},
+	    //     {"data": 'jabatan'},
+	    //     {"data": 'bidang_usaha'},
+	    //     {"data": 'email_perusahaan'},
+	    //     {"data": 'alamat_surat'},
+	    //     {"data": 'alamat_perusahaan'},
+	    //     {"data": 'kota_perusahaan'},
+	    //     {"data": 'kode_pos_perusahaan'},
+	    //     {"data": 'status'},
+	    //     {"data": 'status_member'},
+	    //     {"data": null, 'render': function(data, type, row){
+        //     return `<a class="popup" id="popup" href="<?= base_url('doc/lampiran_daftar/')?>${row.lampiran_daftar}" target="__blank"><img src="<?= base_url('doc/lampiran_daftar/') ?>${row.lampiran_daftar}" style="width: 150px; height: 100px"/></a>`
+        //   }
+        // },
 	      ],
 	      order: [[0, 'asc']]
 	    });

@@ -175,6 +175,7 @@ Author: SAEROX
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
                             <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
+                            <li><a href="#/claim"><i class="la la-gift"></i><span>Claim</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->
@@ -334,7 +335,7 @@ Author: SAEROX
                     success: function(response){
                       if(response.status === 200){
                         localStorage.clear();
-                        window.location.replace(`<?= base_url() ?>auth`)
+                        window.location.replace(`<?= base_url() ?>auth/login_admin`)
                       } else {
                         makeNotif('error', response.message, 'bottomRight');
                       }

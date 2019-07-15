@@ -129,10 +129,10 @@ var setupAuthPage = (function () {
         $(DOM.login).on('submit', function (e) {
             e.preventDefault();
 
-            var email = $('#email').val();
+            var no_member = $('#no_member').val();
             var password = $('#password').val();
 
-            if (email === '' || password === '') {
+            if (no_member === '' || password === '') {
                 makeNotif('error', 'Email atau password harus diisi', 'bottomCenter')
             } else {
                 $.ajax({
