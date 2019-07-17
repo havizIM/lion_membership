@@ -32,4 +32,17 @@ class Customer_service extends CI_Controller {
 	{
 		$this->load->view('customer_service/point');
 	}
+
+	public function claim($id = null)
+	{
+		if($id == null){
+			$this->load->view('customer_service/claim');
+		} else {
+			$this->load->view('customer_service/detail_claim');
+		}
+	}
+
+	
+
+
 }

@@ -47,7 +47,7 @@ Author: SAEROX
      /*this is just positional stuff*/
   margin:0;
   padding:0;
-  position: absolute;
+  position: relative;
   top: 0;
   left:0;
   bottom: 0;
@@ -73,10 +73,10 @@ Author: SAEROX
   <!-- End Preloader -->
   <!-- Begin Container -->
   <div class="container-fluid no-padding h-100">
-    <div class="row flex-row h-100 bg-whites">
+    <div class="row flex-row bg-whites">
       <!-- Begin Left Content -->
       <div class="col-xl-3 col-lg-5 col-md-5 col-sm-12 col-12 no-padding">
-        <div class="elisyam-bg background-03" style="opacity:0.7;">
+        <div class="elisyam-bg" style="opacity:0.7;">
           <div class="elisyam-overlay" style="background: linear-gradient(135deg,#405be0 0%,rgba(152, 137, 156, 0) 100%);"></div>
           <div class="authentication-col-content-2 mx-auto text-center">
              <div class="logo-centered">
@@ -158,9 +158,9 @@ Author: SAEROX
             <!-- End Sign In -->
             
             <!-- Begin Sign Up -->
-            <div role="tabpanel" class="tab-pane" id="signup" aria-labelledby="signup-tab">
+            <div role="tabpanel" class="tab-pane" id="signup" aria-labelledby="signup-tab" style="margin-top:20px;">
               <h3>Create An Account</h3>
-                <form id="form_register">
+                <form id="form_register" enctype="multipart/form-data" style="margin-bottom: 20px;padding-bottom:15px;">
                     <div id="rootwizard">
                         <div class="step-container">
                             <div class="step-wizard">
