@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Mei 2019 pada 16.10
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Waktu pembuatan: 17 Jul 2019 pada 16.31
+-- Versi server: 10.1.40-MariaDB
+-- Versi PHP: 7.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -36,6 +38,13 @@ CREATE TABLE `claim` (
   `keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `claim`
+--
+
+INSERT INTO `claim` (`id_claim`, `kode_booking`, `no_member`, `tgl_claim`, `lampiran`, `status_claim`, `keterangan`) VALUES
+('CL-00000001', 'BIDNKA', '30491728056', '2019-07-05 16:12:16', 'coba.jpg', 'Valid', '');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +56,14 @@ CREATE TABLE `claim_detail` (
   `id_claim` varchar(11) NOT NULL,
   `id_poin` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `claim_detail`
+--
+
+INSERT INTO `claim_detail` (`id_claim_detail`, `id_claim`, `id_poin`) VALUES
+(1, 'CL-00000001', 'POIN0001'),
+(2, 'CL-00000001', 'POIN0002');
 
 -- --------------------------------------------------------
 
@@ -85,7 +102,21 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`no_aplikasi`, `gender`, `nama`, `alamat`, `kota`, `kode_pos`, `no_handphone`, `kebangsaan`, `no_identitas`, `email`, `nama_perusahaan`, `alamat_perusahaan`, `kota_perusahaan`, `kode_pos_perusahaan`, `jabatan`, `no_tlp`, `no_fax`, `email_perusahaan`, `bidang_usaha`, `alamat_surat`, `tgl_pengajuan`, `status`, `lampiran_daftar`) VALUES
-('00000000001', 'Mr', 'Haviz Indra Maulana', 'Jl. Jakarta', 'Jakarta Barat', '11210', '081355754092', 'WNI', '1839517957291364365', 'si.ubk16@gmail.com', 'PT. CodeManiac', 'Jakarta', 'Jakarta Barat', '11210', 'CEO', '081355754092', '02199876542', 'si.ubk16@gmail.com', 'Startup', 'Rumah', '2019-05-24 13:53:49', 'Proses', '00000000001.png');
+('00000000001', 'Mr', 'Haviz Indra Maulana', 'Jl. Jakarta', 'Jakarta Barat', '11210', '081355754092', 'WNI', '1839517957291364365', 'si.ubk16@gmail.com', 'PT. CodeManiac', 'Jakarta', 'Jakarta Barat', '11210', 'CEO', '081355754092', '02199876542', 'si.ubk16@gmail.com', 'Startup', 'Rumah', '2019-05-24 13:53:49', 'Terima', '00000000001.png');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `flight`
+--
+
+CREATE TABLE `flight` (
+  `no_flight` varchar(10) NOT NULL,
+  `departure` varchar(3) NOT NULL,
+  `arrival` varchar(3) NOT NULL,
+  `tgl_berangkat` datetime NOT NULL,
+  `tgl_tiba` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -177,7 +208,23 @@ INSERT INTO `log` (`id_log`, `user`, `id_ref`, `refrensi`, `keterangan`, `katego
 (146, '061422', '-', 'Auth', 'User logout', 'Logout', '2019-04-21 12:31:01'),
 (147, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-04-21 12:31:20'),
 (148, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-04-21 12:32:21'),
-(149, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-05-01 16:58:11');
+(149, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-05-01 16:58:11'),
+(150, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-06-18 09:25:49'),
+(151, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-06-18 09:26:25'),
+(152, '061422', '-', 'Auth', 'User login', 'Login', '2019-06-18 09:26:35'),
+(153, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-06-24 13:58:39'),
+(154, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-05 16:10:39'),
+(155, '061422', '00000000001', 'Aplikasi', 'Terima aplikasi pengajuan LPC', 'Terima', '2019-07-05 16:10:52'),
+(156, 'helpdesk', 'CL-00000001', 'Claim', 'Memvalidasi data poin', 'Valid', '2019-07-05 18:03:38'),
+(157, 'helpdesk', 'CL-00000001', 'Claim', 'Memvalidasi data poin', 'Valid', '2019-07-05 18:12:28'),
+(158, 'helpdesk', 'CL-00000001', 'Claim', 'Memvalidasi data poin', 'Valid', '2019-07-05 18:12:45'),
+(159, 'helpdesk', 'CL-00000001', 'Claim', 'Memvalidasi data poin', 'Valid', '2019-07-05 18:13:33'),
+(160, 'helpdesk', 'CL-00000001', 'Claim', 'Menolak data claim', 'Tidak Valid', '2019-07-05 18:33:14'),
+(161, 'helpdesk', 'CL-00000001', 'Claim', 'Memvalidasi data poin', 'Valid', '2019-07-05 18:33:23'),
+(162, '061422', 'POIN0004', 'Poin', 'Menambahkan data poin baru', 'Add', '2019-07-06 08:32:20'),
+(163, '061422', '-', 'Auth', 'User logout', 'Logout', '2019-07-06 09:19:38'),
+(164, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-06 19:33:44'),
+(165, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-07 14:30:30');
 
 -- --------------------------------------------------------
 
@@ -186,13 +233,23 @@ INSERT INTO `log` (`id_log`, `user`, `id_ref`, `refrensi`, `keterangan`, `katego
 --
 
 CREATE TABLE `log_poin` (
-  `id_user_poin` varchar(11) NOT NULL,
-  `kd_booking` varchar(6) NOT NULL,
+  `id_user_poin` int(11) NOT NULL,
+  `kode_booking` varchar(6) NOT NULL,
   `id_poin` varchar(8) NOT NULL,
   `no_member` varchar(11) NOT NULL,
   `type` enum('claim','reedem','','') NOT NULL,
   `tgl_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `log_poin`
+--
+
+INSERT INTO `log_poin` (`id_user_poin`, `kode_booking`, `id_poin`, `no_member`, `type`, `tgl_log`) VALUES
+(5, 'BIDNKA', 'POIN0002', '30491728056', 'claim', '2019-07-05 18:13:33'),
+(6, 'BIDNKA', 'POIN0001', '30491728056', 'claim', '2019-07-05 18:13:33'),
+(7, 'BIDNKA', 'POIN0002', '30491728056', 'claim', '2019-07-05 18:33:23'),
+(8, 'BIDNKA', 'POIN0001', '30491728056', 'claim', '2019-07-05 18:33:23');
 
 -- --------------------------------------------------------
 
@@ -215,7 +272,8 @@ CREATE TABLE `master_poin` (
 INSERT INTO `master_poin` (`id_poin`, `departure`, `arrival`, `claim_poin`, `reedem_poin`) VALUES
 ('POIN0001', 'PDG', 'CGK', 437, 437000),
 ('POIN0002', 'CGK', 'PDG', 200, 200000),
-('POIN0003', 'BGR', 'UMS', 10, 10000);
+('POIN0003', 'BGR', 'UMS', 10, 10000),
+('POIN0004', 'BGR', 'AMQ', 100, 100000);
 
 -- --------------------------------------------------------
 
@@ -256,6 +314,13 @@ CREATE TABLE `member` (
   `token` varchar(20) NOT NULL,
   `status_member` enum('Aktif','Nonaktif','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `member`
+--
+
+INSERT INTO `member` (`no_member`, `no_aplikasi`, `password`, `berlaku_dari`, `berlaku_sampai`, `token`, `status_member`) VALUES
+('30491728056', '00000000001', 'vm8wi', '2019-07-04 23:00:00', '2021-07-05 00:00:00', 'd569a7c6464d2cfce87b', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -322,14 +387,14 @@ INSERT INTO `user` (`id_karyawan`, `nama_user`, `password`, `level`, `tgl_regist
 --
 
 --
--- Indexes for table `claim`
+-- Indeks untuk tabel `claim`
 --
 ALTER TABLE `claim`
   ADD PRIMARY KEY (`id_claim`),
   ADD KEY `no_member` (`no_member`);
 
 --
--- Indexes for table `claim_detail`
+-- Indeks untuk tabel `claim_detail`
 --
 ALTER TABLE `claim_detail`
   ADD PRIMARY KEY (`id_claim_detail`),
@@ -337,29 +402,28 @@ ALTER TABLE `claim_detail`
   ADD KEY `id_poin` (`id_poin`);
 
 --
--- Indexes for table `customer`
+-- Indeks untuk tabel `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`no_aplikasi`);
 
 --
--- Indexes for table `log`
+-- Indeks untuk tabel `log`
 --
 ALTER TABLE `log`
   ADD PRIMARY KEY (`id_log`),
   ADD KEY `user` (`user`);
 
 --
--- Indexes for table `log_poin`
+-- Indeks untuk tabel `log_poin`
 --
 ALTER TABLE `log_poin`
   ADD PRIMARY KEY (`id_user_poin`),
-  ADD UNIQUE KEY `kd_booking` (`kd_booking`),
   ADD KEY `id_poin` (`id_poin`),
   ADD KEY `id_customer` (`no_member`);
 
 --
--- Indexes for table `master_poin`
+-- Indeks untuk tabel `master_poin`
 --
 ALTER TABLE `master_poin`
   ADD PRIMARY KEY (`id_poin`),
@@ -367,27 +431,27 @@ ALTER TABLE `master_poin`
   ADD KEY `arrival` (`arrival`);
 
 --
--- Indexes for table `master_rute`
+-- Indeks untuk tabel `master_rute`
 --
 ALTER TABLE `master_rute`
   ADD PRIMARY KEY (`id_rute`);
 
 --
--- Indexes for table `member`
+-- Indeks untuk tabel `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`no_member`),
   ADD KEY `no_aplikasi` (`no_aplikasi`);
 
 --
--- Indexes for table `reedem`
+-- Indeks untuk tabel `reedem`
 --
 ALTER TABLE `reedem`
   ADD PRIMARY KEY (`id_reedem`),
   ADD KEY `no_member` (`no_member`);
 
 --
--- Indexes for table `reedem_detail`
+-- Indeks untuk tabel `reedem_detail`
 --
 ALTER TABLE `reedem_detail`
   ADD PRIMARY KEY (`id_reedem_detail`),
@@ -395,30 +459,39 @@ ALTER TABLE `reedem_detail`
   ADD KEY `id_poin` (`id_poin`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_karyawan`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `claim_detail`
+-- AUTO_INCREMENT untuk tabel `claim_detail`
 --
 ALTER TABLE `claim_detail`
-  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `log`
+-- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+
 --
--- AUTO_INCREMENT for table `reedem_detail`
+-- AUTO_INCREMENT untuk tabel `log_poin`
+--
+ALTER TABLE `log_poin`
+  MODIFY `id_user_poin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `reedem_detail`
 --
 ALTER TABLE `reedem_detail`
   MODIFY `id_reedem_detail` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -474,6 +547,7 @@ ALTER TABLE `reedem`
 ALTER TABLE `reedem_detail`
   ADD CONSTRAINT `reedem_detail_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
   ADD CONSTRAINT `reedem_detail_ibfk_2` FOREIGN KEY (`id_reedem`) REFERENCES `reedem` (`id_reedem`) ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
