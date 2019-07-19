@@ -32,4 +32,22 @@ class Manager extends CI_Controller {
 	{
 		$this->load->view('manager/point');
 	}
+
+		public function member($id = null)
+	{
+		if($id == null){
+			$this->load->view('manager/member');
+		} else {
+			$this->load->view('manager/detail_member');
+		}
+	}
+	
+	public function aplikasi($id = null)
+	{
+		if($id == null){
+			$this->load->view('manager/aplikasi');
+		} else {
+			$this->load->view('manager/detail_aplikasi');
+		}
+	}
 }

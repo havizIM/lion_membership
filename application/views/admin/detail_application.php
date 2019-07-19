@@ -1,3 +1,34 @@
+<style>
+
+.h-50 {
+ height: 50px !important;
+}
+
+.hc-darknavy{
+    background-color:#2c304d;
+}
+
+.hc-darknavy h4 {
+    color: #fff !important;
+}
+
+.bg-primary h4 {
+    color: #fff !important;
+}
+
+.bordered.br-radius{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.m-r-10 {
+    margin-right:10px;
+}
+
+.m-r-10 i {
+    font-size:25px;
+}
+</style>
 <div class="row">
     <div class="page-header">
       <div class="d-flex align-items-center">
@@ -32,8 +63,8 @@
                 //DATA PRIBADI
                 html += `<div class="col-xl-5">
                             <div class="widget has-shadow">
-                                <div class="widget-header bordered no-actions d-flex align-items-center">
-                                    <h4>Data Pribadi</h4>
+                                 <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                                   <span class="m-r-10"><i class="la la-user"></i></span> <h4>Data Pribadi</h4>
                                 </div>
                                 <div class="widget-body">
                                     <div class="about-infos d-flex flex-column">
@@ -75,8 +106,8 @@
                
                 //LAIN-LAIN
                 html +=`<div class="widget has-shadow">
-                            <div class="widget-header bordered no-actions d-flex align-items-center">
-                                <h4>Lain-lain</h4>
+                             <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                               <span class="m-r-10"><i class="la la-navicon"></i></span> <h4>Lain-lain</h4>
                             </div>
                             <div class="widget-body">
                                 <div class="about-infos d-flex flex-column">
@@ -95,18 +126,17 @@
                         </div>
 
                         <div class="widget has-shadow">
-                            <div class="widget-header bordered no-actions d-flex align-items-center">
-                                <h4>Aksi</h4>
+                           <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                                <span class="m-r-10"><i class="la la-bell-o"></i></span>  <h4>Status</h4>
                             </div>
-
                             <div class="widget-body text-center">`
                                 if(data.status === 'Proses'){
 								html+= `<div class=btn-group><button type="button" class="btn btn-info btn-shadow-2 mb-2 m-pencil" data-id="${data.no_aplikasi}" id="btn_terima"><i class="ti ti-pencil-alt"></i><span class="pencil">Terima</span></button>
 												<button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_tolak" data-id="${data.no_aplikasi}" style="width: 100px;"><span class="closed">Tolak</span><i class="ti ti-close"></i></button></div>`
 							}else if(data.status === 'Terima'){
-								html+=	`<div class=text-center>${data.status} <i class="ion-checkmark"></i></div>`
+								html+=	`<div class="text-center badge-text badge-text-small success">${data.status} <i class="ion-checkmark"></i></div>`
 							}else{
-								html+= `<div class=text-center>${data.status} <i class="ion-close"></i></div>`
+								html+= `<div class="text-center badge-text badge-text-small danger">${data.status} <i class="ion-close"></i></div>`
 							}
                     html+= `</div>
                         </div>
@@ -116,8 +146,8 @@
                 //PEKERJAAN
                 html +=`<div class="col-xl-7 column">
                         <div class="widget has-shadow">
-                            <div class="widget-header bordered no-actions d-flex align-items-center">
-                                <h4>Pekerjaan</h4>
+                            <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                               <span class="m-r-10"><i class="la la-suitcase"></i></span> <h4>Pekerjaan</h4>
                             </div>
                             <div class="widget-body">
                                 <div class="row">
@@ -171,8 +201,8 @@
 
                 //LAMPIRAN
                 html +=`<div class="widget has-shadow">
-                    <div class="widget-header bordered no-actions d-flex align-items-center">
-                        <h4>Lampiran</h4>
+                    <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                        <span class="m-r-10"><i class="la la-copy"></i></span>  <h4>Lampiran</h4>
                     </div>
                     <div class="widget-body">
                         <div class="row">

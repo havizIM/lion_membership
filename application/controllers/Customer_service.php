@@ -41,6 +41,24 @@ class Customer_service extends CI_Controller {
 			$this->load->view('customer_service/detail_claim');
 		}
 	}
+	
+	public function member($id = null)
+	{
+		if($id == null){
+			$this->load->view('customer_service/member');
+		} else {
+			$this->load->view('customer_service/detail_member');
+		}
+	}
+	
+	public function aplikasi($id = null)
+	{
+		if($id == null){
+			$this->load->view('customer_service/aplikasi');
+		} else {
+			$this->load->view('customer_service/detail_aplikasi');
+		}
+	}
 
 	
 

@@ -60,6 +60,22 @@ Author: SAEROX
             .default-sidebar>.side-navbar a .la-home {
                 color: #1a9cfd;
             }
+          
+             .default-sidebar>.side-navbar a .la-tags {
+                color: #e23f83;
+            } 
+           
+            .default-sidebar>.side-navbar a .ti-map-alt {
+                color: #5cb85c;
+            }
+
+            .default-sidebar>.side-navbar a .la-file-text {
+                color: #8e7ed0;
+            }
+
+            .default-sidebar>.side-navbar a .la-credit-card {
+                color: #d6ac76;
+            }
         </style>
     </head>
     <body id="page-top">
@@ -174,6 +190,8 @@ Author: SAEROX
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
                             <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
+                            <li><a href="#/aplikasi"><i class="la la-file-text"></i><span>Application</span></a></li>
+                            <li><a href="#/member"><i class="la la-credit-card"></i><span>Member</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->

@@ -63,7 +63,7 @@
                 //DATA PRIBADI
                 html += `<div class="col-xl-5">
                             <div class="widget has-shadow">
-                                <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                                 <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                                    <span class="m-r-10"><i class="la la-user"></i></span> <h4>Data Pribadi</h4>
                                 </div>
                                 <div class="widget-body">
@@ -106,7 +106,7 @@
                
                 //LAIN-LAIN
                 html +=`<div class="widget has-shadow">
-                            <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                             <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                                <span class="m-r-10"><i class="la la-navicon"></i></span> <h4>Lain-lain</h4>
                             </div>
                             <div class="widget-body">
@@ -126,15 +126,17 @@
                         </div>
 
                         <div class="widget has-shadow">
-                            <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
-                               <span class="m-r-10"><i class="la la-pencil-square"></i></span> <h4>Aksi</h4>
+                           <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                                <span class="m-r-10"><i class="la la-bell-o"></i></span>  <h4>Status</h4>
                             </div>
-
                             <div class="widget-body text-center">`
-                                if(data.status === 'Nonaktifkan'){
-								html+= `<button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="aktivasi_member" data-id="${data.no_member}"><i class="mdi mdi-check"></i>Aktifkan</button>`
+                                if(data.status === 'Proses'){
+								html+= `<div class=btn-group><button type="button" class="btn btn-info btn-shadow-2 mb-2 m-pencil" data-id="${data.no_aplikasi}" id="btn_terima"><i class="ti ti-pencil-alt"></i><span class="pencil">Terima</span></button>
+												<button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_tolak" data-id="${data.no_aplikasi}" style="width: 100px;"><span class="closed">Tolak</span><i class="ti ti-close"></i></button></div>`
+							}else if(data.status === 'Terima'){
+								html+=	`<div class="text-center badge-text badge-text-small success">${data.status} <i class="ion-checkmark"></i></div>`
 							}else{
-								html+= `<button type="button" class="btn btn-gradient-05 mr-1 mb-2 btn-lg h-50" id="nonaktif_member" data-id="${data.no_member}"><i class="mdi mdi-close"></i>Nonaktifkan</button>`
+								html+= `<div class="text-center badge-text badge-text-small danger">${data.status} <i class="ion-close"></i></div>`
 							}
                     html+= `</div>
                         </div>
@@ -224,12 +226,12 @@
 
     var loadData = (function(UI){
 
-        var NO_MEMBER = location.hash.substr(9);
+        var NO_APLIKASI = location.hash.substr(11);
 
         var getData = function(){
-            // alert(NO_MEMBER)
+            // alert(NO_APLIKASI)
             $.ajax({
-                url: `<?= base_url('api/member/show/'); ?>${auth.token}?no_member=${NO_MEMBER}`,
+                url: `<?= base_url('api/aplikasi/show/'); ?>${auth.token}?no_aplikasi=${NO_APLIKASI}`,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(response){
@@ -246,7 +248,7 @@
                     }
                 },
                 error: function(err){
-                    location.hash = '#/member'
+                    location.hash = '#/application'
                 }
             }) 
         }
@@ -327,93 +329,52 @@
         }
 
         
-         var aktivasiMmeber = function(){
-            $(document).on('click', '#aktivasi_member', function(){
-                var no_member = $(this).attr('data-id');
-                var link_get = `<?= base_url('api/member/aktif/') ?>${auth.token}?no_member=${no_member}`;
-  
-              Swal.fire({
-                title: 'Konfirmasi Terima Aplikasi',
-                text: "Aplikasi akan diterima secara permanent",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-              	if (result.value) {
-              		$.ajax({
-              				url: link_get,
-              				 type: 'GET',
-                            dataType: 'JSON',
-                            success: function(response){
-                            if(response.status === 200){
-                                swal.close();
-                                makeNotif('success', response.description, response.message, 'bottom-left');
-                                location.hash = '#/detail_member';
-                            } else {
-                                makeNotif('error', response.description, response.message, 'bottom-left');
-                            }
-                            },
-                            error: function(err){
-                            makeNotif('error', 'Error', 'Tidak dapat mengakses server', 'bottom-left');
-                            console.log(err);
-                            }
-                            });
-              		}
-              });
-			});
-        }
 
-        var nonaktifMember = function(){
-            $(document).on('click', '#nonaktif_member', function(){
-                var no_member = $(this).attr('data-id');
-            	var link_get = `<?= base_url('api/member/nonaktif/') ?>${auth.token}?no_member=${no_member}`;
-                alert(link_get)
-  
-              Swal.fire({
-                title: 'Konfirmasi Terima Aplikasi',
-                text: "Aplikasi akan diterima secara permanent",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-              	if (result.value) {
-              		$.ajax({
-              				url: link_get,
-              				 type: 'GET',
-                            dataType: 'JSON',
-                            success: function(response){
-                            if(response.status === 200){
-                                swal.close();
-                                makeNotif('success', response.description, response.message, 'bottom-left');
-                                location.hash = '#/detail_member';
-                            } else {
-                                makeNotif('error', response.description, response.message, 'bottom-left');
-                            }
-                            },
-                            error: function(err){
-                            makeNotif('error', 'Error', 'Tidak dapat mengakses server', 'bottom-left');
-                            console.log(err);
-                            }
-                            });
-              		}
-              });
-			});
-        }
+        // var deleteSurvey = function(){
+        //     $(document).on('click', '#delete_survey', function(){
+        //         var id_survey = $(this).attr('data-id');
 
+        //         swal({
+        //             title: "Apakah anda yakin?",
+        //             text: "Data survey ini akan terhapus secara permanen.",
+        //             type: "warning",
+        //             showCancelButton: true,
+        //             confirmButtonColor: "#DD6B55",
+        //             confirmButtonText: "Ya",
+        //             cancelButtonText: "Tidak",
+        //             closeOnConfirm: false,
+        //             closeOnCancel: true,
+        //             showLoaderOnConfirm: true
+        //         }, function (isConfirm) {
+        //             if(isConfirm){
+        //             $.ajax({
+        //                 url: `<?= base_url('api/survey/delete/') ?>${auth.token}?id_survey=${id_survey}`,
+        //                 type: 'GET',
+        //                 dataType: 'JSON',
+        //                 success: function(response){
+        //                 if(response.status === 200){
+        //                     swal.close();
+        //                     makeNotif('success', response.description, response.message, 'bottom-left');
+        //                     location.hash = '#/survey';
+        //                 } else {
+        //                     makeNotif('error', response.description, response.message, 'bottom-left');
+        //                 }
+        //                 },
+        //                 error: function(){
+        //                 makeNotif('error', 'Error', 'Tidak dapat mengakses server', 'bottom-left');
+        //                 }
+        //             })
+        //             }
+        //         });
+        //     });
+        // }
 
-      
        
         return {
             init : function(){
                 getData();
-                // actionTolak();
-                // actionTerima();
-                nonaktifMember();
-                aktivasiMmeber();
+                actionTolak();
+                actionTerima();
             }
         }
 

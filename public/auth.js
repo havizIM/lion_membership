@@ -118,6 +118,7 @@ var setupAuthPage = (function () {
                     error: function (err) {
                         makeNotif('error', 'Tidak dapat mengakases server', 'bottomRight')
                         $(this).removeClass('disabled').html(`Kirim`)
+
                     }
 
                 })
@@ -153,9 +154,10 @@ var setupAuthPage = (function () {
                         }
 
                     },
-                    error: function () {
+                    error: function (err) {
                         makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
                         $('#submit_login').removeClass('disabled').html('Log In');
+
                     }
                 })
             }
@@ -285,6 +287,7 @@ var setupAuthPage = (function () {
                         makeNotif('error', 'Tidak dapat mengakases server', 'bottomRight')
                         $('#submit_regis').removeClass('disabled').html(`Submit`)
                         $('form fieldset:last').show();
+                        console.log(err)
                     }
 
                 })
