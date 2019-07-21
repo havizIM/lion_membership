@@ -95,31 +95,6 @@
                   <th>Email</th>
                   <th>Tanggal Berlaku</th>
                   <th>Tanggal Expired</th>
-				  
-                  <!-- <th>Kebangsaan</th>
-                  <th>No. Identitas</th>
-                  <th>No. Handphone</th>
-                  <th>Email</th>
-                  <th>Alamat</th>
-                  <th>Kota</th>
-                  <th>Kode Pos</th>
-                  <th>Nama Perusahaan</th>
-                  <th>No. Telepon</th>
-                  <th>No. Fax</th>
-                  <th>Jabatan</th>
-                  <th>Bidang Usaha</th>
-                  <th>Email Perusahaan</th>
-                  <th>Alamat Surat</th>
-                  <th>Alamat Perusahaan</th>
-                  <th>Kota Perusahaan</th>
-                  <th>Kode Pos Perusahaan</th>
-                  <th>Status</th>
-                  <th>Status Member</th>
-                  <th>Tanggal Pengajuan</th>
-                  <th>Tanggal Berlaku</th>
-                  <th>Tanggal Expired</th>
-                  <th>Lampiran Daftar</th> -->
-                  <!-- <th class="text-center">Action</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -154,31 +129,7 @@
 			},
 	        {"data": 'email'},
 	        {"data": 'berlaku_dari'},
-	        {"data": 'berlaku_sampai'},
-
-	        // {"data": 'tgl_pengajuan'},
-	        // {"data": 'kebangsaan'},
-	        // {"data": 'no_identitas'},
-	        // {"data": 'no_handphone'},
-	        // {"data": 'alamat'},
-	        // {"data": 'kota'},
-	        // {"data": 'kode_pos'},
-	    //     {"data": 'nama_perusahaan'},
-	    //     {"data": 'no_tlp'},
-	    //     {"data": 'no_fax'},
-	    //     {"data": 'jabatan'},
-	    //     {"data": 'bidang_usaha'},
-	    //     {"data": 'email_perusahaan'},
-	    //     {"data": 'alamat_surat'},
-	    //     {"data": 'alamat_perusahaan'},
-	    //     {"data": 'kota_perusahaan'},
-	    //     {"data": 'kode_pos_perusahaan'},
-	    //     {"data": 'status'},
-	    //     {"data": 'status_member'},
-	    //     {"data": null, 'render': function(data, type, row){
-        //     return `<a class="popup" id="popup" href="<?= base_url('doc/lampiran_daftar/')?>${row.lampiran_daftar}" target="__blank"><img src="<?= base_url('doc/lampiran_daftar/') ?>${row.lampiran_daftar}" style="width: 150px; height: 100px"/></a>`
-        //   }
-        // },
+	        {"data": 'berlaku_sampai'}
 	      ],
 	      order: [[0, 'asc']]
 	    });

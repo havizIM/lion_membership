@@ -58,7 +58,6 @@ class Claim extends CI_Controller {
                 'nama'      => $key->nama
             );
             $json['tgl_claim']          = $key->tgl_claim;
-            $json['lampiran']           = $key->lampiran;
             $json['status_claim']       = $key->status_claim;
             $json['keterangan']         = $key->keterangan;
             $json['detail']             = $this->ClaimDetailModel->show($where)->result();

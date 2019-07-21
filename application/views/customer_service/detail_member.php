@@ -32,10 +32,10 @@
 <div class="row">
     <div class="page-header">
       <div class="d-flex align-items-center">
-          <h2 class="page-header-title">Detail Aplikasi</h2>
+          <h2 class="page-header-title">Detail Member</h2>
           <div>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="#/dashboard"><i class="la la-home"></i></a> - <a href="#/application">Aplikasi</a> - Detail Aplikasi </li>
+                <li class="breadcrumb-item active"><a href="#/dashboard"><i class="la la-home"></i></a> - <a href="#/member">Member</a> - Detail Member </li>
             </ul>
           </div>
       </div>
@@ -111,16 +111,20 @@
                             </div>
                             <div class="widget-body">
                                 <div class="about-infos d-flex flex-column">
-                                    <div class="about-title">No Aplikasi:</div>
-                                    <div class="about-text">${data.no_aplikasi}</div>
+                                    <div class="about-title">Berlaku dari :</div>
+                                    <div class="about-text">${data.berlaku_dari}</div>
                                 </div>
                                     <div class="about-infos d-flex flex-column">
-                                    <div class="about-title">Tamggal Pengajuan:</div>
-                                    <div class="about-text">${data.tgl_pengajuan}</div>
+                                    <div class="about-title">Berlaku sampai :</div>
+                                    <div class="about-text">${data.berlaku_sampai}</div>
                                 </div>
                                 <div class="about-infos d-flex flex-column">
-                                    <div class="about-title">Alamat Surat:</div>
-                                    <div class="about-text">${data.alamat_surat}</div>
+                                    <div class="about-title">Tipe kartu :</div>
+                                    <div class="about-text">${data.tipe}</div>
+                                </div>
+                                <div class="about-infos d-flex flex-column">
+                                    <div class="about-title">Status :</div>
+                                    <div class="about-text">${data.status_member}</div>
                                 </div>
                             </div>
                         </div>
@@ -130,19 +134,38 @@
                                <span class="m-r-10"><i class="la la-pencil-square"></i></span> <h4>Aksi</h4>
                             </div>
 
-                            <div class="widget-body text-center">`
-                                if(data.status === 'Nonaktifkan'){
-								html+= `<button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="aktivasi_member" data-id="${data.no_member}"><i class="mdi mdi-check"></i>Aktifkan</button>`
-							}else{
-								html+= `<button type="button" class="btn btn-gradient-05 mr-1 mb-2 btn-lg h-50" id="nonaktif_member" data-id="${data.no_member}"><i class="mdi mdi-close"></i>Nonaktifkan</button>`
-							}
-                    html+= `</div>
+                            <div class="widget-body text-center">
+                                <div class="btn-group">`
+                                if(data.status_member === 'Nonaktif'){
+                                    html+= `<button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="aktivasi_member" data-id="${data.no_member}"><i class="mdi mdi-check"></i>Aktifkan</button>`
+
+                                }else{
+                                    html+= `<button type="button" class="btn btn-gradient-05 mr-1 mb-2 btn-lg h-50" id="nonaktif_member" data-id="${data.no_member}"><i class="mdi mdi-close"></i>Nonaktifkan</button>`
+                                    if(data.tipe === "Silver"){
+                                        html+= `<button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="aktivasi_member" data-id="${data.no_member}"><i class="mdi mdi-check"></i>Upgrade</button>`
+                                    } else {
+                                        html+= `<button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="aktivasi_member" data-id="${data.no_member}"><i class="mdi mdi-check"></i>Downgrade</button>`
+                                    }
+                                }
+
+                    html+= `    </div>
+                            </div>
                         </div>
                         
                     </div>`;
 
                 //PEKERJAAN
                 html +=`<div class="col-xl-7 column">
+                        <div class="widget widget-16 has-shadow" style="max-height: 130px">
+                            <div class="widget-body">
+                                <div class="row">
+                                    <div class="col-xl-12 d-flex flex-column justify-content-center align-items-center">
+                                        <div class="counter" style="color: #e76c90">${data.no_member}</div>
+                                        <div class="total-views">No Member</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="widget has-shadow">
                             <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                                <span class="m-r-10"><i class="la la-suitcase"></i></span> <h4>Pekerjaan</h4>
@@ -200,17 +223,71 @@
                 //LAMPIRAN
                 html +=`<div class="widget has-shadow">
                     <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
-                        <span class="m-r-10"><i class="la la-copy"></i></span>  <h4>Lampiran</h4>
+                        <span class="m-r-10"><i class="la la-copy"></i></span><h4>Eletronic Card</h4>
                     </div>
                     <div class="widget-body">
                         <div class="row">
-                            <div class="col-md-12 about-infos d-flex flex-column">
-                                <embed src="<?= base_url() ?>doc/lampiran_daftar/${data.lampiran_daftar}" style="width: 100%; height: 500px;">
+                            <div class="col-md-12 about-infos d-flex flex-column" style="padding-top: 100px">
+                                <center>
+                                    <div class="widget has-shadow" style="border-radius: 12px; height: 240px; width: 380px; background-color: navy;">
+                                        <div style="background-image: url(<?= base_url('assets/id.svg') ?>); background-size: 100% 80%; background-repeat: no-repeat; height: 100%; width: 100%; position: relative; top: 25px;">
+                                        
+                                        </div>
+                                        <center style="position: relative; top: -250px;"><img src="<?= base_url('assets/logo_lion.png') ?>" ></img></center>
+                                    </div>
+                                </center>
                             </div>
                         </div>
                     </div>
                 </div>
-    </div>`;
+            </div>
+            
+            <div class="col-xl-12 column">
+                <div class="widget has-shadow">
+                    <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
+                        
+                        <span class="m-r-10"><i class="la la-suitcase"></i></span> <h4>Log Poin</h4>
+                        
+                    </div>
+                    <div class="widget-body">
+                        <table class="table">
+                            <thead>
+                                <th>Kode Booking</th>
+                                <th>Tanggal</th>
+                                <th>Tipe</th>
+                                <th>Departure</th>
+                                <th>Arrival</th>
+                                <th>Poin</th>
+                            </thead>
+                            <tbody>`
+                                var total_poin = 0;
+                                
+                                $.each(data.log, function(k, v){
+                                    if(v.type === 'claim'){
+                                        total_poin    += parseInt(v.claim_poin);
+                                    } else {
+                                        total_poin    -= parseInt(v.reedem_poin);
+                                    }
+
+                                    html += `
+                                    <tr>
+                                        <td>${v.kode_booking}</td>
+                                        <td>${v.tgl_log}</td>
+                                        <td>${v.type}</td>
+                                        <td>${v.departure} - ${v.nama_departure}</td>
+                                        <td>${v.arrival} - ${v.nama_arrival}</td>
+                                        <td>${v.type === 'claim' ? `<i class="la la-plus text-success"></i> ${v.claim_poin}` : `<i class="la la-minus text-danger"></i> ${v.reedem_poin}`}</td>
+                                    </tr>
+                                    `;
+                                });
+
+            html += `
+                            </tbody>
+                        </table>
+                        <h4>Total Poin : <b class="text-success">${total_poin}</b></h4>
+                    </div>
+                </div>       
+            </div>`;
 
 
                 $('#content_app').html(html);

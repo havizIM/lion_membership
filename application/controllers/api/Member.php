@@ -20,6 +20,7 @@ class Member extends CI_Controller {
     );
 
     $this->load->model('MemberModel');
+    $this->load->model('LogPoinModel');
   }
 
   function show($token = null){
@@ -45,7 +46,12 @@ class Member extends CI_Controller {
           $this->input->get('no_aplikasi') != null ? $where['no_aplikasi'] = $this->input->get('no_aplikasi') : null;
           $this->input->get('no_member') != null ? $where['no_member'] = $this->input->get('no_member') : null;
 
-          $show         = $this->MemberModel->show($where, $like);
+          $where = array(
+            'no_aplikasi' => $this->input->get('no_aplikasi'),
+            'no_member'   => $this->input->get('no_member')
+          );
+
+          $show         = $this->MemberModel->show($where);
           $member       = array();
 
           foreach($show->result() as $key){
@@ -55,6 +61,7 @@ class Member extends CI_Controller {
             $json['no_aplikasi']        = $key->no_aplikasi;
             $json['berlaku_dari']       = $key->berlaku_dari;
             $json['berlaku_sampai']     = $key->berlaku_sampai;
+            $json['tipe']               = $key->tipe;
             $json['status_member']      = $key->status_member;
 
             $json['no_aplikasi']          = $key->no_aplikasi;
@@ -80,6 +87,30 @@ class Member extends CI_Controller {
             $json['status']               = $key->status;
             $json['tgl_pengajuan']        = $key->tgl_pengajuan;
             $json['lampiran_daftar']      = $key->lampiran_daftar;
+
+            $json['log']                  = array();
+
+            $where_lg = array('a.no_member' => $key->no_member);
+            $log      = $this->LogPoinModel->show($where_lg);
+
+            if($log->num_rows() !== 0){
+              foreach($log->result() as $key2){
+                $json_l = array();
+                
+                $json_l['id_user_poin']    = $key2->id_user_poin;
+                $json_l['kode_booking']    = $key2->kode_booking;
+                $json_l['type']            = $key2->type;
+                $json_l['tgl_log']         = $key2->tgl_log;
+                $json_l['departure']       = $key2->departure;
+                $json_l['nama_departure']  = $key2->nama_departure;
+                $json_l['arrival']         = $key2->arrival;
+                $json_l['nama_arrival']    = $key2->nama_arrival;
+                $json_l['claim_poin']      = $key2->claim_poin;
+                $json_l['reedem_poin']     = $key2->reedem_poin;
+
+                $json['log'][]              = $json_l;
+              }
+            }
 
             $member[] = $json;
           }

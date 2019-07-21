@@ -97,10 +97,6 @@
                                <span class="m-r-10"><i class="la la-navicon"></i></span> <h4>Lain-lain</h4>
                             </div>
                             <div class="widget-body">
-                                 <div class="about-infos d-flex flex-column">
-                                        <div class="about-title">Lampiran:</div>
-                                        <div class="about-text">${data.lampiran}</div>
-                                    </div>
                                     <div class="about-infos d-flex flex-column">
                                         <div class="about-title">Status:</div>
                                         <div class="about-text">`
@@ -115,7 +111,7 @@
                                     </div>
                                     <div class="about-infos d-flex flex-column">
                                         <div class="about-title">Keterangan:</div>
-                                        <div class="about-text">${data.keterangan}</div>
+                                        <div class="about-text">${data.keterangan !== '' ? data.keterangan : '-'}</div>
                                     </div>
                             </div>
                         </div>
@@ -188,12 +184,20 @@
                         <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                           <span class="m-r-10"><i class="la la-copy"></i></span>  <h4>Lampiran</h4>
                         </div>
-                        <div class="widget-body">
+                        <div class="widget-body">`
+
+                        $.each(data.detail, function(k, v){
+                            html += `
                             <div class="row">
                                 <div class="col-md-12 about-infos d-flex flex-column">
-                                    <img src="<?= base_url() ?>doc/lampiran_daftar/${data.lampiran_daftar}" onerror="this.onerror=null;this.src='<?= base_url() ?>assets/img/error/undraw_problem_solving_ft81.svg';" style="width: 100%; height: 500px;">
+                                    <h4>${v.nama_departure}(${v.departure}) <i class="la la-arrow-right"></i> ${v.nama_arrival}(${v.arrival})</h4>
+                                    <img src="<?= base_url() ?>doc/lampiran_claim/${v.lampiran_claim}" onerror="this.onerror=null;this.src='<?= base_url() ?>assets/img/error/undraw_problem_solving_ft81.svg';" style="width: 100%; height: 500px;">
                                 </div>
-                            </div>
+                            </div><br />
+                            `
+                        });
+                            
+                html += `    
                         </div>
                     </div>
                 </div>`;

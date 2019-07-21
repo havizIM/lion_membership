@@ -126,6 +126,7 @@ class Aplikasi extends CI_Controller {
                   $berlaku_dari   = date('Y-m-d');
                   $berlaku_sampai = date('Y-m-d', mktime(0, 0, 0, date("m", strtotime($berlaku_dari)), date("d", strtotime($berlaku_dari)), date("Y", strtotime($berlaku_dari)) + 2));
                   $token          = sha1($no_member);
+                  $tipe           = 'Blue';
                   $status_member  = 'Aktif';
 
                   $this->load->library('email');

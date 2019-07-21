@@ -81,12 +81,10 @@
                   <th>ID Claim</th>
                   <th>Kode Booking</th>
                   <th>No Member</th>
-                  <!-- <th>Gender</th> -->
                   <th>Nama</th>
                   <th>Tanggal Claim</th>
                   <th>Status Claim</th>
                   <th>Keterangan</th>
-                  <th>Lampiran</th>
                 </tr>
               </thead>
               <tbody>
@@ -123,8 +121,7 @@
 			},
 	        {"data": 'tgl_claim'},
 	        {"data": 'status_claim'},
-	        {"data": 'keterangan'},
-	        {"data": 'lampiran'},
+	        {"data": 'keterangan'}
 	      ],
 	      order: [[0, 'asc']]
 	    });
