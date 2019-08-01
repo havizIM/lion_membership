@@ -39,51 +39,55 @@
     <div class="widget has-shadow" id="content_poin">
         
     </div>
-</div>
 
-<div id="modal_redeem" class="modal fade">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Redeem Your Poin</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">close</span>
-                </button>
-            </div>
-            <form id="form_redeem">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">No Flight / No Penerbangan</label>
-                        <div class="input-group">
-                            <input type="hidden" name="id_poin" id="id_poin">
-                            <input type="text" class="form-control" id="no_flight" name="no_flight">
-                            <span class="input-group-addon addon-primary"><a href="http://www.lionair.co.id/id" target="__blank" class="text-white">Cari Fight</a></span>
+    <div id="modal_redeem" class="modal fade">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Redeem Your Poin</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">close</span>
+                    </button>
+                </div>
+                <form id="form_redeem">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">No Flight / No Penerbangan</label>
+                            <div class="input-group">
+                                <input type="hidden" name="id_poin" id="id_poin">
+                                <input type="text" class="form-control" id="no_flight" name="no_flight">
+                                <span class="input-group-addon addon-primary"><a href="http://www.lionair.co.id/id" target="__blank" class="text-white">Cari Fight</a></span>
+                            </div>
+                            <i>* Klik tombol cari flight untuk mencari penerbangan yang dinginkan.</i>
                         </div>
-                        <i>* Klik tombol cari flight untuk mencari penerbangan yang dinginkan.</i>
+                        <div class="form-group">
+                            <label for="">Gender</label>
+                            <select class="form-control" id="gender_pessenger" name="gender_pessenger">
+                                <option value="">-</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nama Pessenger</label>
+                            <input type="text" class="form-control" id="nama_pessenger" name="nama_pessenger">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Gender</label>
-                        <select class="form-control" id="gender_pessenger" name="gender_pessenger">
-                            <option value="">-</option>
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Ms">Ms</option>
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-shadow" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="submit_redeem">Submit</button>
                     </div>
-                    <div class="form-group">
-                        <label for="">Nama Pessenger</label>
-                        <input type="text" class="form-control" id="nama_pessenger" name="nama_pessenger">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="submit_redeem">Submit</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
+
 </div>
+
+
+
 
 <script>
     var renderUI = (() => {

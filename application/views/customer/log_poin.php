@@ -30,13 +30,19 @@
     var renderUI = (() => {
         return {
             renderPoin: (data) => {
-                console.log(data)
-
                 var html = '';
 
                 if(data.length === 0){
                     html += `
-                        
+                        <div class="container">
+                            <div class="contain">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="<?= base_url() ?>assets/img/undraw_online_resume_qyys.svg" alt="" style="height: 500px; display:block; margin: 0 auto"> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     `
                 } else {
                     $.each(data, function(k, v){

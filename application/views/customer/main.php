@@ -151,7 +151,7 @@ Author: SAEROX
                         </div>
                     </div>
 
-                    <footer class="main-footer">
+                    <footer class="main-footer fixed-bottom">
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 d-flex align-items-center justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center">
                                 <p class="text-gradient-02">Design By Muliani</p>
