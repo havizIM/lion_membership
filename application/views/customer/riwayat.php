@@ -8,7 +8,7 @@
     color: #fff;
 }
 
-.pos2 {git
+.pos2 {
     position: relative;
     bottom: 100%;
     margin-bottom: -100px;
@@ -80,7 +80,7 @@
                                             <div class="widget-header bordered no-actions d-flex align-items-center" style="background:#2c304d;">
                                                 <span class="pos"><i class="la la-file-text"></i></span><h4 class="text-white">Detail</h4>
                                             </div>
-                                            <div class="widget-body">
+                                            <div class="widget-body" style="background: #f8f8f8;">
                                                 <div class="row">
                                                     <div class="col-md-4 about-infos d-flex flex-column">
                                                         <div class="about-title">ID Claim:</div>
@@ -157,7 +157,7 @@
                                             <div class="widget-header bordered no-actions d-flex align-items-center" style="background:#2c304d;">
                                                 <span class="pos"><i class="la la-file-text"></i></span><h4 class="text-white">Detail</h4>
                                             </div>
-                                            <div class="widget-body">
+                                            <div class="widget-body" style="background: #f8f8f8;">
                                                 <div class="row">
                                                     <div class="col-md-4 about-infos d-flex flex-column">
                                                         <div class="about-title">ID Claim:</div>
@@ -197,7 +197,7 @@
                                                     </div>
                                                     <div class="col-md-4 about-infos d-flex flex-column">
                                                     <div class="pos2">
-                                                         <img src="<?= base_url() ?>assets/img/undraw_transfer_files_6tns.svg" alt="" style="height: 500px; display:block; margin: 0 auto"> 
+                                                         <img src="<?= base_url() ?>assets/img/undraw_transfer_files_6tns.svg" alt="" style="height: 200px; display:block; margin: 0 auto"> 
                                                     </div>
                                                     </div>
                                                 </div>
