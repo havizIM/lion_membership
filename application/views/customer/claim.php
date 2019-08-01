@@ -33,7 +33,7 @@
 
                 <div class="widget has-shadow">
                     <div class="widget-header bordered br-radius no-actions d-flex align-items-center">
-                        <h5><i>* Cari rute dan click pilih untuk menambah detail claim</i></h5>
+                        <h5><i>* Cari rute lalu Klik pilih, dan jangan lupa Upload Boarding Passmu</i></h5>
                     </div>
                     <div class="widget-body no-padding">
                         <ul class="ticket list-group w-100" id="detail_claim">
@@ -292,6 +292,7 @@
                             $('#detail_claim').html('');
                             $('#content_poin').html('');
                             $('#form_claim')[0].reset();
+                            $('#form_cari')[0].reset();
                             $('#departure').selectpicker('refresh');
                             $('#arrival').selectpicker('refresh');
                         } else {

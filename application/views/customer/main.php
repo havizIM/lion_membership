@@ -52,7 +52,7 @@ Author: SAEROX
               background-repeat: no-repeat;
               background-attachment: fixed;
               background-size: cover;
-              /* background-position: bottom center; */
+              background-position: bottom center;
               color: #fff!important;
               height: 300px;
               position: relative;
@@ -104,15 +104,15 @@ Author: SAEROX
                                             <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
                                                 <ul>
                                                     <li>
-                                                        <div class="counter">8234</div>
+                                                        <div class="counter" id="total_claim">0</div>
                                                         <div class="heading">Claim</div>
                                                     </li>
                                                     <li>
-                                                        <div class="counter"><h1 class="text-danger">23</h1></div>
+                                                        <div class="counter"><h1 class="text-danger" id="total_poin">0</h1></div>
                                                         <div class="heading">Total Poin</div>
                                                     </li>
                                                     <li>
-                                                        <div class="counter">357</div>
+                                                        <div class="counter" id="total_redeem">0</div>
                                                         <div class="heading">Redeem</div>
                                                     </li>
                                                 </ul>
@@ -208,14 +208,8 @@ Author: SAEROX
         <script src="<?= base_url() ?>assets/vendors/js/bootstrap-select/bootstrap-select.min.js"></script>
         <!-- End Page Vendor Js -->
         <script type="text/javascript">
-          function load_content(link) {
-            $.get(`<?= base_url().'main/'?>${link}`,function(response){
 
-              $('#page_content').html(response);
-            });
-          };
-
-          function makeNotif(type, message, position){
+          var makeNotif = (type, message, position) => {
             new Noty({
               type: type,
               layout: position,
@@ -229,105 +223,158 @@ Author: SAEROX
             }).show();
           }
 
-          $(document).ready(function(){
+          var mainController = (() => {
 
+            var loadContent = (link) => {
+              $.get(`<?= base_url().'main/'?>${link}`,function(response){
+
+                $('#page_content').html(response);
+              });
+            }
+
+            var setupSession = () => {
               $('#session_no_member').text(auth.no_member);
               $('#session_nama').text(auth.nama);
               $('#session_email').text(auth.email);
-            //   $('#session_berlaku_dari').text(auth.tgl_registrasi);
-            //   $('#session_berlaku_sampai').text(auth.tgl_registrasi);
-
-            if (location.hash) {
-              link = location.hash.substr(2);
-              load_content(link);
-            }else {
-              location.hash ='#/home';
             }
 
-            $(window).on('hashchange',function(){
-              link = location.hash.substr(2);
-              load_content(link);
-            });
+            var hashChange = () => {
+              if (location.hash) {
+                link = location.hash.substr(2);
+                loadContent(link);
+              }else {
+                location.hash ='#/home';
+              }
 
+              $(window).on('hashchange',function(){
+                link = location.hash.substr(2);
+                loadContent(link);
+              });
+            }
 
-            $('#show_pass').click(function(){
-              if($(this).is(':checked')){
-                $('#password_lama').attr('type','text');
-                $('#password_baru').attr('type','text');
-                $('#retype_baru').attr('type','text');
-              }else{
-                $('#password_lama').attr('type','password');
-                $('#password_baru').attr('type','password');
-                $('#retype_baru').attr('type','password');
-              };
-            });
+            var showPass = () => {
+              $('#show_pass').click(function(){
+                if($(this).is(':checked')){
+                  $('#password_lama').attr('type','text');
+                  $('#password_baru').attr('type','text');
+                  $('#retype_baru').attr('type','text');
+                }else{
+                  $('#password_lama').attr('type','password');
+                  $('#password_baru').attr('type','password');
+                  $('#retype_baru').attr('type','password');
+                };
+              });
+            }
 
-            $('#logout').on('click', function(){
-              Swal.fire({
-                title: 'Are you sure to logout?',
-                text: "You need to login again!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-                if (result.value) {
+            var logoutAction = () => {
+              $('#logout').on('click', function(){
+                Swal.fire({
+                  title: 'Are you sure to logout?',
+                  text: "You need to login again!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes',
+                }).then((result) => {
+                  if (result.value) {
+                    $.ajax({
+                      url: `<?= base_url() ?>ext/auth/logout_member/${auth.token}`,
+                      type: 'GET',
+                      dataType: 'JSON',
+                      success: function(response){
+                        if(response.status === 200){
+                          localStorage.removeItem('ext_lion');
+                          window.location.replace(`<?= base_url() ?>auth/`)
+                        } else {
+                          makeNotif('error', response.message, 'bottomRight');
+                        }
+                      },
+                      error: function(){
+                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+                      }
+                    })
+                  }
+                })
+              });
+            }
+
+            var gantiPassword = () => {
+              $('#form_password').on('submit', function(e){
+                e.preventDefault();
+                var password_lama = $('#password_lama').val();
+                var password_baru = $('#password_baru').val();
+                var retype_password = $('#retype_baru').val();
+
+                if(password_lama === '' || password_baru === ''){
+                  makeNotif('error', 'Silahkan isi form dengan lengkap', 'bottomRight')
+                } else if(password_baru !== retype_password){
+                  makeNotif('error', 'Password baru dan retype password harus sama', 'bottomRight')
+                } else {
                   $.ajax({
-                    url: `<?= base_url() ?>ext/auth/logout_member/${auth.token}`,
-                    type: 'GET',
+                    url: `<?= base_url('ext/auth/password_member/') ?>${auth.token}`,
+                    type: 'POST',
                     dataType: 'JSON',
+                    data: $(this).serialize(),
+                    beforeSend: function(){
+                      $('#btn_password').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                    },
                     success: function(response){
                       if(response.status === 200){
-                        localStorage.clear();
-                        window.location.replace(`<?= base_url() ?>auth/`)
+                        makeNotif('success', response.message, 'bottomRight');
+                        $('#form_password')[0].reset();
                       } else {
-                        makeNotif('error', response.message, 'bottomRight');
+                        makeNotif('error', response.message, 'bottomRight')
                       }
+                      $('#btn_password').removeClass('disabled').html('Save Changes');
                     },
                     error: function(){
-                      makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+                      makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
                     }
                   })
                 }
               })
-            });
+            }
 
-            $('#form_password').on('submit', function(e){
-              e.preventDefault();
-              var password_lama = $('#password_lama').val();
-              var password_baru = $('#password_baru').val();
-              var retype_password = $('#retype_baru').val();
+            var getMyPoin = () => {
+              $.ajax({
+                url: `<?= base_url('ext/member/get_my_poin/') ?>${auth.token}`,
+                type: 'GET',
+                dataType: 'JSON',
+                beforeSend: function(){
+                    $('#total_claim').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                    $('#total_redeem').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                    $('#total_poin').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                },
+                success: function(res){
+                    $('#total_claim').html(res.data.total_claim);
+                    $('#total_redeem').html(res.data.total_redeem);
+                    $('#total_poin').html(res.data.total_poin);
+                },
+                error: function(err){
+                  $('#total_claim').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                  $('#total_redeem').html('<i class="la la-spinner animated infinite rotateOut"></i>');
+                  $('#total_poin').html('<i class="la la-spinner animated infinite rotateOut"></i>');
 
-              if(password_lama === '' || password_baru === ''){
-                makeNotif('error', 'Silahkan isi form dengan lengkap', 'bottomRight')
-              } else if(password_baru !== retype_password){
-                makeNotif('error', 'Password baru dan retype password harus sama', 'bottomRight')
-              } else {
-                $.ajax({
-                  url: `<?= base_url('ext/auth/password_member/') ?>${auth.token}`,
-                  type: 'POST',
-                  dataType: 'JSON',
-                  data: $(this).serialize(),
-                  beforeSend: function(){
-                    $('#btn_password').addClass('disabled').html('<i class="la la-spinner animated infinite rotateOut"></i>');
-                  },
-                  success: function(response){
-                    if(response.status === 200){
-                      makeNotif('success', response.message, 'bottomRight');
-                      $('#form_password')[0].reset();
-                    } else {
-                      makeNotif('error', response.message, 'bottomRight')
-                    }
-                    $('#btn_password').removeClass('disabled').html('Save Changes');
-                  },
-                  error: function(){
-                    makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
-                  }
-                })
+                  makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
+                }
+              })
+            }
+
+            return {
+              init: () => {
+                getMyPoin();
+                setupSession();
+                hashChange();
+                showPass();
+                logoutAction();
+                gantiPassword();
               }
-            })
+            }
+          })();
 
+          $(document).ready(function(){
+              mainController.init();
           });
         </script>
     </body>

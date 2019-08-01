@@ -70,6 +70,54 @@ class Member extends CI_Controller {
     }
   }
 
+  function get_my_poin($token = null){
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if ($method != 'GET') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah'));
+		} else {
+
+      if($token == null){
+        json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Request tidak terotorisasi'));
+      } else {
+        $param  = array('token' => $token);
+        $auth   = $this->AuthModel->cekAuthMember($param);
+
+        if($auth->num_rows() != 1){
+          json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Token tidak dikenali'));
+        } else {
+
+            $otorisasi = $auth->row();
+
+            $where    = array('a.no_member' => $otorisasi->no_member);
+            $show     = $this->LogPoinModel->show($where);
+            
+
+            $total_claim  = 0;
+            $total_redeem = 0;
+
+            foreach($show->result() as $key){
+              if($key->type == 'claim'){
+                $total_claim  += $key->claim_poin;
+              }
+              if($key->type == 'redeem'){
+                $total_redeem += $key->redeem_poin;
+              }
+            }
+
+            $my_poin      = array(
+              'total_claim'   => $total_claim,
+              'total_redeem'  => $total_redeem,
+              'total_poin'    => $total_claim - $total_redeem
+            );
+
+          json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $my_poin));
+
+        }
+      }
+    }
+  }
+
   function profile($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
