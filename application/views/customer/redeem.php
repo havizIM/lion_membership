@@ -53,11 +53,32 @@
             </div>
             <form id="form_redeem">
                 <div class="modal-body">
-                    
+                    <div class="form-group">
+                        <label for="">No Flight / No Penerbangan</label>
+                        <div class="input-group">
+                            <input type="hidden" name="id_poin" id="id_poin">
+                            <input type="text" class="form-control" id="no_flight" name="no_flight">
+                            <span class="input-group-addon addon-primary"><a href="http://www.lionair.co.id/id" target="__blank" class="text-white">Cari Fight</a></span>
+                        </div>
+                        <i>* Klik tombol cari flight untuk mencari penerbangan yang dinginkan.</i>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Gender</label>
+                        <select class="form-control" id="gender_pessenger" name="gender_pessenger">
+                            <option value="">-</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Ms">Ms</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nama Pessenger</label>
+                        <input type="text" class="form-control" id="nama_pessenger" name="nama_pessenger">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-shadow" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" id="submit_redeem">Submit</button>
                 </div>
             </form>
         </div>
@@ -145,7 +166,8 @@
         }
         
         var openFormModal = (data) => {
-
+            $('#form_redeem')[0].reset();
+            $('#id_poin').val(data.id_poin);
             $('#modal_redeem').modal('show')
         }
 
@@ -162,22 +184,37 @@
             $('#form_redeem').on('submit', function(e){
                 e.preventDefault();
 
-                $.ajax({
-                    url: `<?= base_url('ext/redeem/add/') ?>${auth.token}`,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data: $(this).serialize(),
-                    success: function(res){
-                        if(res.status === 200){
-                            makeNotif('success', res.message, 'bottomRight')
-                        } else {
-                            makeNotif('error', res.message, 'bottomRight')
+                var id_poin             = $('#id_poin').val();
+                var no_flight           = $('#no_flight').val();
+                var gender_pessenger    = $('#gender_pessenger').val();
+                var nama_pessenger      = $('#nama_pessenger').val();
+
+                if(id_poin === '' || no_flight === '' || gender_pessenger === '' || nama_pessenger === ''){
+                    makeNotif('warning', 'Silahkan isi data dengan lengkap', 'bottomRight')
+                } else {
+                    $.ajax({
+                        url: `<?= base_url('ext/redeem/add/') ?>${auth.token}`,
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: $(this).serialize(),
+                        beforeSend: function(){
+                            $('#submit_redeem').html('Loading...')
+                        },
+                        success: function(res){
+                            if(res.status === 200){
+                                makeNotif('success', res.message, 'bottomRight')
+                                $('#modal_redeem').modal('hide')
+                            } else {
+                                makeNotif('error', res.message, 'bottomRight')
+                            }
+                            $('#submit_redeem').html('Submit')
+                        },
+                        error: function(err){
+                            $('#submit_redeem').html('Submit')
+                            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
                         }
-                    },
-                    error: function(err){
-                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
-                    }
-                })
+                    })
+                }
             })
         }
 
@@ -244,16 +281,19 @@
                     type: 'GET',
                     dataType: 'JSON',
                     beforeSend: function(){
-                        
+                        $(this).html('Loading...');
                     },
                     success: function(res){
                         if(res.status === 200){
-                            // if(res.data.total_poin < obj.redeem_poin){
-                            //     makeNotif('warning', 'Poin anda tidak mencukupi', 'bottomRight')
-                            // } else {
+                            if(res.data.total_poin < obj.redeem_poin){
+                                makeNotif('warning', 'Poin anda tidak mencukupi', 'bottomRight')
+                            } else {
                                 UI.openFormModal(obj);
-                            // }
+                            }
+
+                            $(this).html('Pilih');
                         } else {
+                            $(this).html('Pilih');
                             makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight')
                         }
                     },

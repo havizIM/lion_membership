@@ -58,7 +58,6 @@ class Redeem extends CI_Controller {
             );
             $json['tgl_redeem']         = $key->tgl_redeem;
             $json['status_redeem']      = $key->status_redeem;
-            $json['alamat_kirim']       = $key->alamat_kirim;
             $json['keterangan']         = $key->keterangan;
             $json['detail']             = $this->RedeemDetailModel->show($where)->result();
 

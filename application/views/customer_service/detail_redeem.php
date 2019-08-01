@@ -108,11 +108,6 @@
                                         <div class="about-title">Tanggal Redeem:</div>
                                         <div class="about-text">${data.tgl_redeem}</div>
                                     </div>
-                                    <div class="about-infos d-flex flex-column">
-                                        <div class="about-title">Alamat Kirim:</div>
-                                        <div class="about-text">${data.alamat_kirim}</div>
-                                    </div>
-                                   
                                 </div>
                             </div>`
                             

@@ -29,7 +29,7 @@ class RedeemModel extends CI_Model {
       $this->db->insert('redeem', $data);
 
       if(!empty($detail)){
-        $this->db->insert_batch('redeem_detail', $detail);
+        $this->db->insert('redeem_detail', $detail);
       }
 
       $this->db->trans_complete();
