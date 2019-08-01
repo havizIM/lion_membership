@@ -46,7 +46,7 @@ Author: SAEROX
           var auth = JSON.parse(session);
 
           if(!session){
-            window.location.replace(`<?= base_url() ?>auth`);
+            window.location.replace(`<?= base_url() ?>internal`);
           } else {
             if(auth.level !== 'customer_service'){
               window.location.replace(`<?= base_url() ?>${auth.level}/`);
@@ -351,8 +351,8 @@ Author: SAEROX
                     dataType: 'JSON',
                     success: function(response){
                       if(response.status === 200){
-                        localStorage.clear();
-                        window.location.replace(`<?= base_url() ?>auth/login_admin`)
+                        localStorage.removeItem('lion_membership');
+                        window.location.replace(`<?= base_url() ?>internal`)
                       } else {
                         makeNotif('error', response.message, 'bottomRight');
                       }

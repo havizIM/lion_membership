@@ -186,7 +186,7 @@
                                             <div class="col-xl-6 col-md-6 col-sm-6 d-flex justify-content-xl-end justify-content-md-end justify-content-center">
                                                 <div class="total">
                                                     <div class="title">Total Poin Redeem</div>
-                                                    <div class="number">${grand_total} Poin</div>
+                                                    <div class="number">${grand_total || 0} Poin</div>
                                                 </div>
                                             </div>
                                         </div>

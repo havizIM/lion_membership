@@ -77,7 +77,7 @@ $(document).ready(function () {
           dataType: 'JSON',
           success: function (response) {
             if (response.status === 200) {
-              localStorage.clear();
+              localStorage.removeItem('lion_membership');
               window.location.replace(`${BASE_URL}auth/login_admin`)
             } else {
               makeNotif('error', response.message, 'bottomRight');

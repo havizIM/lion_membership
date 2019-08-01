@@ -41,7 +41,7 @@ Author: SAEROX
           var auth = JSON.parse(session);
 
           if(!session){
-            window.location.replace(`<?= base_url() ?>auth`);
+            window.location.replace(`<?= base_url() ?>`);
           }
         </script>
 
@@ -287,7 +287,7 @@ Author: SAEROX
                       success: function(response){
                         if(response.status === 200){
                           localStorage.removeItem('ext_lion');
-                          window.location.replace(`<?= base_url() ?>auth/`)
+                          window.location.replace(`<?= base_url() ?>`)
                         } else {
                           makeNotif('error', response.message, 'bottomRight');
                         }

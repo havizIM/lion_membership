@@ -60,7 +60,6 @@ class Redeem extends CI_Controller {
             );
             $json['tgl_redeem']         = $key->tgl_redeem;
             $json['status_redeem']      = $key->status_redeem;
-            $json['alamat_kirim']       = $key->alamat_kirim;
             $json['keterangan']         = $key->keterangan;
 
             $where2           = array('a.id_redeem' => $key->id_redeem);
@@ -95,43 +94,39 @@ class Redeem extends CI_Controller {
 
             $otorisasi = $auth->row();
 
-            $post               = $this->input->post();
-            $id_claim           = $this->KodeModel->buatKode('claim', 'CL-', 'id_claim', 8);
-            $kode_booking       = $post['kode_booking'];
+            $id_redeem      = $this->KodeModel->buatKode('redeem', 'RD-', 'id_redeem', 8);
+            $no_member      = $otorisasi->no_member;
+            $status_redeem  = 'Proses';
 
-            if($kode_booking == null){
+            $id_poin          = $this->input->post('id_poin');
+            $no_flight        = $this->input->post('no_flight');
+            $gender_pessenger = $this->input->post('gender_pessenger');
+            $nama_pessenger   = $this->input->post('nama_pessenger');
+
+            if($id_poin == null || $no_flight === null || $gender_pessenger === null || $nama_pessenger === null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
             } else {
 
-              if(!isset($post['id_poin']) && count($post['id_poin']) < 1){
-                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Pilih barang yang akan dipilih'));
+              $redeem = array(
+                'id_redeem'        => $id_redeem,
+                'no_member'        => $no_member,
+                'status_redeem'    => $status_redeem
+              );
+
+              $detail = array(
+                  'id_redeem'         => $id_redeem,
+                  'id_poin'           => $id_poin,
+                  'no_flight'         => $no_flight,
+                  'gender_pessenger'  => $gender_pessenger,
+                  'nama_pessenger'    => $nama_pessenger
+              );
+
+              $add = $this->RedeemModel->add($redeem, $detail);
+
+              if(!$add){
+                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data redeem'));
               } else {
-
-                $detail       = array();
-
-                foreach($post['id_poin'] as $key => $val){
-                    $detail[] = array(
-                      'id_claim'          => $id_claim,
-                      'id_poin'           => $post['id_poin'][$key],
-                      'lampiran_claim'    => $file['file_name']
-                    );
-                }
-
-                $redeem = array(
-                  'id_claim'        => $id_claim,
-                  'kode_booking'    => $kode_booking,
-                  'no_member'       => $otorisasi->no_member,
-                  'status_claim'    => 'Proses',
-                  'no_member'       => $otorisasi->no_member
-                );
-
-                $add = $this->RedeemModel->add($redeem, $detail);
-
-                if(!$add){
-                  json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data redeem'));
-                } else {
-                  json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data redeem'));
-                }
+                json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data redeem'));
               }
             }
         }
