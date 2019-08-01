@@ -57,10 +57,10 @@ Author: SAEROX
         <style>
              .default-sidebar>.side-navbar a .la-gift {
                 color: #e7956c;
-            } 
+            }
              .default-sidebar>.side-navbar a .la-tags {
                 color: #e23f83;
-            } 
+            }
             .default-sidebar>.side-navbar a .la-home {
                 color: #1a9cfd;
             }
@@ -161,11 +161,11 @@ Author: SAEROX
                                 </ul>
                             </li>
                             <!-- End Notifications -->
-                            <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="<?= base_url() ?>assets/img/avatar/avatar-01.jpg" alt="..." class="avatar rounded-circle"></a>
+                            <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="<?= base_url().'assets/user.jpg' ?>" alt="..." class="avatar rounded-circle"></a>
                                 <ul aria-labelledby="user" class="user-size dropdown-menu">
                                     <li class="welcome">
                                         <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
-                                        <img src="<?= base_url() ?>assets/img/avatar/avatar-01.jpg" alt="..." class="rounded-circle">
+                                        <img src="<?= base_url().'assets/user.jpg' ?>" alt="..." class="rounded-circle">
                                     </li>
                                     <li><a rel="nofollow" class="dropdown-item logout text-center" style="cursor: pointer" id="logout"><i class="ti-power-off"></i></a></li>
                                 </ul>
