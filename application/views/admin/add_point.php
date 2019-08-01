@@ -44,9 +44,9 @@
                 </div>
             </div>
             <div class="form-group row d-flex align-items-center mb-5">
-                <label class="col-lg-3 form-control-label">Reedem Point</label>
+                <label class="col-lg-3 form-control-label">Redeem Point</label>
                 <div class="col-lg-9">
-                    <input id="reedem_poin" name="reedem_poin" type="number" class="form-control">
+                    <input id="redeem_poin" name="redeem_poin" type="number" class="form-control">
                 </div>
             </div>
             <ul class="pager wizard text-right">

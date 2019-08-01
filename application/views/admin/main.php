@@ -193,7 +193,7 @@ Author: SAEROX
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
                             <li><a href="#/rute"><i class="ti ti-map-alt"></i><span>Rute</span></a></li>
                             <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
-                            <li><a href="#/application"><i class="la la-file-text"></i><span>Application</span></a></li>
+                            <li><a href="#/aplikasi"><i class="la la-file-text"></i><span>Application</span></a></li>
                             <li><a href="#/member"><i class="la la-credit-card"></i><span>Member</span></a></li>
                         </ul>
                     </nav>

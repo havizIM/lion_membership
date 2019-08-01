@@ -6,7 +6,7 @@ class LogPoinModel extends CI_Model {
 
     function show($where)
     {
-      $this->db->select('a.*, b.id_poin, b.departure, c.nama_rute as nama_departure, b.arrival, d.nama_rute as nama_arrival, b.claim_poin, b.reedem_poin')
+      $this->db->select('a.*, b.id_poin, b.departure, c.nama_rute as nama_departure, b.arrival, d.nama_rute as nama_arrival, b.claim_poin, b.redeem_poin')
                ->from('log_poin a')
                ->join('master_poin b', 'b.id_poin = a.id_poin')
                ->join('master_rute c', 'c.id_rute = b.departure')

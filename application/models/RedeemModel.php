@@ -2,12 +2,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ReedemModel extends CI_Model {
+class RedeemModel extends CI_Model {
 
     function show($where)
     {
       $this->db->select('a.*, b.no_aplikasi, b.no_member, c.gender, c.nama')
-               ->from('reedem a')
+               ->from('redeem a')
                ->join('member b', 'b.no_member = a.no_member')
                ->join('customer c', 'c.no_aplikasi = b.no_aplikasi');
 
@@ -19,7 +19,7 @@ class ReedemModel extends CI_Model {
         }
       }
 
-      $this->db->order_by('a.tgl_claim', 'desc');
+      $this->db->order_by('a.tgl_redeem', 'desc');
       return $this->db->get();
     }
 
@@ -50,7 +50,7 @@ class ReedemModel extends CI_Model {
     function edit($where, $data, $log_poin, $log)
     {
       $this->db->trans_start();
-      $this->db->where($where)->update('claim', $data);
+      $this->db->where($where)->update('redeem', $data);
       
        if(!empty($log_poin)){
         $this->db->insert_batch('log_poin', $log_poin);

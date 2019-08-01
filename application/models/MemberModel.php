@@ -20,6 +20,26 @@ class MemberModel extends CI_Model {
       return $this->db->get();
     }
 
+    function edit($param, $data, $log)
+    {
+      $this->db->trans_start();
+      $this->db->where($param)->update('member', $data);
+      
+      if(!empty($log)){
+        $this->db->insert('log', $log);
+      }
+
+      $this->db->trans_complete();
+
+      if ($this->db->trans_status() === FALSE){
+        $this->db->trans_rollback();
+        return false;
+      } else {
+        $this->db->trans_commit();
+        return true;
+      }
+    }
+
 
 }
 

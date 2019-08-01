@@ -23,17 +23,13 @@ class ClaimModel extends CI_Model {
       return $this->db->get();
     }
 
-    function add($data, $detail, $log)
+    function add($data, $detail)
     {
       $this->db->trans_start();
       $this->db->insert('claim', $data);
 
       if(!empty($detail)){
         $this->db->insert_batch('claim_detail', $detail);
-      }
-
-      if(!empty($log)){
-        $this->db->insert('log', $log);
       }
 
       $this->db->trans_complete();

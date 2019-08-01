@@ -38,7 +38,7 @@
           <h2 class="page-header-title">Detail Claim</h2>
           <div>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="#/dashboard"><i class="la la-home"></i></a> - <a href="#/claim">Aplikasi</a> - Detail Claim </li>
+                <li class="breadcrumb-item active"><a href="#/dashboard"><i class="la la-home"></i></a> - <a href="#/claim">Claim</a> - Detail Claim </li>
             </ul>
           </div>
       </div>
@@ -47,12 +47,38 @@
 
 <div class="row flex-row about" id="content_app">
     
-    <!-- Begin Column -->
-    <div class="col-xl-7 column">
-
-
-    </div>
+   
     
+</div>
+
+<div id="modal_tolak" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Form Penolakan Pengajuan Claim</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">close</span>
+                </button>
+            </div>
+            <form id="form_tolak">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">ID Claim</label>
+                        <input type="text" readonly class="form-control" id="id_claim" name="id_claim">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <!-- End Row -->
 <script>
@@ -66,7 +92,7 @@
                 html += `<div class="col-xl-5">
                             <div class="widget has-shadow">
                                 <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
-                                   <span class="m-r-10"><i class="la la-user"></i></span> <h4>Data Pribadi</h4>
+                                   <span class="m-r-10"><i class="la la-user"></i></span> <h4>Data Member</h4>
                                 </div>
                                 <div class="widget-body">
                                     <div class="about-infos d-flex flex-column">
@@ -75,7 +101,7 @@
                                     </div>
                                     <div class="about-infos d-flex flex-column">
                                         <div class="about-title">No Member:</div>
-                                        <div class="about-text">${data.member.no_member}.</div>
+                                        <div class="about-text">${data.member.no_member}</div>
                                     </div>
                                     <div class="about-infos d-flex flex-column">
                                         <div class="about-title">Nama:</div>
@@ -94,7 +120,7 @@
                 //LAIN-LAIN
                 html +=`<div class="widget has-shadow">
                             <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
-                               <span class="m-r-10"><i class="la la-navicon"></i></span> <h4>Lain-lain</h4>
+                               <span class="m-r-10"><i class="la la-navicon"></i></span> <h4>Status</h4>
                             </div>
                             <div class="widget-body">
                                     <div class="about-infos d-flex flex-column">
@@ -131,15 +157,15 @@
                                     </div>
                                     <div class="widget-body text-center">
                                         <div class="btn-group" style="width: 100%">
-                                            <button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="btn_validasi" data-id="${data.id_claim}" style="width: 100%"><i class="mdi mdi-check"></i>Validasi</button>
-                                            <button type="button" class="btn btn-gradient-05 mr-1 mb-2 btn-lg h-50" id="btn_tolak" data-id="${data.id_claim}" style="width: 100%"><i class="mdi mdi-check"></i>Tolak Validasi</button>
+                                            <button type="button" class="btn btn-gradient-03 mr-1 mb-2 btn-lg h-50" id="btn_validasi" data-id="${data.id_claim}" style="width: 100%"><i class="mdi mdi-check"></i>Approve Claim</button>
+                                            <button type="button" class="btn btn-gradient-05 mr-1 mb-2 btn-lg h-50" id="btn_tolak" data-id="${data.id_claim}" style="width: 100%"><i class="mdi mdi-check"></i>Tolak Claim</button>
                                         </div>
                                        </div>
                                 </div>`
 							}  
                          html+= `<div class="widget has-shadow">
                                     <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
-                                      <span class="m-r-10"><i class="la la-suitcase"></i></span> <h4>Pekerjaan</h4>
+                                      <span class="m-r-10"><i class="la la-suitcase"></i></span> <h4>Detail Claim</h4>
                                     </div>
                                     <div class="widget-body pd">
                                         <div class="row">
@@ -219,7 +245,6 @@
         var ID_CLAIM = location.hash.substr(8);
 
         var getData = function(){
-            // alert(ID_CLAIM)
             $.ajax({
                 url: `<?= base_url('api/claim/show/'); ?>${auth.token}?id_claim=${ID_CLAIM}`,
                 type: 'GET',
@@ -243,42 +268,8 @@
             }) 
         }
 
-        // var validMmeber = function(){
-        //     $(document).on('click', '#btn_validasi', function(){
-        //         var id_claim = $(this).attr('data-id');
-        //         var link_get = `<?= base_url('api/claim/valid/') ?>${auth.token}?id_claim=${id_claim}`;
-                
-        //       Swal.fire({
-        //         title: 'Konfirmasi Validasi Member',
-        //         text: "Member akan valid secara permanent",
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes',
-        //       }).then((result) => {
-        //       	if (result.value) {
-        //             $.ajax({
-        //                 url: `<?= base_url('api/claim/valid/') ?>${auth.token}?id_claim=${id_claim}`,
-        //                 type: 'GET',
-        //                 success: function(response){
-        //                     if(response.status === 200){
-        //                         getData()
-        //                         swal.close();
-        //                         makeNotif('success', response.description, response.message, 'bottom-left');
-        //                         location.hash = '#/detail_claim';
-        //                     } else {
-        //                         makeNotif('error', response.description, response.message, 'bottom-left');
-        //                     }
-        //                 }
-        //             })      
-              		
-        //       	}
-        //       });
-		// 	});
-        // }
 
-         var validMmeber = function(){
+         var validClaim = function(){
             $(document).on('click', '#btn_validasi', function(){
                 var id_claim = $(this).attr('data-id');
                 var link_get = `<?= base_url('api/claim/valid/') ?>${auth.token}?id_claim=${id_claim}`;
@@ -302,9 +293,9 @@
                             if(response.status === 200){
                                 getData()
                                 swal.close();
-                                makeNotif('success', response.description, response.message, 'bottom-left');
+                                makeNotif('success', response.message, 'bottomRight');
                             } else {
-                                makeNotif('error', response.description, response.message, 'bottom-left');
+                                makeNotif('error', response.message, 'bottomRight');
                             }
                             },
                             error: function(err){
@@ -317,51 +308,61 @@
 			});
         }
         
-        var invalidMmeber = function(){
+        var tolakClaim = function(){
             $(document).on('click', '#btn_tolak', function(){
-                var id_claim = $(this).attr('data-id');
-                var link_get = `<?= base_url('api/claim/tidak_valid/') ?>${auth.token}?id_claim=${id_claim}`;
-  
-              Swal.fire({
-                title: 'Konfirmasi Tolak Member',
-                text: "Tolak Member secara permanent",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-              	if (result.value) {
-                      console.log(id_claim)
-              		$.ajax({
-              				url: `<?= base_url('api/claim/tidak_valid/') ?>${auth.token}?id_claim=${id_claim}`,
-              				 type: 'GET',
-                            dataType: 'JSON',
-                            success: function(response){
-                            if(response.status === 200){
-                                getData()
-                                swal.close();
-                                makeNotif('success', response.description, response.message, 'bottom-left');
-                            } else {
-                                makeNotif('error', response.description, response.message, 'bottom-left');
-                            }
-                            },
-                            error: function(err){
-                            makeNotif('error', 'Error', 'Tidak dapat mengakses server', 'bottom-left');
-                            console.log(err);
-                            }
-                            });
-              		}
-              });
+				var id_claim = $(this).attr('data-id');
+
+                $('#id_claim').val(id_claim);
+                $('#modal_tolak').modal('show');
 			});
+        }
+
+        var submitForm = function(){
+            $('#form_tolak').on('submit', function(e){
+                e.preventDefault();
+
+                var id_claim = $('#id_claim').val();
+                var keterangan   = $('#keterangan').val();
+
+                if(id_claim === '' || keterangan === ''){
+                    makeNotif('error', 'Silahkan isi no member', 'bottomRight');
+                } else {
+                    $.ajax({
+                        url: `<?= base_url('api/claim/tidak_valid/') ?>${auth.token}?id_claim=${id_claim}`,
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        dataType: 'JSON',
+                        beforeSend: function(){
+                            $('#submit').html('<i class="la la-spinner animated infinite rotateIn"></i>')
+                        },
+                        success: function(response){
+                            $('#submit').html('Submit')
+                            if (response.status === 200) {
+                                getData()
+                                $('#modal_tolak').modal('hide');
+                                makeNotif('success', response.message, 'bottomRight');
+                            } else {
+                                makeNotif('error', response.message, 'bottomRight');
+                            }	
+                        },
+                
+                        error: function(){
+                            $('#submit').html('Submit')
+                            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+                        },
+                    });
+                }
+                       
+            })
         }
         
 
         return {
             init : function(){
                 getData();
-                validMmeber();
-                invalidMmeber();
+                validClaim();
+                tolakClaim();
+                submitForm();
              
             }
         }

@@ -55,7 +55,7 @@ class Poin extends CI_Controller {
             $json['arrival']          = $key->arrival;
             $json['arrival_name']     = $key->arrival_name;
             $json['claim_poin']       = $key->claim_poin;
-            $json['reedem_poin']      = $key->reedem_poin;
+            $json['redeem_poin']      = $key->redeem_poin;
 
             $poin[] = $json;
           }
@@ -91,9 +91,9 @@ class Poin extends CI_Controller {
             $departure    = $this->input->post('departure');
             $arrival      = $this->input->post('arrival');
             $claim_poin   = $this->input->post('claim_poin');
-            $reedem_poin  = $this->input->post('reedem_poin');
+            $redeem_poin  = $this->input->post('redeem_poin');
 
-            if($departure == null || $arrival == null || $claim_poin == null || $reedem_poin == null){
+            if($departure == null || $arrival == null || $claim_poin == null || $redeem_poin == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
             } else {
 
@@ -102,7 +102,7 @@ class Poin extends CI_Controller {
                 'departure'     => $departure,
                 'arrival'       => $arrival,
                 'claim_poin'    => $claim_poin,
-                'reedem_poin'   => $reedem_poin
+                'redeem_poin'   => $redeem_poin
               );
 
               $log = array(
@@ -152,19 +152,19 @@ class Poin extends CI_Controller {
             $departure    = $this->input->post('departure');
             $arrival      = $this->input->post('arrival');
             $claim_poin   = $this->input->post('claim_poin');
-            $reedem_poin  = $this->input->post('reedem_poin');
+            $redeem_poin  = $this->input->post('redeem_poin');
 
             if($id_poin == null){
               json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Tidak ada ID Poin yang dipilih'));
             } else {
-              if($departure == null || $arrival == null || $claim_poin == null || $reedem_poin == null){
+              if($departure == null || $arrival == null || $claim_poin == null || $redeem_poin == null){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
               } else {
                 $data = array(
                   'departure'     => $departure,
                   'arrival'       => $arrival,
                   'claim_poin'    => $claim_poin,
-                  'reedem_poin'   => $reedem_poin
+                  'redeem_poin'   => $redeem_poin
                 );
 
                 $log = array(

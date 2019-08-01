@@ -16,11 +16,11 @@ class PoinModel extends CI_Model {
       }
 
       if($departure != null){
-        $this->db->like('b.departure', $departure);
+        $this->db->where('b.id_rute', $departure);
       }
 
       if($arrival != null){
-        $this->db->like('c.arrival', $arrival);
+        $this->db->where('c.id_rute', $arrival);
       }
 
       $this->db->order_by('a.id_poin', 'desc');

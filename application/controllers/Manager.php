@@ -33,7 +33,22 @@ class Manager extends CI_Controller {
 		$this->load->view('manager/point');
 	}
 
-		public function member($id = null)
+	public function laporan_member()
+	{
+		$this->load->view('manager/laporan_member');
+	}
+
+	public function laporan_claim()
+	{
+		$this->load->view('manager/laporan_claim');
+	}
+
+	public function laporan_redeem()
+	{
+		$this->load->view('manager/laporan_redeem');
+	}
+
+	public function member($id = null)
 	{
 		if($id == null){
 			$this->load->view('manager/member');
@@ -42,12 +57,4 @@ class Manager extends CI_Controller {
 		}
 	}
 	
-	public function aplikasi($id = null)
-	{
-		if($id == null){
-			$this->load->view('manager/aplikasi');
-		} else {
-			$this->load->view('manager/detail_aplikasi');
-		}
-	}
 }

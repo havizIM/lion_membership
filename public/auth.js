@@ -97,7 +97,7 @@ var setupAuthPage = (function () {
                 makeNotif('error', 'Email harus diisi terlebih dahulu', 'bottomRight')
             } else {
                 $.ajax({
-                    url: `${BASE_URL}api/auth/send_verify`,
+                    url: `${BASE_URL}ext/auth/send_verify`,
                     type: 'POST',
                     dataType: 'JSON',
                     data: {
@@ -137,7 +137,7 @@ var setupAuthPage = (function () {
                 makeNotif('error', 'Email atau password harus diisi', 'bottomCenter')
             } else {
                 $.ajax({
-                    url: `${BASE_URL}api/auth/login_member`,
+                    url: `${BASE_URL}ext/auth/login_member`,
                     type: 'POST',
                     dataType: 'JSON',
                     data: $(this).serialize(),
@@ -146,7 +146,7 @@ var setupAuthPage = (function () {
                     },
                     success: function (response) {
                         if (response.status === 200) {
-                            localStorage.setItem('ext_bppt', JSON.stringify(response.data));
+                            localStorage.setItem('ext_lion', JSON.stringify(response.data));
                             window.location.replace(`${BASE_URL}main/`)
                         } else {
                             makeNotif('error', response.message, 'bottomCenter');
@@ -174,7 +174,7 @@ var setupAuthPage = (function () {
                 makeNotif('error', 'Email harus diisi', 'bottomCenter')
             } else {
                 $.ajax({
-                    url: `${BASE_URL}api/auth/lupa_password`,
+                    url: `${BASE_URL}ext/auth/lupa_password`,
                     type: 'POST',
                     dataType: 'JSON',
                     data: $(this).serialize(),
@@ -258,7 +258,7 @@ var setupAuthPage = (function () {
             },
             submitHandler: function (form) {
                 $.ajax({
-                    url: `${BASE_URL}api/auth/register_customer`,
+                    url: `${BASE_URL}ext/auth/register_customer`,
                     type: 'POST',
                     dataType: 'JSON',
                     data: new FormData(form),

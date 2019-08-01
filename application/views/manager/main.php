@@ -190,8 +190,14 @@ Author: SAEROX
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
                             <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
-                            <li><a href="#/aplikasi"><i class="la la-file-text"></i><span>Application</span></a></li>
                             <li><a href="#/member"><i class="la la-credit-card"></i><span>Member</span></a></li>
+                            <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i class="la la-puzzle-piece"></i><span>Laporan</span></a>
+                                <ul id="dropdown-app" class="collapse list-unstyled pt-0">
+                                    <li><a href="#/laporan_member">Laporan Member</a></li>
+                                    <li><a href="#/laporan_claim">Laporan Claim</a></li>
+                                    <li><a href="#/laporan_redeem">Laporan Redeem</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->
@@ -260,6 +266,7 @@ Author: SAEROX
         <script src="<?= base_url() ?>assets/vendors/js/app/app.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/noty/noty.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/moment/moment.js"></script>
+        <script src="<?= base_url() ?>assets/js/jquery.PrintArea.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>

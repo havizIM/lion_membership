@@ -38,6 +38,15 @@ Author: SAEROX
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+    <script type="text/javascript">
+        var session = localStorage.getItem('ext_lion');
+        var auth = JSON.parse(session);
+
+        if(session){
+        window.location.replace(`<?= base_url() ?>main/`);
+        }
+    </script>
+
   <!-- Tweaks for older IEs-->
   <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jul 2019 pada 16.31
+-- Waktu pembuatan: 01 Agu 2019 pada 14.17
 -- Versi server: 10.1.40-MariaDB
 -- Versi PHP: 7.1.29
 
@@ -33,7 +33,6 @@ CREATE TABLE `claim` (
   `kode_booking` varchar(6) NOT NULL,
   `no_member` varchar(11) NOT NULL,
   `tgl_claim` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lampiran` text NOT NULL,
   `status_claim` enum('Proses','Valid','Tidak Valid','') NOT NULL,
   `keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -42,8 +41,13 @@ CREATE TABLE `claim` (
 -- Dumping data untuk tabel `claim`
 --
 
-INSERT INTO `claim` (`id_claim`, `kode_booking`, `no_member`, `tgl_claim`, `lampiran`, `status_claim`, `keterangan`) VALUES
-('CL-00000001', 'BIDNKA', '30491728056', '2019-07-05 16:12:16', 'coba.jpg', 'Valid', '');
+INSERT INTO `claim` (`id_claim`, `kode_booking`, `no_member`, `tgl_claim`, `status_claim`, `keterangan`) VALUES
+('CL-00000001', 'DGDSGF', '30491728056', '2019-08-01 09:46:57', 'Proses', ''),
+('CL-00000002', 'DGDSGF', '30491728056', '2019-08-01 09:49:55', 'Proses', ''),
+('CL-00000003', 'DGDSGF', '30491728056', '2019-08-01 09:50:48', 'Proses', ''),
+('CL-00000004', 'ADGNDA', '30491728056', '2019-08-01 09:56:05', 'Proses', ''),
+('CL-00000005', 'ahsfgf', '30491728056', '2019-08-01 09:57:14', 'Proses', ''),
+('CL-00000006', 'ahgrsg', '30491728056', '2019-08-01 09:58:01', 'Proses', '');
 
 -- --------------------------------------------------------
 
@@ -54,16 +58,25 @@ INSERT INTO `claim` (`id_claim`, `kode_booking`, `no_member`, `tgl_claim`, `lamp
 CREATE TABLE `claim_detail` (
   `id_claim_detail` int(11) NOT NULL,
   `id_claim` varchar(11) NOT NULL,
-  `id_poin` varchar(8) NOT NULL
+  `id_poin` varchar(8) NOT NULL,
+  `lampiran_claim` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `claim_detail`
 --
 
-INSERT INTO `claim_detail` (`id_claim_detail`, `id_claim`, `id_poin`) VALUES
-(1, 'CL-00000001', 'POIN0001'),
-(2, 'CL-00000001', 'POIN0002');
+INSERT INTO `claim_detail` (`id_claim_detail`, `id_claim`, `id_poin`, `lampiran_claim`) VALUES
+(11, 'CL-00000001', 'POIN0002', 'yeolallineed___BtxJRe6h4Ey___.jpg'),
+(12, 'CL-00000001', 'POIN0001', 'wallpaper1.jpg'),
+(13, 'CL-00000002', 'POIN0002', 'yeolallineed___BtxJRe6h4Ey___1.jpg'),
+(14, 'CL-00000002', 'POIN0001', 'wallpaper11.jpg'),
+(15, 'CL-00000003', 'POIN0002', 'yeolallineed___BtxJRe6h4Ey___2.jpg'),
+(16, 'CL-00000003', 'POIN0001', 'wallpaper12.jpg'),
+(17, 'CL-00000004', 'POIN0002', 'yeolallineed___BtxJRe6h4Ey___3.jpg'),
+(18, 'CL-00000004', 'POIN0001', 'yeolallineed___BtxJRe6h4Ey___4.jpg'),
+(19, 'CL-00000005', 'POIN0001', 'yeolallineed___BtxJRe6h4Ey___5.jpg'),
+(20, 'CL-00000006', 'POIN0002', 'yeolallineed___BtxJRe6h4Ey___6.jpg');
 
 -- --------------------------------------------------------
 
@@ -224,7 +237,50 @@ INSERT INTO `log` (`id_log`, `user`, `id_ref`, `refrensi`, `keterangan`, `katego
 (162, '061422', 'POIN0004', 'Poin', 'Menambahkan data poin baru', 'Add', '2019-07-06 08:32:20'),
 (163, '061422', '-', 'Auth', 'User logout', 'Logout', '2019-07-06 09:19:38'),
 (164, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-06 19:33:44'),
-(165, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-07 14:30:30');
+(165, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-07 14:30:30'),
+(166, '061422', '-', 'Auth', 'User login', 'Login', '2019-07-19 21:24:04'),
+(167, '061422', '-', 'Auth', 'User logout', 'Logout', '2019-07-19 21:42:11'),
+(168, '06142', '-', 'Auth', 'User login', 'Login', '2019-07-19 21:42:41'),
+(169, '06142', '-', 'Auth', 'User login', 'Login', '2019-07-20 02:34:13'),
+(170, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-07-21 09:36:20'),
+(171, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-07-21 09:36:53'),
+(172, 'Tst', '-', 'Auth', 'User login', 'Login', '2019-07-21 09:36:58'),
+(173, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-07-31 22:46:06'),
+(174, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-07-31 22:46:51'),
+(175, '06244', '-', 'Auth', 'User login', 'Login', '2019-07-31 22:46:58'),
+(176, '141939', '-', 'Auth', 'User login', 'Login', '2019-07-31 22:49:13'),
+(177, '06244', '00000000001', 'Aplikasi', 'Terima aplikasi pengajuan LPC', 'Terima', '2019-07-31 23:05:37'),
+(178, '06244', '00000000001', 'Aplikasi', 'Terima aplikasi pengajuan LPC', 'Terima', '2019-07-31 23:38:29'),
+(179, '06244', '123123123', 'Member', 'Menonaktifkan Member', 'Nonaktif', '2019-08-01 00:04:26'),
+(180, '06244', '123123123', 'Member', 'Menonaktifkan Member', 'Aktif', '2019-08-01 00:06:34'),
+(181, '06244', '123123123', 'Member', 'Mengupdate Member', 'Upgrade', '2019-08-01 00:08:40'),
+(182, '06244', '123123123', 'Member', 'Mengupdate Member', 'Downgrade', '2019-08-01 00:08:45'),
+(183, '06244', '123123123', 'Member', 'Menonaktifkan Member', 'Nonaktif', '2019-08-01 00:09:00'),
+(184, '06244', '123123123', 'Member', 'Menonaktifkan Member', 'Aktif', '2019-08-01 00:09:31'),
+(185, '06244', '123123123', 'Member', 'Mengupdate Member', 'Upgrade', '2019-08-01 00:09:38'),
+(186, '06244', '123123123', 'Member', 'Mengupdate Member', 'Downgrade', '2019-08-01 00:09:43'),
+(187, '06244', '123123123', 'Member', 'Mengupdate Member', 'Upgrade', '2019-08-01 00:10:32'),
+(188, '06244', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 00:22:17'),
+(189, '061422', '-', 'Auth', 'User login', 'Login', '2019-08-01 00:27:11'),
+(190, '061422', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 00:45:45'),
+(191, '141939', 'RDM', 'Redeem', 'Memvalidasi data poin', 'Approval', '2019-08-01 02:15:03'),
+(192, '141939', 'RDM', 'Redeem', 'Menolak data redeem', 'Tolak', '2019-08-01 02:54:21'),
+(193, '141939', 'RDM', 'Redeem', 'Memvalidasi data poin', 'Approval', '2019-08-01 02:55:55'),
+(194, '141939', 'RDM', 'Redeem', 'Memvalidasi data poin', 'Approval', '2019-08-01 02:57:19'),
+(195, '141939', 'CL-00000001', 'Claim', 'Menolak data claim', 'Tidak Valid', '2019-08-01 03:05:19'),
+(196, '141939', 'CL-00000001', 'Claim', 'Menolak data claim', 'Tidak Valid', '2019-08-01 04:14:33'),
+(197, '141939', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 04:15:30'),
+(198, '7201160106', '-', 'Auth', 'User login', 'Login', '2019-08-01 04:15:39'),
+(199, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-08-01 05:14:21'),
+(200, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 05:14:37'),
+(201, '06244', '-', 'Auth', 'User login', 'Login', '2019-08-01 05:14:43'),
+(202, '06244', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 05:14:50'),
+(203, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-08-01 05:15:04'),
+(204, 'helpdesk', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 05:15:21'),
+(205, '06142', '-', 'Auth', 'User login', 'Login', '2019-08-01 05:15:27'),
+(206, '7201160106', '-', 'Auth', 'User logout', 'Logout', '2019-08-01 05:56:15'),
+(207, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-08-01 06:12:51'),
+(208, 'helpdesk', '-', 'Auth', 'User login', 'Login', '2019-08-01 11:20:44');
 
 -- --------------------------------------------------------
 
@@ -237,7 +293,7 @@ CREATE TABLE `log_poin` (
   `kode_booking` varchar(6) NOT NULL,
   `id_poin` varchar(8) NOT NULL,
   `no_member` varchar(11) NOT NULL,
-  `type` enum('claim','reedem','','') NOT NULL,
+  `type` enum('claim','redeem','','') NOT NULL,
   `tgl_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -249,7 +305,10 @@ INSERT INTO `log_poin` (`id_user_poin`, `kode_booking`, `id_poin`, `no_member`, 
 (5, 'BIDNKA', 'POIN0002', '30491728056', 'claim', '2019-07-05 18:13:33'),
 (6, 'BIDNKA', 'POIN0001', '30491728056', 'claim', '2019-07-05 18:13:33'),
 (7, 'BIDNKA', 'POIN0002', '30491728056', 'claim', '2019-07-05 18:33:23'),
-(8, 'BIDNKA', 'POIN0001', '30491728056', 'claim', '2019-07-05 18:33:23');
+(8, 'BIDNKA', 'POIN0001', '30491728056', 'claim', '2019-07-05 18:33:23'),
+(9, 'FLG001', 'POIN0003', '30491728056', 'redeem', '2019-08-01 02:15:03'),
+(10, 'FLG001', 'POIN0003', '30491728056', 'redeem', '2019-08-01 02:55:55'),
+(11, 'FLG001', 'POIN0003', '30491728056', 'redeem', '2019-08-01 02:57:19');
 
 -- --------------------------------------------------------
 
@@ -262,14 +321,14 @@ CREATE TABLE `master_poin` (
   `departure` varchar(3) NOT NULL,
   `arrival` varchar(3) NOT NULL,
   `claim_poin` int(11) NOT NULL,
-  `reedem_poin` int(11) NOT NULL
+  `redeem_poin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `master_poin`
 --
 
-INSERT INTO `master_poin` (`id_poin`, `departure`, `arrival`, `claim_poin`, `reedem_poin`) VALUES
+INSERT INTO `master_poin` (`id_poin`, `departure`, `arrival`, `claim_poin`, `redeem_poin`) VALUES
 ('POIN0001', 'PDG', 'CGK', 437, 437000),
 ('POIN0002', 'CGK', 'PDG', 200, 200000),
 ('POIN0003', 'BGR', 'UMS', 10, 10000),
@@ -311,6 +370,7 @@ CREATE TABLE `member` (
   `password` varchar(15) NOT NULL,
   `berlaku_dari` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `berlaku_sampai` datetime NOT NULL,
+  `tipe` enum('Blue','Gold','','') NOT NULL,
   `token` varchar(20) NOT NULL,
   `status_member` enum('Aktif','Nonaktif','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -319,38 +379,53 @@ CREATE TABLE `member` (
 -- Dumping data untuk tabel `member`
 --
 
-INSERT INTO `member` (`no_member`, `no_aplikasi`, `password`, `berlaku_dari`, `berlaku_sampai`, `token`, `status_member`) VALUES
-('30491728056', '00000000001', 'vm8wi', '2019-07-04 23:00:00', '2021-07-05 00:00:00', 'd569a7c6464d2cfce87b', 'Aktif');
+INSERT INTO `member` (`no_member`, `no_aplikasi`, `password`, `berlaku_dari`, `berlaku_sampai`, `tipe`, `token`, `status_member`) VALUES
+('123123123', '00000000001', 'hx812', '2019-07-31 23:00:00', '2021-08-01 00:00:00', 'Gold', '88ea39439e74fa27c09a', 'Aktif'),
+('30491728056', '00000000001', 'vm8wi', '2019-07-04 23:00:00', '2021-07-05 00:00:00', 'Blue', 'd569a7c6464d2cfce87b', 'Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `reedem`
+-- Struktur dari tabel `redeem`
 --
 
-CREATE TABLE `reedem` (
-  `id_reedem` varchar(11) NOT NULL,
+CREATE TABLE `redeem` (
+  `id_redeem` varchar(11) NOT NULL,
   `no_member` varchar(11) NOT NULL,
-  `tgl_reedem` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status_reedem` enum('Batal','Proses','Approve','') NOT NULL,
+  `tgl_redeem` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status_redeem` enum('Tolak','Proses','Approve','') NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   `alamat_kirim` enum('Rumah','Kantor','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `redeem`
+--
+
+INSERT INTO `redeem` (`id_redeem`, `no_member`, `tgl_redeem`, `status_redeem`, `keterangan`, `alamat_kirim`) VALUES
+('RDM', '30491728056', '2019-08-01 01:12:12', 'Approve', 'Tidak ada blablabla', 'Rumah');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `reedem_detail`
+-- Struktur dari tabel `redeem_detail`
 --
 
-CREATE TABLE `reedem_detail` (
-  `id_reedem_detail` int(11) NOT NULL,
-  `id_reedem` varchar(11) NOT NULL,
+CREATE TABLE `redeem_detail` (
+  `id_redeem_detail` int(11) NOT NULL,
+  `id_redeem` varchar(11) NOT NULL,
   `id_poin` varchar(8) NOT NULL,
   `no_flight` varchar(10) NOT NULL,
   `gender_pessenger` enum('Mr','Mrs','Ms','') NOT NULL,
   `nama_pessenger` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `redeem_detail`
+--
+
+INSERT INTO `redeem_detail` (`id_redeem_detail`, `id_redeem`, `id_poin`, `no_flight`, `gender_pessenger`, `nama_pessenger`) VALUES
+(1, 'RDM', 'POIN0003', 'FLG001', 'Mr', 'Test');
 
 -- --------------------------------------------------------
 
@@ -444,18 +519,18 @@ ALTER TABLE `member`
   ADD KEY `no_aplikasi` (`no_aplikasi`);
 
 --
--- Indeks untuk tabel `reedem`
+-- Indeks untuk tabel `redeem`
 --
-ALTER TABLE `reedem`
-  ADD PRIMARY KEY (`id_reedem`),
+ALTER TABLE `redeem`
+  ADD PRIMARY KEY (`id_redeem`),
   ADD KEY `no_member` (`no_member`);
 
 --
--- Indeks untuk tabel `reedem_detail`
+-- Indeks untuk tabel `redeem_detail`
 --
-ALTER TABLE `reedem_detail`
-  ADD PRIMARY KEY (`id_reedem_detail`),
-  ADD KEY `id_reedem` (`id_reedem`),
+ALTER TABLE `redeem_detail`
+  ADD PRIMARY KEY (`id_redeem_detail`),
+  ADD KEY `id_reedem` (`id_redeem`),
   ADD KEY `id_poin` (`id_poin`);
 
 --
@@ -472,25 +547,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `claim_detail`
 --
 ALTER TABLE `claim_detail`
-  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id_log` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT untuk tabel `log_poin`
 --
 ALTER TABLE `log_poin`
-  MODIFY `id_user_poin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user_poin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `reedem_detail`
+-- AUTO_INCREMENT untuk tabel `redeem_detail`
 --
-ALTER TABLE `reedem_detail`
-  MODIFY `id_reedem_detail` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `redeem_detail`
+  MODIFY `id_redeem_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -536,17 +611,17 @@ ALTER TABLE `member`
   ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`no_aplikasi`) REFERENCES `customer` (`no_aplikasi`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `reedem`
+-- Ketidakleluasaan untuk tabel `redeem`
 --
-ALTER TABLE `reedem`
-  ADD CONSTRAINT `reedem_ibfk_1` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
+ALTER TABLE `redeem`
+  ADD CONSTRAINT `redeem_ibfk_1` FOREIGN KEY (`no_member`) REFERENCES `member` (`no_member`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `reedem_detail`
+-- Ketidakleluasaan untuk tabel `redeem_detail`
 --
-ALTER TABLE `reedem_detail`
-  ADD CONSTRAINT `reedem_detail_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `reedem_detail_ibfk_2` FOREIGN KEY (`id_reedem`) REFERENCES `reedem` (`id_reedem`) ON UPDATE CASCADE;
+ALTER TABLE `redeem_detail`
+  ADD CONSTRAINT `redeem_detail_ibfk_1` FOREIGN KEY (`id_poin`) REFERENCES `master_poin` (`id_poin`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `redeem_detail_ibfk_2` FOREIGN KEY (`id_redeem`) REFERENCES `redeem` (`id_redeem`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -95,8 +95,8 @@
                   <th>Departure Name</th>
                   <th>Arrival</th>
                   <th>Arrival Name</th>
-                  <th>Clain Point</th>
-                  <th>Reedem Point</th>
+                  <th>Claim Point</th>
+                  <th>Redeem Point</th>
                   <th class="text-center" style="width: 15%;">Action</th>
                 </tr>
               </thead>
@@ -128,7 +128,7 @@
 	        {"data": 'arrival'},
 	        {"data": 'arrival_name'},
 	        {"data": 'claim_poin'},
-	        {"data": 'reedem_poin'},
+	        {"data": 'redeem_poin'},
 	        {"data": null, 'render': function(data, type, row){
 	            return `<a href="#/edit_point/${row.id_poin}" class="btn btn-info btn-shadow-2 mb-2 m-pencil" id="btn_edit"><i class="ti ti-pencil-alt"></i><span class="pencil">Edit</span></a><button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_delete" data-id="${row.id_poin}" style="width: 100px;"><span class="closed">Delete</span><i class="ti ti-close"></i></button>`
 	          }

@@ -50,15 +50,16 @@ class Customer_service extends CI_Controller {
 			$this->load->view('customer_service/detail_member');
 		}
 	}
-	
-	public function aplikasi($id = null)
+
+	public function redeem($id = null)
 	{
 		if($id == null){
-			$this->load->view('customer_service/aplikasi');
+			$this->load->view('customer_service/redeem');
 		} else {
-			$this->load->view('customer_service/detail_aplikasi');
+			$this->load->view('customer_service/detail_redeem');
 		}
 	}
+	
 
 	
 

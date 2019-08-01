@@ -190,9 +190,9 @@ Author: SAEROX
                         <ul class="list-unstyled">
                             <li><a href="#/dashboard"><i class="la la-home"></i><span>Dashboard</span></a></li>
                             <li><a href="#/point"><i class="la la-gift"></i><span>Point</span></a></li>
-                            <li><a href="#/claim"><i class="la la-tags"></i><span>Claim</span></a></li>
-                            <li><a href="#/aplikasi"><i class="la la-file-text"></i><span>Application</span></a></li>
                             <li><a href="#/member"><i class="la la-credit-card"></i><span>Member</span></a></li>
+                            <li><a href="#/claim"><i class="la la-tags"></i><span>Claim</span></a></li>
+                            <li><a href="#/redeem"><i class="la la-tags"></i><span>Redeem</span></a></li>
                         </ul>
                     </nav>
                     <!-- End Side Navbar -->

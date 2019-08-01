@@ -86,7 +86,7 @@ class Aplikasi extends CI_Controller {
   function terima_aplikasi($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
-    if ($method != 'GET') {
+    if ($method != 'POST') {
       json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah'));
 		} else {
 
@@ -116,12 +116,12 @@ class Aplikasi extends CI_Controller {
               } else {
                 $member = $this->MemberModel->show(null, $no_aplikasi);
 
-                if($member->num_rows() > 1){
+                if($member->num_rows() >= 1){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Aplikasi ini sudah menjadi member'));
                 } else {
                   $customer = $aplikasi->row();
 
-                  $no_member      = substr(str_shuffle("01234567890"), 0, 11);
+                  $no_member      = $this->input->post('no_member');
                   $password       = substr(str_shuffle("01234567890abcdefghijklmnopqestuvwxyz"), 0, 5);
                   $berlaku_dari   = date('Y-m-d');
                   $berlaku_sampai = date('Y-m-d', mktime(0, 0, 0, date("m", strtotime($berlaku_dari)), date("d", strtotime($berlaku_dari)), date("Y", strtotime($berlaku_dari)) + 2));

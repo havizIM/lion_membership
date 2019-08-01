@@ -53,12 +53,12 @@ class Admin extends CI_Controller {
 	// 	$this->load->view('admin/aplikasi');
 	// }
 
-	public function application($id = null)
+	public function aplikasi($id = null)
 	{
 		if($id == null){
-			$this->load->view('admin/application');
+			$this->load->view('admin/aplikasi');
 		} else {
-			$this->load->view('admin/detail_application');
+			$this->load->view('admin/detail_aplikasi');
 		}
 	}
 	

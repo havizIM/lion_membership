@@ -54,7 +54,7 @@
 	  padding: 0.4rem 0rem !important;
 	}
 </style>
-<div class=" animated bounceInRight">
+
 <div class="row">
     <div class="page-header">
       <div class="d-flex align-items-center">
@@ -96,24 +96,6 @@
                   <th>Email</th>
                   <th>Tanggal Pengajuan</th>
                   <th>Status</th>
-                  <!-- <th>Kebangsaan</th>
-                  <th>No. Identitas</th>
-                  <th>No. Handphone</th>
-                  <th>Alamat</th>
-                  <th>Kota</th>
-                  <th>Kode Pos</th>
-                  <th>Nama Perusahaan</th>
-                  <th>No. Telepon</th>
-                  <th>No. Fax</th>
-                  <th>Jabatan</th>
-                  <th>Bidang Usaha</th>
-                  <th>Email Perusahaan</th>
-                  <th>Alamat Surat</th>
-                  <th>Alamat Perusahaan</th>
-                  <th>Kota Perusahaan</th>
-                  <th>Kode Pos Perusahaan</th>
-                  <th>Lampiran Daftar</th>
-                  <th class="text-center">Action</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -124,7 +106,6 @@
         </div>
     </div>
   </div>
-</div>
 </div>
 <script>
 	$(document).ready(function(){
@@ -140,48 +121,16 @@
 	      ajax: link_get,
 	      columns: [
 			{"data": null, 'render': function(data, type, row){
-                return `<a href="#/application/${row.no_aplikasi}">${row.no_aplikasi}</a>`;
+                return `<a href="#/aplikasi/${row.no_aplikasi}">${row.no_aplikasi}</a>`;
 				}
 			},
 			{"data": null, 'render': function(data, type, row){
 				return `${row.gender}. ${row.nama}`
 				}
 			},
-			{"data": 'status'},
 	        {"data": 'email'},
 	        {"data": 'tgl_pengajuan'},
-	    //     {"data": 'kebangsaan'},
-	    //     {"data": 'no_identitas'},
-	    //     {"data": 'no_handphone'},
-	    //     {"data": 'alamat'},
-	    //     {"data": 'kota'},
-	    //     {"data": 'kode_pos'},
-	    //     {"data": 'nama_perusahaan'},
-	    //     {"data": 'no_tlp'},
-	    //     {"data": 'no_fax'},
-	    //     {"data": 'jabatan'},
-	    //     {"data": 'bidang_usaha'},
-	    //     {"data": 'email_perusahaan'},
-	    //     {"data": 'alamat_surat'},
-	    //     {"data": 'alamat_perusahaan'},
-	    //     {"data": 'kota_perusahaan'},
-	    //     {"data": 'kode_pos_perusahaan'},
-	    //     {"data": null, 'render': function(data, type, row){
-        //     return `<a class="popup" id="popup" href="<?= base_url('doc/lampiran_daftar/')?>${row.lampiran_daftar}" target="__blank"><img src="<?= base_url('doc/lampiran_daftar/') ?>${row.lampiran_daftar}" style="width: 150px; height: 100px"/></a>`
-        //   }
-        // },
-	        // {"data": null, 'render': function(data, type, row){
-			// 				if(row.status === 'Proses'){
-			// 					return `<button type="button" class="btn btn-info btn-shadow-2 mb-2 m-pencil" data-id="${row.no_aplikasi}" id="btn_terima"><i class="ti ti-pencil-alt"></i><span class="pencil">Terima</span></button>
-			// 									<button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_tolak" data-id="${row.no_aplikasi}" style="width: 100px;"><span class="closed">Tolak</span><i class="ti ti-close"></i></button>`
-			// 				}else if(row.status === 'Terima'){
-			// 					return	`<i class="ion-checkmark"></i>`
-			// 				}else{
-			// 					return `<i class="ion-close"></i>`
-			// 				}
-	        //     return 
-	        //   }
-	        // },
+			{"data": 'status'},
 	      ],
 	      order: [[0, 'asc']]
 	    });

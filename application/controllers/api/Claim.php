@@ -72,6 +72,59 @@ class Claim extends CI_Controller {
     }
   }
 
+  function laporan($token = null){
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if ($method != 'GET') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah'));
+		} else {
+
+      if($token == null){
+        json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Request tidak terotorisasi'));
+      } else {
+        $auth = $this->AuthModel->cekAuth($token);
+
+        if($auth->num_rows() != 1){
+          json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Token tidak dikenali'));
+        } else {
+
+          $otorisasi    = $auth->row();
+          $where        = array(
+              'MONTH(a.tgl_claim)' => $this->input->get('bulan'),
+              'YEAR(a.tgl_claim)'  => $this->input->get('tahun'),
+              'a.status_claim'           => 'Valid'
+          );
+
+          $show         = $this->ClaimModel->show($where);
+          $claim        = array();
+
+          foreach($show->result() as $key){
+            $json = array();
+
+            $json['id_claim']           = $key->id_claim;
+            $json['kode_booking']       = $key->kode_booking;
+            $json['member']             = array(
+                'no_member' => $key->no_member,
+                'gender'    => $key->gender,
+                'nama'      => $key->nama
+            );
+            $json['tgl_claim']          = $key->tgl_claim;
+            $json['status_claim']       = $key->status_claim;
+            $json['keterangan']         = $key->keterangan;
+
+            $where2 = array('a.id_claim' => $key->id_claim);
+            $json['detail']             = $this->ClaimDetailModel->show($where2)->result();
+
+            $claim[] = $json;
+          }
+
+          json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $claim));
+
+        }
+      }
+    }
+  }
+
   function valid($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
@@ -146,7 +199,7 @@ class Claim extends CI_Controller {
   function tidak_valid($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
-    if ($method != 'GET') {
+    if ($method != 'POST') {
 			json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah'));
 		} else {
       if($token == null){
@@ -170,6 +223,7 @@ class Claim extends CI_Controller {
               );
 
               $data = array(
+                  'keterangan'   => $this->input->post('keterangan'),
                   'status_claim' => 'Tidak Valid'
               );
 

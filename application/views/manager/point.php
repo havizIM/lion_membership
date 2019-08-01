@@ -83,8 +83,8 @@
                   <th>Departure Name</th>
                   <th>Arrival</th>
                   <th>Arrival Name</th>
-                  <th>Clain Point</th>
-                  <th>Reedem Point</th>
+                  <th>Claim Point</th>
+                  <th>Redeem Point</th>
                 </tr>
               </thead>
               <tbody>
@@ -115,7 +115,7 @@
 	        {"data": 'arrival'},
 	        {"data": 'arrival_name'},
 	        {"data": 'claim_poin'},
-	        {"data": 'reedem_poin'},
+	        {"data": 'redeem_poin'},
 	      ],
 	      order: [[0, 'asc']]
 	    });

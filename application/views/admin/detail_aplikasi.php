@@ -51,6 +51,36 @@
     </div>
 
 </div>
+
+<div id="modal_terima" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Form Pembuatan Member</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">close</span>
+                </button>
+            </div>
+            <form id="form_confirm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">No Aplikasi</label>
+                        <input type="text" readonly class="form-control" id="no_aplikasi" name="no_aplikasi">
+                    </div>
+                    <div class="form-group">
+                        <label for="">No Member</label>
+                        <input type="number" class="form-control" id="no_member" name="no_member">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-shadow" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="submit">Terima</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- End Row -->
 <script>
  var renderUI = (function(){
@@ -131,13 +161,13 @@
                             </div>
                             <div class="widget-body text-center">`
                                 if(data.status === 'Proses'){
-								html+= `<div class=btn-group><button type="button" class="btn btn-info btn-shadow-2 mb-2 m-pencil" data-id="${data.no_aplikasi}" id="btn_terima"><i class="ti ti-pencil-alt"></i><span class="pencil">Terima</span></button>
-												<button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_tolak" data-id="${data.no_aplikasi}" style="width: 100px;"><span class="closed">Tolak</span><i class="ti ti-close"></i></button></div>`
-							}else if(data.status === 'Terima'){
-								html+=	`<div class="text-center badge-text badge-text-small success">${data.status} <i class="ion-checkmark"></i></div>`
-							}else{
-								html+= `<div class="text-center badge-text badge-text-small danger">${data.status} <i class="ion-close"></i></div>`
-							}
+                                    html+= `<div class=btn-group><button type="button" class="btn btn-info btn-shadow-2 mb-2 m-pencil" data-id="${data.no_aplikasi}" id="btn_terima"><i class="ti ti-pencil-alt"></i><span class="pencil">Terima</span></button>
+                                            <button type="button" class="btn btn-danger btn-shadow-2 mb-2 m-closed" id="btn_tolak" data-id="${data.no_aplikasi}" style="width: 100px;"><span class="closed">Tolak</span><i class="ti ti-close"></i></button></div>`
+                                }else if(data.status === 'Terima'){
+                                    html+=	`<div class="text-center badge-text badge-text-small success">${data.status} <i class="ion-checkmark"></i></div>`
+                                }else{
+                                    html+= `<div class="text-center badge-text badge-text-small danger">${data.status} <i class="ion-close"></i></div>`
+                                }
                     html+= `</div>
                         </div>
                         
@@ -226,7 +256,7 @@
 
     var loadData = (function(UI){
 
-        var NO_APLIKASI = location.hash.substr(14);
+        var NO_APLIKASI = location.hash.substr(11);
 
         var getData = function(){
             // alert(NO_APLIKASI)
@@ -256,8 +286,8 @@
         var actionTolak = function(){
              //TOLAK APLIKASI
 	    $(document).on('click', '#btn_tolak', function(){
-      var no_aplikasi = $(this).attr('data-id');
-      var link_get = `<?= base_url('api/aplikasi/tolak_aplikasi/') ?>${auth.token}?no_aplikasi=${no_aplikasi}`;
+            var no_aplikasi = $(this).attr('data-id');
+            var link_get = `<?= base_url('api/aplikasi/tolak_aplikasi/') ?>${auth.token}?no_aplikasi=${no_aplikasi}`;
   
               Swal.fire({
                 title: 'Konfirmasi Tolak Aplikasi',
@@ -294,87 +324,57 @@
         var actionTerima = function(){
             $(document).on('click', '#btn_terima', function(){
 				var no_aplikasi = $(this).attr('data-id');
-      	var link_get = `<?= base_url('api/aplikasi/terima_aplikasi/') ?>${auth.token}?no_aplikasi=${no_aplikasi}`;
-  
-              Swal.fire({
-                title: 'Konfirmasi Terima Aplikasi',
-                text: "Aplikasi akan diterima secara permanent",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes',
-              }).then((result) => {
-              	if (result.value) {
-              		$.ajax({
-              				url: link_get,
-              				type: 'GET',
-              				dataType: 'JSON',
-              				success: function(response){
-              				 if (response.status === 200) {
-              				 	getData()
-              					makeNotif('success', response.message, 'bottomRight');
-              				 } else {
-              				 	makeNotif('error', response.message, 'bottomRight');
-              				 }	
-              				},
-              		
-              				error: function(){
-              					makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
-              				},
-              			});
-              		}
-              });
+
+                $('#no_aplikasi').val(no_aplikasi);
+                $('#modal_terima').modal('show');
 			});
         }
 
-        
+        var submitForm = function(){
+            $('#form_confirm').on('submit', function(e){
+                e.preventDefault();
 
-        // var deleteSurvey = function(){
-        //     $(document).on('click', '#delete_survey', function(){
-        //         var id_survey = $(this).attr('data-id');
+                var no_aplikasi = $('#no_aplikasi').val();
+                var no_member   = $('#no_member').val();
 
-        //         swal({
-        //             title: "Apakah anda yakin?",
-        //             text: "Data survey ini akan terhapus secara permanen.",
-        //             type: "warning",
-        //             showCancelButton: true,
-        //             confirmButtonColor: "#DD6B55",
-        //             confirmButtonText: "Ya",
-        //             cancelButtonText: "Tidak",
-        //             closeOnConfirm: false,
-        //             closeOnCancel: true,
-        //             showLoaderOnConfirm: true
-        //         }, function (isConfirm) {
-        //             if(isConfirm){
-        //             $.ajax({
-        //                 url: `<?= base_url('api/survey/delete/') ?>${auth.token}?id_survey=${id_survey}`,
-        //                 type: 'GET',
-        //                 dataType: 'JSON',
-        //                 success: function(response){
-        //                 if(response.status === 200){
-        //                     swal.close();
-        //                     makeNotif('success', response.description, response.message, 'bottom-left');
-        //                     location.hash = '#/survey';
-        //                 } else {
-        //                     makeNotif('error', response.description, response.message, 'bottom-left');
-        //                 }
-        //                 },
-        //                 error: function(){
-        //                 makeNotif('error', 'Error', 'Tidak dapat mengakses server', 'bottom-left');
-        //                 }
-        //             })
-        //             }
-        //         });
-        //     });
-        // }
+                if(no_aplikasi === '' || no_member === ''){
+                    makeNotif('error', 'Silahkan isi no member', 'bottomRight');
+                } else {
+                    $.ajax({
+                        url: `<?= base_url('api/aplikasi/terima_aplikasi/') ?>${auth.token}?no_aplikasi=${no_aplikasi}`,
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        dataType: 'JSON',
+                        beforeSend: function(){
+                            $('#submit').html('<i class="la la-spinner animated infinite rotateIn"></i>')
+                        },
+                        success: function(response){
+                            $('#submit').html('Terima')
+                            if (response.status === 200) {
+                                getData()
+                                $('#modal_terima').modal('hide');
+                                makeNotif('success', response.message, 'bottomRight');
+                            } else {
+                                makeNotif('error', response.message, 'bottomRight');
+                            }	
+                        },
+                
+                        error: function(){
+                            $('#submit').html('Terima')
+                            makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+                        },
+                    });
+                }
+                       
+            })
+        }
 
-       
         return {
             init : function(){
                 getData();
                 actionTolak();
                 actionTerima();
+                submitForm();
             }
         }
 

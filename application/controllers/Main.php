@@ -23,8 +23,33 @@ class Main extends CI_Controller {
 		$this->load->view('customer/main');
 	}
     
-	public function dashboard()
+	public function home()
 	{
-		$this->load->view('customer/dashboard');
+		$this->load->view('customer/home');
+	}
+
+	public function log_poin()
+	{
+		$this->load->view('customer/log_poin');
+	}
+
+	public function riwayat()
+	{
+		$this->load->view('customer/riwayat');
+	}
+
+	public function claim()
+	{
+		$this->load->view('customer/claim');
+	}
+
+	public function redeem()
+	{
+		$this->load->view('customer/redeem');
+	}
+
+	public function profile()
+	{
+		$this->load->view('customer/profile');
 	}
 }
