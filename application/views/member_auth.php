@@ -145,7 +145,7 @@ Author: SAEROX
                     </button>
                   </div>
               </form>
-              <form id="form_pass" style="margin-top: 50px; display:none ">
+              <form id="form_forgot_pass" style="margin-top: 50px; display:none ">
                   <div class="group material-input">
                       <input type="email" name="email_customer" id="email_customer" style="background: transparent;">
                           <span class="highlight"></span>

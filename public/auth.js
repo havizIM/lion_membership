@@ -7,6 +7,7 @@ var DOM = {
     kode: '#kirim_kode',
     check_pass: '#checkbox-password',
     show_fp: '#forgot_password',
+    hide_fp: '#btm_cancel',
 }
 
 var setupAuthPage = (function () {
@@ -86,6 +87,12 @@ var setupAuthPage = (function () {
             $('#form_forgot_pass').show('slow', function () {
                 $('#email_customer').focus()
             });
+        });
+    }
+
+    var hideFormPassword = function () {
+        $('#btn_cancel').on('click', function () {
+            $('#form_forgot_pass').hide('slow')
         });
     }
 
@@ -306,6 +313,7 @@ var setupAuthPage = (function () {
             submitForgotPass();
             submitLogin();
             setupFile();
+            hideFormPassword();
         }
     }
 })();
