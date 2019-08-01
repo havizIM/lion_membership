@@ -202,6 +202,8 @@ Author: SAEROX
         <!-- Begin Page Vendor Js -->
         <script src="<?= base_url() ?>assets/vendors/js/nicescroll/nicescroll.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/app/app.min.js"></script>
+        <script src="<?= base_url() ?>assets/vendors/js/owl-carousel/owl.carousel.min.js"></script>
+        
         
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script src="<?= base_url() ?>assets/vendors/js/noty/noty.min.js"></script>
