@@ -44,12 +44,13 @@
 
 <div class="row flex-row about" id="content_app">
     
-    <!-- Begin Column -->
-    <div class="col-xl-7 column">
+   
+</div>
 
-
+<div class="row">
+    <div class="col-xl-12">
+        <button id="print" class="btn btn-md btn-info btn-block dont-print"><i class="la la-print"></i>Print</button>
     </div>
-
 </div>
 <!-- End Row -->
 <script>
@@ -61,8 +62,9 @@
 
                 
                 //DATA PRIBADI
-                html += `<div class="col-xl-5">
-                            <div class="widget has-shadow">
+                html += `
+                        <div class="col-xl-5">
+                            <div class="widget has-shadow print-me">
                                 <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                                    <span class="m-r-10"><i class="la la-user"></i></span> <h4>Data Pribadi</h4>
                                 </div>
@@ -105,7 +107,7 @@
                             </div>`
                
                 //LAIN-LAIN
-                html +=`<div class="widget has-shadow">
+                html +=`<div class="widget has-shadow dont-print">
                             <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                                <span class="m-r-10"><i class="la la-navicon"></i></span> <h4>Lain-lain</h4>
                             </div>
@@ -132,7 +134,7 @@
                     </div>`;
 
                 //PEKERJAAN
-                html +=`<div class="col-xl-7 column">
+                html +=`<div class="col-xl-7 column dont-print">
                         <div class="widget widget-16 has-shadow" style="max-height: 130px">
                             <div class="widget-body">
                                 <div class="row">
@@ -185,20 +187,20 @@
                                     </div>
                                     <div class="col-md-6 about-infos d-flex flex-column">
                                         <div class="about-title">Kota:</div>
-                                        <div class="about-text">${data.kota}</div>
+                                        <div class="about-text">${data.kota_perusahaan}</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 about-infos d-flex flex-column">
                                         <div class="about-title">Kode Pos:</div>
-                                        <div class="about-text">${data.kode_pos}</div>
+                                        <div class="about-text">${data.kode_pos_perusahaan}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>`
 
                 //LAMPIRAN
-                html +=`<div class="widget has-shadow">
+                html +=`<div class="widget has-shadow dont-print">
                     <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                         <span class="m-r-10"><i class="la la-copy"></i></span><h4>Tipe Card</h4>
                     </div>
@@ -219,7 +221,7 @@
                 </div>
             </div>
             
-            <div class="col-xl-12 column">
+            <div class="col-xl-12 column print-me">
                 <div class="widget has-shadow">
                     <div class="widget-header bg-primary bordered br-radius no-actions d-flex align-items-center" style="padding:1rem;">
                         
@@ -305,9 +307,23 @@
             }) 
         }
 
+        var printPoin = () => {
+            $('#print').on('click', function(){
+                var mode = 'iframe';
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+
+                $("div.print-me").printArea(options);
+            })
+        }
+
         return {
             init : function(){
                 getData();
+                printPoin();
             }
         }
 

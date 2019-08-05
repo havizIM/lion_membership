@@ -185,13 +185,13 @@
                                     </div>
                                     <div class="col-md-6 about-infos d-flex flex-column">
                                         <div class="about-title">Kota:</div>
-                                        <div class="about-text">${data.kota}</div>
+                                        <div class="about-text">${data.kota_perusahaan}</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 about-infos d-flex flex-column">
                                         <div class="about-title">Kode Pos:</div>
-                                        <div class="about-text">${data.kode_pos}</div>
+                                        <div class="about-text">${data.kode_pos_perusahaan}</div>
                                     </div>
                                 </div>
                             </div>

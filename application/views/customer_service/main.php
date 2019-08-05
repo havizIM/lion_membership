@@ -76,6 +76,13 @@ Author: SAEROX
             .default-sidebar>.side-navbar a .la-credit-card {
                 color: #d6ac76;
             }
+
+            @media print {
+                /* Hide everything in the body when printing... */
+                .dont-print { display: none; }
+                /* ...except our special div. */
+                .print-me { display: block; }
+            }
         </style>
     </head>
     <body id="page-top">
@@ -261,6 +268,7 @@ Author: SAEROX
         <script src="<?= base_url() ?>assets/vendors/js/app/app.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/noty/noty.min.js"></script>
         <script src="<?= base_url() ?>assets/vendors/js/moment/moment.js"></script>
+        <script src="<?= base_url() ?>assets/js/jquery.PrintArea.js"></script>
         <!-- <script src="<?= base_url() ?>assets/vendors/js/datatables/datatables.min.js"></script> -->
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
