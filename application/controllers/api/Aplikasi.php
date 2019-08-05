@@ -147,8 +147,8 @@ class Aplikasi extends CI_Controller {
                     'mailtype'  => 'html',
                     'protocol'  => 'smtp',
                     'smtp_host' => 'ssl://smtp.gmail.com',
-                    'smtp_user' => 'viz.ndinq@gmail.com',
-                    'smtp_pass' => 'haviz06142',
+                    'smtp_user' => 'adm.titan001@gmail.com',
+                    'smtp_pass' => 'cintaku1',
                     'smtp_port' => 465,
                     'crlf'      => "\r\n",
                     'newline'   => "\r\n"
