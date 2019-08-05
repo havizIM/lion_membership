@@ -116,8 +116,6 @@ class Auth extends CI_Controller {
 
       if($gender == null || $nama == null || $alamat == null || $kota == null || $kode_pos == null || $no_handphone == null || $kebangsaan == null || $no_identitas == null || $email == null){
         json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data pribadi harus diisi dengan lengkap.'));
-      } elseif($nama_perusahaan == null || $alamat_perusahaan == null || $kota_perusahaan == null || $kode_pos_perusahaan == null || $jabatan == null || $no_tlp == null || $no_fax == null || $email_perusahaan == null || $bidang_usaha == null){
-        json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data pekerjaan harus diisi dengan lengkap.'));
       } elseif($alamat_surat == null) {
         json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data pengiriman harus diisi dengan lengkap.'));
       } elseif($kode_verifikasi == null){
