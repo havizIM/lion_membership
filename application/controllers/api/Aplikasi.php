@@ -114,7 +114,8 @@ class Aplikasi extends CI_Controller {
               if($aplikasi->num_rows() != 1){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'No Aplikasi tidak valid'));
               } else {
-                $member = $this->MemberModel->show(null, $no_aplikasi);
+                $where_m = array('a.no_aplikasi' => $no_aplikasi);
+                $member = $this->MemberModel->show($where_m);
 
                 if($member->num_rows() >= 1){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Aplikasi ini sudah menjadi member'));
