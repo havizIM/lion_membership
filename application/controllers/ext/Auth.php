@@ -224,7 +224,7 @@ class Auth extends CI_Controller {
         $member = $this->AuthModel->cekAuthMember($param);
 
         if($member->num_rows() == 0){
-          json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Email tidak ditemukan' ));
+          json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'No Member tidak ditemukan' ));
         } else {
           foreach($member->result() as $key){
             $db_password    = $key->password;

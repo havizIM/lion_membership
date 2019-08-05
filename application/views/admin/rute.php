@@ -72,14 +72,12 @@
     <h2>Data Rute</h2>
     <div class="widget-options">
         <div class="dropdown">
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                <i class="la la-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu">
-                <button type="button" class="dropdown-item edit" id="btn_add">
-                    <i class="ion-plus-round"></i>Add Rute
-                </button>
-            </div>
+            <div class="my-fancy-container">
+              <button type="button" class="dropdown-toggle" id="btn_add">
+              <span class='la la-plus-circle fz'></span>
+              <span class="my-text">Add Rute</span>
+              </button>
+          </div>
         </div>
     </div>
 </div>

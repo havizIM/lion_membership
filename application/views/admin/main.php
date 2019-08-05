@@ -133,7 +133,7 @@ Author: SAEROX
                                                 <i class="la la-user"></i>
                                             </div>
                                             <div class="message-body">
-                                                <span class="date">NIP</span>
+                                                <span class="date">ID Karyawan</span>
                                                 <div class="message-body-heading" id="session_nip"></div>
                                             </div>
                                         </a>
@@ -305,7 +305,7 @@ Author: SAEROX
 
             <!-- Display Session -->
               $('#session_name').text(auth.nama_user);
-              $('#session_nip').text(auth.nip);
+              $('#session_nip').text(auth.id_karyawan);
               $('#session_level').text(auth.level);
               $('#session_tgl').text(auth.tgl_registrasi);
             <!-- End Display Session -->

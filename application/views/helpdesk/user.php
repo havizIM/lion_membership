@@ -16,7 +16,7 @@
     <div class="widget-options">
         <div class="dropdown">
             <div class="my-fancy-container">
-              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle" id="add_user">
+              <button type="button" class="dropdown-toggle" id="add_user">
               <span class='la la-plus-circle fz'></span>
               <span class="my-text">Add</span>
               </button>

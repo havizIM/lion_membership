@@ -69,18 +69,6 @@
  <!-- Begin Widget Header -->
 <div class="widget-header bordered d-flex align-items-center">
     <h2>Data Member</h2>
-    <div class="widget-options">
-        <div class="dropdown">
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                <i class="la la-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu">
-                <a href="#/add_member" class="dropdown-item edit" id="btn_add"> 
-                    <i class="ion-plus-round"></i>Add member
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="row row-flex">
   <div class="col-md-12">
@@ -93,6 +81,8 @@
                   <th>No. Member</th>
                   <th>Nama</th>
                   <th>Email</th>
+                  <th>Tipe</th>
+                  <th>Jml Poin</th>
                   <th>Tanggal Berlaku</th>
                   <th>Tanggal Expired</th>
 				  
@@ -153,6 +143,24 @@
 				}
 			},
 	        {"data": 'email'},
+	        {"data": null, 'render': function(data, type, row){
+					return `<span class="${row.tipe === 'Blue' ? 'text-info' : 'text-warning'}">${row.tipe}</span>`
+				}
+			},
+	        {"data": null, 'render': function(data, type, row){
+					var total_poin = 0;
+
+					$.each(row.log, function(k, v){
+						if(v.type === 'claim'){
+							total_poin    += parseInt(v.claim_poin);
+						} else {
+							total_poin    -= parseInt(v.redeem_poin);
+						}
+					})
+
+					return `<span class="text-success">${total_poin}</span>`
+				}
+			},
 	        {"data": 'berlaku_dari'},
 	        {"data": 'berlaku_sampai'},
 
@@ -200,7 +208,7 @@
 		 });
 		 
 
-    Pusher.logToConsole = true;
+    Pusher.logToConsole = false;
 
     var pusher = new Pusher('4e09d24d839d5e63c48b', {
       cluster: 'ap1',

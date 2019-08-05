@@ -70,18 +70,6 @@
  <!-- Begin Widget Header -->
 <div class="widget-header bordered d-flex align-items-center">
     <h2>Data Aplikasi</h2>
-    <div class="widget-options">
-        <div class="dropdown">
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                <i class="la la-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu">
-                <a href="#/add_aplikasi" class="dropdown-item edit" id="btn_add"> 
-                    <i class="ion-plus-round"></i>Add Aplikasi
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="row row-flex">
   <div class="col-md-12">

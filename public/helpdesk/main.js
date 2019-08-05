@@ -30,7 +30,7 @@ $(document).ready(function () {
 
   //Display Session
   $('#session_name').text(auth.nama_user);
-  $('#session_nip').text(auth.nip);
+  $('#session_nip').text(auth.id_karyawan);
   $('#session_level').text(auth.level);
   $('#session_tgl').text(auth.tgl_registrasi);
 

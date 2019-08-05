@@ -71,14 +71,12 @@
     <h2>Data Point</h2>
     <div class="widget-options">
         <div class="dropdown">
-            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                <i class="la la-ellipsis-h"></i>
-            </button>
-            <div class="dropdown-menu">
-                <a href="#/add_point" class="dropdown-item edit" id="btn_add"> 
-                    <i class="ion-plus-round"></i>Add Point
-                </a>
-            </div>
+            <div class="my-fancy-container">
+              <a href="#/add_point" class="dropdown-toggle" id="add_user">
+              <span class='la la-plus-circle fz'></span>
+              <span class="my-text">Add Poin</span>
+              </a>
+          </div>
         </div>
     </div>
 </div>

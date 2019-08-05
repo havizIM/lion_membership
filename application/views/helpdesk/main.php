@@ -194,7 +194,7 @@ Author: SAEROX
                                                 <i class="la la-user"></i>
                                             </div>
                                             <div class="message-body">
-                                                <span class="date">NIP</span>
+                                                <span class="date">ID Karyawan</span>
                                                 <div class="message-body-heading" id="session_nip"></div>
                                             </div>
                                         </a>
