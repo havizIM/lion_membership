@@ -83,6 +83,7 @@
 </div>
 
 <script>
+    var count = 0;
 
     var renderUI = (function(){
         var renderDeparture = function(data){
@@ -163,8 +164,9 @@
         }
 
         var renderRow = function(data){
+            count = count + 1;
             var html = `
-                <li class="list-group-item">
+                <li class="list-group-item" id="poin_${count}">
                     <div class="media">
                         <div class="media-body align-self-center">
                             <div class="username">
@@ -197,7 +199,7 @@
                                     <input type="file" name="lampiran_claim[]" required />
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <i class="la la-trash text-danger remove" style="cursor: pointer"></i>
+                                    <i class="la la-trash text-danger remove" data-id="${count}" style="cursor: pointer"></i>
                                 </div>
                             </div>
                         </div>
@@ -323,6 +325,17 @@
                 UI.renderRow(obj);
 
                 $('#modal_poin').modal('hide');
+                $('#departure').val('').selectpicker('refresh');
+                $('#arrival').val('').selectpicker('refresh');
+                $('#content_poin').html('');
+            })
+        }
+
+        var removeRow = () => {
+            $(document).on('click', '.remove', function(){
+                var id = $(this).data('id');
+
+                $('#poin_'+id).remove();
             })
         }
         
@@ -333,6 +346,7 @@
                 submitCari();
                 pilihPoin();
                 submitClaim();
+                removeRow();
             }
         }
     })(renderUI);
