@@ -141,7 +141,7 @@ var setupAuthPage = (function () {
             var password = $('#password').val();
 
             if (no_member === '' || password === '') {
-                makeNotif('error', 'Email atau password harus diisi', 'bottomCenter')
+                makeNotif('error', 'No Member atau password harus diisi', 'bottomRight')
             } else {
                 $.ajax({
                     url: `${BASE_URL}ext/auth/login_member`,
@@ -156,13 +156,13 @@ var setupAuthPage = (function () {
                             localStorage.setItem('ext_lion', JSON.stringify(response.data));
                             window.location.replace(`${BASE_URL}main/`)
                         } else {
-                            makeNotif('error', response.message, 'bottomCenter');
+                            makeNotif('error', response.message, 'bottomRight');
                             $('#submit_login').removeClass('disabled').html('Log In');
                         }
 
                     },
                     error: function (err) {
-                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
+                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
                         $('#submit_login').removeClass('disabled').html('Log In');
 
                     }
@@ -178,7 +178,7 @@ var setupAuthPage = (function () {
             var email = $('#email_forgot').val();
 
             if (email === '') {
-                makeNotif('error', 'Email harus diisi', 'bottomCenter')
+                makeNotif('error', 'Email harus diisi', 'bottomRight')
             } else {
                 $.ajax({
                     url: `${BASE_URL}ext/auth/lupa_password`,
@@ -190,15 +190,15 @@ var setupAuthPage = (function () {
                     },
                     success: function (response) {
                         if (response.status === 200) {
-                            makeNotif('success', response.message, 'bottomCenter');
+                            makeNotif('success', response.message, 'bottomRight');
                         } else {
-                            makeNotif('error', response.message, 'bottomCenter');
+                            makeNotif('error', response.message, 'bottomRight');
                         }
                         $('#send_pass').removeClass('disabled').html('Kirim');
 
                     },
                     error: function () {
-                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomCenter');
+                        makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
                         $('#send_pass').removeClass('disabled').html('Kirim');
                     }
                 })
@@ -284,9 +284,67 @@ var setupAuthPage = (function () {
         })
     }
 
+    var loginWithFB = (email) => {
+        $.ajax({
+            url: `${BASE_URL}ext/auth/login_fb`,
+            type: 'POST',
+            dataType: 'JSON',
+            data: {email: email},
+            success: function (res) {
+                if (res.status === 200) {
+                    localStorage.setItem('ext_lion', JSON.stringify(res.data));
+                    window.location.replace(`${BASE_URL}main/`)
+                } else {
+                    FB.logout();
+                    makeNotif('error', res.message, 'bottomRight');
+                }
+
+            },
+            error: function (err) {
+                FB.logout();
+                makeNotif('error', 'Tidak dapat mengakses server', 'bottomRight');
+            }
+        })
+    }
+
+    var getFbUserData = function(){
+        FB.api('/me', { locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture' },
+            function(response){
+                loginWithFB(response.email)
+            }
+        );
+    }
+
+    var getAuth = function(response){
+        if (response.authResponse) {
+            getFbUserData();
+        } else {
+            makeNotif('error', 'Anda membatalkan login dengan facebook', 'bottomRight')
+        }
+    }
+
+    var facebookAuth = function(){
+        $('#btn_facebook').on('click', function () {
+            FB.login(getAuth, {scope: 'email'})
+        })
+    }
+
+    var facebookInit = function(){
+            $.ajaxSetup({ cache: true });
+            $.getScript('https://connect.facebook.net/en_US/sdk.js', function () {
+                FB.init({
+                    appId: '367278160632509',
+                    version: 'v4.0'
+                });
+
+                facebookAuth();
+            });
+    }
+
     return {
         init: function () {
             console.log('App is running');
+            facebookInit();
             setupWizard();
             setupShowPass();
             setupForgotPass();

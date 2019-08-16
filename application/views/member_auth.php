@@ -143,6 +143,13 @@ Author: SAEROX
                     <button type="submit" class="btn btn-lg btn-gradient-01" id="submit_login">
                       Sign In
                     </button>
+
+                    <div class="mt-4">
+                         or Sign In with :
+                    </div>
+                    <div class="mt-2">
+                        <i class="la la-facebook text-info" id="btn_facebook" style="font-size: 40px; cursor: pointer;"></i>
+                    </div>
                   </div>
               </form>
               <form id="form_forgot_pass" style="margin-top: 50px; display:none ">

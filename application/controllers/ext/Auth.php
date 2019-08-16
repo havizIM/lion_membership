@@ -252,6 +252,47 @@ class Auth extends CI_Controller {
     }
   }
 
+  function login_fb(){
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if($method != 'POST') {
+      json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
+    } else {
+
+      $email    = $this->input->post('email');
+
+      if($email == null) {
+        json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'No Member dan Password belum lengkap'));
+      } else {
+        $param    = array('b.email' => $email);
+        $member = $this->AuthModel->cekAuthMember($param);
+
+        if($member->num_rows() == 0){
+          json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Email Facebook tidak terdaftar sebagai member' ));
+        } else {
+          foreach($member->result() as $key){
+            $status         = $key->status_member;
+
+            $session = array(
+              'no_member'       => $key->no_member,
+              'nama'            => $key->nama,
+              'email'           => $key->email,
+              'berlaku_dari'    => $key->berlaku_dari,
+              'berlaku_sampai'  => $key->berlaku_sampai,
+              'token'           => $key->token
+            );
+          }
+
+          if($status != 'Aktif'){
+            json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Member sudah tidak aktif' ));
+          } else {
+            json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil melakukan login', 'data' => $session ));
+          }
+        }
+      }
+    }
+  }
+
   function lupa_password(){
     $method = $_SERVER['REQUEST_METHOD'];
 
