@@ -40,7 +40,7 @@ var setupAuthPage = (function () {
                 var valid = $(DOM.register).valid();
 
                 if (!valid) {
-                    $validator.focusInvalid();
+                    // $validator.focusInvalid();
                     return false;
                 }
             }
@@ -341,31 +341,10 @@ var setupAuthPage = (function () {
             });
     }
 
-    var onSuccess = function(googleUser) {
-        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-
-    var onFailure = function(error) {
-        console.log(error);
-    }
-
-    var googleInit = function() {
-        gapi.signin2.render('btn_google', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
-    }
-
     return {
         init: function () {
             console.log('App is running');
             facebookInit();
-            googleInit();
             setupWizard();
             setupShowPass();
             setupForgotPass();
