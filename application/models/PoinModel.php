@@ -27,6 +27,26 @@ class PoinModel extends CI_Model {
       return $this->db->get();
     }
 
+    function flight($where)
+    {
+      $this->db->select('a.*, b.nama_rute as departure_name, c.nama_rute as arrival_name, d.id_poin, d.redeem_poin, d.claim_poin')
+               ->from('flight a')
+               ->join('master_rute b', 'b.id_rute = a.departure')
+               ->join('master_rute c', 'c.id_rute = a.arrival')
+               ->join('master_poin d', 'd.departure = a.departure AND d.arrival = a.arrival');
+
+      if(!empty($where)){
+        foreach($where as $key => $value){
+            if($value != null){
+                $this->db->where($key, $value);
+            }
+        }
+      }
+
+      $this->db->order_by('a.no_flight', 'desc');
+      return $this->db->get();
+    }
+
     function add($data, $log)
     {
       $this->db->trans_start();

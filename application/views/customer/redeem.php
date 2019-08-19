@@ -19,14 +19,22 @@
         <div class="widget-body">
             <form id="cari_poin" class="form-horizontal">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
+                            <label for="">Departure</label>
                             <select id="departure" name="departure" class="form-control" data-live-search="true"></select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
+                            <label for="">Arrival</label>
                             <select id="arrival" name="arrival" class="form-control" data-live-search="true"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="">Date</label>
+                            <input type="date" class="form-control" name="departure_date" id="departure_date">
                         </div>
                     </div>
                 </div>
@@ -54,12 +62,16 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">No Flight / No Penerbangan</label>
-                            <div class="input-group">
-                                <input type="hidden" name="id_poin" id="id_poin">
-                                <input type="text" class="form-control" id="no_flight" name="no_flight">
-                                <span class="input-group-addon addon-primary"><a href="http://www.lionair.co.id/id" target="__blank" class="text-white">Cari Fight</a></span>
-                            </div>
-                            <i>* Klik tombol cari flight untuk mencari penerbangan yang dinginkan.</i>
+                            <input type="hidden" name="id_poin" id="id_poin">
+                            <input type="text" class="form-control" id="no_flight" name="no_flight" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Departure</label>
+                            <input type="text" class="form-control" id="departure_detail" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Arrival</label>
+                            <input type="text" class="form-control" id="arrival_detail" readonly>
                         </div>
                         <div class="form-group">
                             <label for="">Gender</label>
@@ -124,7 +136,7 @@
                 $.each(data, function(k, v){
                     html += `
                         <div class="widget-header bordered bg-info no-actions d-flex align-items-center">
-                            <h4 style="color: white"><span class="text-danger">${v.id_poin}</span> - Redeem Poin : ${v.redeem_poin}</h3>
+                            <h3 style="color: white"><span class="text-danger">${v.id_poin}</span> - Redeem Poin : ${v.redeem_poin}</h3>
                         </div>
                         <div class="widget-body">
                             <li class="list-group-item">
@@ -137,11 +149,13 @@
                                                         <p class="text-info">Departure</p>
                                                         <h3>${v.departure}</h3>
                                                         <p>${v.departure_name}</p>
+                                                        <p>${v.departure_date} ${v.departure_time}</p>
                                                     </center>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <center>
+                                                    <center style="margin-top: 30px">
                                                         <i style="font-size: 50px" class="la la-arrow-right"></i>
+                                                        <span>${v.duration}</span>
                                                     </center>
                                                 </div>
                                                 <div class="col-md-5">
@@ -149,13 +163,17 @@
                                                         <p class="text-info">Arrival</p>
                                                         <h3>${v.arrival}</h3>
                                                         <p>${v.arrival_name}</p>
+                                                        <p>${v.arrival_date} ${v.arrival_time}</p>
                                                     </center>
                                                 </div>
                                             </div>
                                         </div><br/>
                                         <div class="status row">
-                                            <div class="col-md-12 text-right">
-                                                <button class="btn btn-md btn-primary pilih" data-id="${v.id_poin}" data-poin="${v.redeem_poin}" data-id_dep="${v.departure}" data-id_arr="${v.arrival}" data-dep="${v.departure_name}" data-arr="${v.arrival_name}">Pilih</button>
+                                            <div class="col-md-6 text-left">
+                                                <h3>No. Flight <span class="text-info">${v.no_flight}</span></h3>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <button class="btn btn-md btn-primary pilih" data-id="${v.id_poin}" data-poin="${v.redeem_poin}" data-id_dep="${v.departure}" data-id_arr="${v.arrival}" data-dep="${v.departure_name}" data-arr="${v.arrival_name}" data-flight="${v.no_flight}" data-dep_date="${v.departure_date}" data-dep_time="${v.departure_time}" data-arr_date="${v.arrival_date}" data-arr_time="${v.arrival_time}">Pilih</button>
                                             </div>
                                         </div>
                                     </div>
@@ -171,6 +189,9 @@
         
         var openFormModal = (data) => {
             $('#form_redeem')[0].reset();
+            $('#no_flight').val(data.no_flight);
+            $('#departure_detail').val(`${data.departure} - ${data.departure_name} (${data.departure_date} ${data.departure_time})`);
+            $('#arrival_detail').val(`${data.arrival} - ${data.arrival_name} (${data.arrival_date} ${data.arrival_time})`);
             $('#id_poin').val(data.id_poin);
             $('#modal_redeem').modal('show')
         }
@@ -222,18 +243,37 @@
             })
         }
 
+        var setupDate = function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10){
+                dd='0'+dd
+            }
+
+            if(mm<10){
+                mm='0'+mm
+            } 
+
+            today = yyyy+'-'+mm+'-'+dd;
+            $('#departure_date').attr('min', today);
+        }
+
         var cariPoin = () => {
             $('#cari_poin').on('submit', function(e){
                 e.preventDefault();
 
-                var departure   = $('#departure').val();
-                var arrival     = $('#arrival').val();
+                var departure           = $('#departure').val();
+                var arrival             = $('#arrival').val();
+                var departure_date      = $('#departure_date').val();
 
-                if(departure === '' || arrival === ''){
+                if(departure === '' || arrival === '' || departure_date === ''){
                     makeNotif('error', 'Silahkan pilih rute yang tersedia', 'bottomRight')
                 } else {
                     $.ajax({
-                        url: `<?= base_url('ext/poin/show/') ?>${auth.token}?departure=${departure}&arrival=${arrival}`,
+                        url: `<?= base_url('ext/poin/search/') ?>${auth.token}?departure=${departure}&arrival=${arrival}&departure_date=${departure_date}`,
                         type: 'GET',
                         dataType: 'JSON',
                         beforeSend: function(){
@@ -272,13 +312,20 @@
         var pilihPoin = () => {
             $('#content_poin').on('click', '.pilih', function(){
                 var obj = {
+                    no_flight: $(this).data('flight'),
                     id_poin: $(this).data('id'),
                     redeem_poin: $(this).data('poin'),
                     departure: $(this).data('id_dep'),
                     departure_name: $(this).data('dep'),
+                    departure_date: $(this).data('dep_date'),
+                    departure_time: $(this).data('dep_time'),
                     arrival: $(this).data('id_arr'),
-                    arrival_name: $(this).data('arr')
+                    arrival_name: $(this).data('arr'),
+                    arrival_date: $(this).data('arr_date'),
+                    arrival_time: $(this).data('arr_time')
                 }
+
+                console.log(obj)
 
                 $.ajax({
                     url: `<?= base_url('ext/member/get_my_poin/') ?>${auth.token}`,
@@ -289,11 +336,11 @@
                     },
                     success: function(res){
                         if(res.status === 200){
-                            if(res.data.total_poin < obj.redeem_poin){
-                                makeNotif('warning', 'Poin anda tidak mencukupi', 'bottomRight')
-                            } else {
+                            // if(res.data.total_poin < obj.redeem_poin){
+                            //     makeNotif('warning', 'Poin anda tidak mencukupi', 'bottomRight')
+                            // } else {
                                 UI.openFormModal(obj);
-                            }
+                            // }
 
                             $(this).html('Pilih');
                         } else {
@@ -310,6 +357,7 @@
 
         return {
             init: () => {
+                setupDate();
                 submitRedeem();
                 getRoute();
                 cariPoin();
