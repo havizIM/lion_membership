@@ -336,11 +336,11 @@
                     },
                     success: function(res){
                         if(res.status === 200){
-                            // if(res.data.total_poin < obj.redeem_poin){
-                            //     makeNotif('warning', 'Poin anda tidak mencukupi', 'bottomRight')
-                            // } else {
+                            if(res.data.total_poin < obj.redeem_poin){
+                                makeNotif('warning', 'Poin anda tidak mencukupi', 'bottomRight')
+                            } else {
                                 UI.openFormModal(obj);
-                            // }
+                            }
 
                             $(this).html('Pilih');
                         } else {
