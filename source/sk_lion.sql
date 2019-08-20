@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Agu 2019 pada 14.47
+-- Waktu pembuatan: 20 Agu 2019 pada 06.15
 -- Versi server: 10.1.40-MariaDB
 -- Versi PHP: 7.1.29
 
@@ -25,6 +25,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `booking`
+--
+
+CREATE TABLE `booking` (
+  `kd_booking` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `booking`
+--
+
+INSERT INTO `booking` (`kd_booking`) VALUES
+('ADGJLP'),
+('ERDFXC'),
+('MLPOKN'),
+('OIKJNB'),
+('QAZXSW'),
+('QETUOP'),
+('SFHKOI'),
+('XVNLJG'),
+('ZCBMLK'),
+('ZMALQP');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `claim`
 --
 
@@ -36,6 +62,13 @@ CREATE TABLE `claim` (
   `status_claim` enum('Proses','Valid','Tidak Valid','') NOT NULL,
   `keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `claim`
+--
+
+INSERT INTO `claim` (`id_claim`, `kode_booking`, `no_member`, `tgl_claim`, `status_claim`, `keterangan`) VALUES
+('CL-00000001', 'ADGJLP', '30491728056', '2019-08-20 04:14:42', 'Proses', '');
 
 -- --------------------------------------------------------
 
@@ -49,6 +82,13 @@ CREATE TABLE `claim_detail` (
   `id_poin` varchar(8) NOT NULL,
   `lampiran_claim` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `claim_detail`
+--
+
+INSERT INTO `claim_detail` (`id_claim_detail`, `id_claim`, `id_poin`, `lampiran_claim`) VALUES
+(1, 'CL-00000001', 'POIN0001', 'yeolallineed___BtxJRe6h4Ey___1.jpg');
 
 -- --------------------------------------------------------
 
@@ -416,6 +456,12 @@ INSERT INTO `user` (`id_karyawan`, `nama_user`, `password`, `level`, `tgl_regist
 --
 
 --
+-- Indeks untuk tabel `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`kd_booking`);
+
+--
 -- Indeks untuk tabel `claim`
 --
 ALTER TABLE `claim`
@@ -509,7 +555,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `claim_detail`
 --
 ALTER TABLE `claim_detail`
-  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_claim_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`

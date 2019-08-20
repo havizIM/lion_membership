@@ -21,6 +21,7 @@ class Claim extends CI_Controller {
 
     $this->load->model('ClaimModel');
     $this->load->model('ClaimDetailModel');
+    $this->load->model('BookingModel');
   }
 
   function show($token = null){
@@ -103,51 +104,57 @@ class Claim extends CI_Controller {
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
             } else {
 
-              if(!isset($post['id_poin']) && count($post['id_poin']) < 1){
-                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Pilih barang yang akan dipilih'));
+              $param2      = array('kd_booking' => $kode_booking);
+              $cek_booking = $this->BookingModel->show($param2);
+
+              if($cek_booking->num_rows() === 0){
+                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Kode Booking Tidak Valid'));
               } else {
-
-                $no           = 0;
-                $detail       = array();
-
-                $config['upload_path']   = './doc/lampiran_claim/';
-                $config['allowed_types'] = 'jpg|jpeg|png';
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
-
-                foreach($post['id_poin'] as $key => $val){
-                  $_FILES['file']['name'] = $_FILES['lampiran_claim']['name'][$key];
-                  $_FILES['file']['type'] = $_FILES['lampiran_claim']['type'][$key];
-                  $_FILES['file']['tmp_name'] = $_FILES['lampiran_claim']['tmp_name'][$key];
-                  $_FILES['file']['error'] = $_FILES['lampiran_claim']['error'][$key];
-                  $_FILES['file']['size'] = $_FILES['lampiran_claim']['size'][$key];
-
-                  if(!$this->upload->do_upload('file')){
-                    return null;
-                  } else {
-                    $file     = $this->upload->data();
-                    $detail[] = array(
-                      'id_claim'          => $id_claim,
-                      'id_poin'           => $post['id_poin'][$key],
-                      'lampiran_claim'    => $file['file_name']
-                    );
-                  }
-                }
-
-                $claim = array(
-                  'id_claim'        => $id_claim,
-                  'kode_booking'    => $kode_booking,
-                  'no_member'       => $otorisasi->no_member,
-                  'status_claim'    => 'Proses',
-                  'no_member'       => $otorisasi->no_member
-                );
-
-                $add = $this->ClaimModel->add($claim, $detail);
-
-                if(!$add){
-                  json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data claim'));
+                if(!isset($post['id_poin']) && count($post['id_poin']) < 1){
+                  json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Pilih barang yang akan dipilih'));
                 } else {
-                  json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data claim'));
+                  $no           = 0;
+                  $detail       = array();
+
+                  $config['upload_path']   = './doc/lampiran_claim/';
+                  $config['allowed_types'] = 'jpg|jpeg|png';
+                  $this->load->library('upload', $config);
+                  $this->upload->initialize($config);
+
+                  foreach($post['id_poin'] as $key => $val){
+                    $_FILES['file']['name'] = $_FILES['lampiran_claim']['name'][$key];
+                    $_FILES['file']['type'] = $_FILES['lampiran_claim']['type'][$key];
+                    $_FILES['file']['tmp_name'] = $_FILES['lampiran_claim']['tmp_name'][$key];
+                    $_FILES['file']['error'] = $_FILES['lampiran_claim']['error'][$key];
+                    $_FILES['file']['size'] = $_FILES['lampiran_claim']['size'][$key];
+
+                    if(!$this->upload->do_upload('file')){
+                      return null;
+                    } else {
+                      $file     = $this->upload->data();
+                      $detail[] = array(
+                        'id_claim'          => $id_claim,
+                        'id_poin'           => $post['id_poin'][$key],
+                        'lampiran_claim'    => $file['file_name']
+                      );
+                    }
+                  }
+
+                  $claim = array(
+                    'id_claim'        => $id_claim,
+                    'kode_booking'    => $kode_booking,
+                    'no_member'       => $otorisasi->no_member,
+                    'status_claim'    => 'Proses',
+                    'no_member'       => $otorisasi->no_member
+                  );
+
+                  $add = $this->ClaimModel->add($claim, $detail);
+
+                  if(!$add){
+                    json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data claim'));
+                  } else {
+                    json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data claim'));
+                  }
                 }
               }
             }

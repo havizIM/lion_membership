@@ -325,8 +325,6 @@
                     arrival_time: $(this).data('arr_time')
                 }
 
-                console.log(obj)
-
                 $.ajax({
                     url: `<?= base_url('ext/member/get_my_poin/') ?>${auth.token}`,
                     type: 'GET',
